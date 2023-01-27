@@ -1,17 +1,22 @@
-const AList = () => {
-  return (
-    <div>
-      <div>A: WHAT EVER THE ANSWER IS ... ... </div>
 
-      <img src=""/>
+const AList = (props) => {
+    // console.log("im in Answer render now the incoming props looks like: ", props);
+    const answersArray = Object.values(props.answers)
+    console.log("im in Answer render now the answers array looks like: ", answersArray);
+    return (
+      <div>
+        {answersArray.map((answer, index) => (
+          <div key={index}>
+            <p>{answer.body}</p>
+            {answer.photos.map((photo, index) => (
+            <img key={index} src={photo.url} alt="answer" />
+            ))}
+            <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()} | Helpful? <a href="url">Yes</a> | <a href="url">Report</a></p>
+          </div>
+        ))}
+      </div>
+    );
 
-      <button id="load-more">Load More Answers</button>
-
-      <p className="answer-info">
-        User created: xxx | Helpful or not: Helpful | <button>Report</button>
-      </p>
-    </div>
-  )
 }
 
 export default AList;
