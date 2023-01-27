@@ -12,21 +12,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-var AList = function AList() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      children: "A: WHAT EVER THE ANSWER IS ... ... "
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-      src: ""
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-      id: "load-more",
-      children: "Load More Answers"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-      className: "answer-info",
-      children: ["User created: xxx | Helpful or not: Helpful | ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-        children: "Report"
-      })]
-    })]
+var AList = function AList(props) {
+  // console.log("im in Answer render now the incoming props looks like: ", props);
+  var answersArray = Object.values(props.answers);
+  console.log("im in Answer render now the answers array looks like: ", answersArray);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    children: answersArray.map(function (answer, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: answer.body
+        }), answer.photos.map(function (photo, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+            src: photo.url,
+            alt: "answer"
+          }, index);
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+          children: ["by ", answer.answerer_name, " - ", new Date(answer.date).toLocaleDateString(), " | Helpful? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+            href: "url",
+            children: "Yes"
+          }), " | ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+            href: "url",
+            children: "Report"
+          })]
+        })]
+      }, index);
+    })
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (AList);
@@ -41,16 +51,21 @@ var AList = function AList() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Qbody_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Qbody.jsx */ "./client/src/components/QAcomponents/Qbody.jsx");
-/* harmony import */ var _AList_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AList.jsx */ "./client/src/components/QAcomponents/AList.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var _AList_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AList.jsx */ "./client/src/components/QAcomponents/AList.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 var ListEntry = function ListEntry(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Qbody_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_AList_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {})]
+  // console.log("props i gave to Alist are :", {props});
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h2", {
+        children: ["Q: ", props.question.question_body]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_AList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      answers: props.question.answers
+    })]
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (ListEntry);
@@ -67,16 +82,59 @@ var ListEntry = function ListEntry(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _QAList_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QAList.jsx */ "./client/src/components/QAcomponents/QAList.jsx");
 /* harmony import */ var _Searchqa_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Searchqa.jsx */ "./client/src/components/QAcomponents/Searchqa.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../config.js */ "./config.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
 
 var QAIndex = function QAIndex() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([37315]),
+    _useState2 = _slicedToArray(_useState, 2),
+    questionId = _useState2[0],
+    setQuestionId = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    qaData = _useState4[0],
+    setQaData = _useState4[1];
+  function handleSearch() {
+    // console.log(`sending request to server and token is ${token}`);
+
+    $.ajax({
+      type: 'GET',
+      url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=".concat(questionId),
+      headers: {
+        'Authorization': "".concat(_config_js__WEBPACK_IMPORTED_MODULE_4__.token)
+      },
+      success: function success(response) {
+        console.log("res from API looks like: ", response.results);
+        setQaData(response.results);
+      },
+      error: function error(_error) {
+        console.log(_error);
+      }
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
       children: "QUESTIONS & ANSWERS"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Searchqa_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_QAList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Searchqa_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      handleSearch: handleSearch
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_QAList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      qaData: qaData
+    })]
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (QAIndex);
@@ -95,35 +153,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-
 var QAList = function QAList(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  // console.log("now im in QAList, now the props looks like: ", props, "and types of props are: ", typeof (props));
+  var questionArray = Object.values(props.qaData);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "qa-list",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ListEntry_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ListEntry_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ListEntry_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {})]
-  });
-};
-/* harmony default export */ __webpack_exports__["default"] = (QAList);
-
-/***/ }),
-
-/***/ "./client/src/components/QAcomponents/Qbody.jsx":
-/*!******************************************************!*\
-  !*** ./client/src/components/QAcomponents/Qbody.jsx ***!
-  \******************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-var Qbody = function Qbody() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      children: "Q: WHAT EVER THE QUESTSION?"
+    children: questionArray.map(function (question) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ListEntry_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
+        question: question
+      }, question.question_id);
     })
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (Qbody);
+/* harmony default export */ __webpack_exports__["default"] = (QAList);
 
 /***/ }),
 
@@ -136,42 +178,33 @@ var Qbody = function Qbody() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-function SearchComponent() {
-  var productId = 37312;
-  var token = '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';
-  function handleSearch() {
-    console.log("sending request to questions now");
-    $.ajax({
-      type: 'GET',
-      url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=".concat(productId),
-      headers: {
-        'Authorization': "".concat(token)
-      },
-      success: function success(response) {
-        console.log(response);
-      },
-      error: function error(_error) {
-        console.log(_error);
-      }
-    });
-    console.log("sending request to ");
-  }
-  //
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+function SearchComponent(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    productId = _useState2[0],
+    setProductId = _useState2[1];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "search-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      placeholder: "HAVE A QUESTION? SEARCH FOR ANSWERS..."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+      placeholder: "HAVE A QUESTION? SEARCH FOR ANSWERS...",
+      value: productId,
+      onChange: function onChange(e) {
+        return setProductId(e.target.value);
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       type: "submit",
-      onClick: handleSearch,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+      onClick: props.handleSearch,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         src: "./magnifier.png",
         alt: "Amplifier"
       })
@@ -249,6 +282,22 @@ var Reviews = function Reviews() {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (Reviews);
+
+/***/ }),
+
+/***/ "./config.js":
+/*!*******************!*\
+  !*** ./config.js ***!
+  \*******************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "token": function() { return /* binding */ token; }
+/* harmony export */ });
+var token = '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';
+
 
 /***/ }),
 

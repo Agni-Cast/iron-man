@@ -1,14 +1,15 @@
 import ListEntry from './ListEntry.jsx';
 
 const QAList = (props) => {
+  // console.log("now im in QAList, now the props looks like: ", props, "and types of props are: ", typeof (props));
+  const questionArray = Object.values(props.qaData)
   return (
     <div className="qa-list">
-      <br/>
-      <ListEntry />
-      <br/>
-      <ListEntry />
-      <br/>
-      <ListEntry />
+      {questionArray.map(question => (
+        <ListEntry
+          key={question.question_id}
+          question={question}/>
+      ))}
     </div>
   )
 }
