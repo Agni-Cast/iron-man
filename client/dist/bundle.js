@@ -176,10 +176,11 @@ var QAIndex = function QAIndex() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ListEntry_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListEntry.jsx */ "./client/src/components/QAcomponents/ListEntry.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 
 var QAList = function QAList(props) {
-  // console.log("now im in QAList, now the props looks like: ", props, "and types of props are: ", typeof (props));
+  console.log("now im in QAList, now the props looks like: ", props, "and types of props are: ", _typeof(props));
   var questionArray = Object.values(props.qaData);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "qa-list",
