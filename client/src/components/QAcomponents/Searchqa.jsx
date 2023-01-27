@@ -1,24 +1,45 @@
-import { API_KEY } from '../config.js';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-$.ajaxPrefilter(function (settings, _, jqXHR) {
-  jqXHR.setRequestHeader('Authorization', API_KEY);
-});
+function SearchComponent() {
 
-var searchQA = (query, callback) => {
-  $.ajax({
-    // This is the url you should use to communicate with the API server.
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/`,
-    type: 'GET',
-    data: {product_id: 5},
-    contentType: 'application/json',
-    success: function(response) {
-      console.log(response);
-    }
-    error: function(error) {
-      // do something when request failed
-      console.error('Failed to fetch videos', error);
-    }
-  });
-};
+  const productId = 37312;
 
-export default searchQA;
+  const token = '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';
+
+
+
+  function handleSearch() {
+    console.log("sending request to questions now")
+    $.ajax({
+        type: 'GET',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${productId}`,
+        headers: {
+            'Authorization': `${token}`,
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+    console.log("sending request to ")
+
+
+}
+//
+  return (
+    <div className="search-container">
+        <input  placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."/>
+        <button type="submit" onClick={handleSearch}>
+          <img src="./magnifier.png" alt="Amplifier"/>
+        </button>
+    </div>
+
+  );
+}
+
+export default SearchComponent;
+
