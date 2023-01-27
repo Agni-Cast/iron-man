@@ -2,7 +2,7 @@ import ListEntry from './ListEntry.jsx';
 
 const QAList = (props) => {
   return (
-    <div>
+    <div className="qa-list">
       <br/>
       <ListEntry />
       <br/>

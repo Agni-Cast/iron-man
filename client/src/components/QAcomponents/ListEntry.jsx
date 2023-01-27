@@ -1,7 +1,7 @@
 import Qbody from './Qbody.jsx';
 import AList from './AList.jsx';
 
-const ListEntry = () => {
+const ListEntry = (props) => {
 
   return (
     <div>
