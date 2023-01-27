@@ -3,7 +3,7 @@ import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 const axios = require('axios');
 
-
+// TESTING
 const RatingsReviews = () => {
 
   // axios.get(`/reviews`)
