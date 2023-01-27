@@ -4,6 +4,19 @@
   display: flex;
 }
 
+.question-container {
+  display: flex;
+}
+
+.answer-infor {
+  display: flex;
+}
+
+.enlarged-photo {
+  width: 500px;
+  height: auto;
+}
+
 input {
   flex: 1;
 }
@@ -17,3 +30,4 @@ img {
   height: 30px;
   object-fit: contain;
 }
+

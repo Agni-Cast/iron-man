@@ -9,7 +9,7 @@ const QAIndex = () => {
   const [qaData, setQaData] = useState([])
 
   function handleSearch() {
-    console.log(`sending request to server and token is ${token}`);
+    // console.log(`sending request to server and token is ${token}`);
 
     $.ajax({
       type: 'GET',
