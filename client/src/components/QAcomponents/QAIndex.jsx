@@ -9,7 +9,7 @@ const QAIndex = () => {
   const [qaData, setQaData] = useState([])
 
   function handleSearch() {
-    // console.log(`sending request to server and token is ${token}`);
+    console.log(`sending request to server and token is ${token}`);
 
     $.ajax({
       type: 'GET',
@@ -18,7 +18,7 @@ const QAIndex = () => {
           'Authorization': `${token}`,
       },
       success: function (response) {
-          console.log("res from API looks like: ", response.results)
+          // console.log("res from API looks like: ", response.results)
           setQaData(response.results)
       },
       error: function (error) {

@@ -52,18 +52,44 @@ var AList = function AList(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AList_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AList.jsx */ "./client/src/components/QAcomponents/AList.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 var ListEntry = function ListEntry(props) {
   // console.log("props i gave to Alist are :", {props});
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h2", {
+  // set state for just render two answers at begging
+  // const [numAnswerToShow, setnumAnswerToShow] = useState(2);
+
+  // const loadMoreAnswers = () => {
+  //   setnumAnswerToShow(numAnswerToShow + 2);
+  // }
+
+  // const answers = props.question.answers;
+  // console.log(Object.values(answers));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
         children: ["Q: ", props.question.question_body]
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_AList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          onClick: function onClick() {
+            return voteOnHelp(props.question.quesiton_id);
+          },
+          children: ["Helpful? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+            url: "rul",
+            children: "YES"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: function onClick() {
+            return addAnswer(props.question.question_id);
+          },
+          children: "Add Answer"
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_AList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
       answers: props.question.answers
     })]
   });
@@ -110,8 +136,7 @@ var QAIndex = function QAIndex() {
     qaData = _useState4[0],
     setQaData = _useState4[1];
   function handleSearch() {
-    // console.log(`sending request to server and token is ${token}`);
-
+    console.log("sending request to server and token is ".concat(_config_js__WEBPACK_IMPORTED_MODULE_4__.token));
     $.ajax({
       type: 'GET',
       url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=".concat(questionId),
@@ -119,7 +144,7 @@ var QAIndex = function QAIndex() {
         'Authorization': "".concat(_config_js__WEBPACK_IMPORTED_MODULE_4__.token)
       },
       success: function success(response) {
-        console.log("res from API looks like: ", response.results);
+        // console.log("res from API looks like: ", response.results)
         setQaData(response.results);
       },
       error: function error(_error) {
@@ -296,7 +321,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "token": function() { return /* binding */ token; }
 /* harmony export */ });
-var token = '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';
+var token = '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';
 
 
 /***/ }),
