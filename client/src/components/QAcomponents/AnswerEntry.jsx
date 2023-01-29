@@ -3,13 +3,14 @@ import ReactModal from 'react-modal';
 
 
 const AnswerEntry = ({ answer }) => {
-    const [answerHelpfulCount, setAnswerHelpfulCount] = useState(1);
+    console.log('what is each answer looks like :', answer);
+    const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
 
 
     const handleHelpfulClick = () => {
-        setAnswerHelpfulCount(answerHelpfulCount + answer.helpfulness);
+        setAnswerHelpfulCount(answerHelpfulCount + 1);
     }
 
     const handleOpenModal = () => {
@@ -34,15 +35,15 @@ const AnswerEntry = ({ answer }) => {
             {answer.photos.map((photo, index) => (
                 <img
                     key={index}
+                    onClick={handlePhotoClick}
                     src={'https://terrigen-cdn-dev.marvel.com/content/prod/1x/ironman_lob_mas_hlf_02_0.jpg'}
                     alt="answer photo"
-                    onClick={handlePhotoClick}
                     className={isEnlarged ? 'enlarged-photo' : ''}
                 />
             ))}
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                <button className="answer-help" >| &nbsp; Helpful? <a href="url" onClick={handleHelpfulClick}> Yes({answerHelpfulCount}) </a> </button>
+                <button className="answer-help" >| &nbsp; Helpful? <u onClick={handleHelpfulClick}> Yes({answerHelpfulCount}) </u> </button>
                 <button className="answer-report" onClick={handleOpenModal}>| &nbsp; Report</button>
             </div>
             <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal}>

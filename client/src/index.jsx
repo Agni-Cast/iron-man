@@ -8,7 +8,7 @@ const App = () => {
     <div>
       <h1>Hello Iron Man!</h1>
       <QAIndex />
-      <RatingsReviews/>
+      {/* <RatingsReviews/> */}
     </div>
   )
 }

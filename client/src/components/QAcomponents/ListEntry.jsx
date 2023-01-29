@@ -2,9 +2,6 @@ import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
 
-
-
-
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
@@ -24,7 +21,7 @@ const ListEntry = (props) => {
       <div className="question-container">
         <h4 className="question-body">Q: {props.question.question_body}</h4>
         <div className="question-actions">
-          <button className="question-help">Helpful? <a href="rul"  onClick={() => voteOnHelp(props.question.quesiton_id)}> Yes({helpfulnessCount})</a></button>
+          <button className="question-help">Helpful? <u onClick={() => voteOnHelp(props.question.quesiton_id)}> Yes({helpfulnessCount})</u></button>
           <button className="question-addAnswer" >| &nbsp; <a  onClick={() => addAnswer(props.question.question_id)}>Add Answer</a></button>
         </div>
       </div>
@@ -33,15 +30,14 @@ const ListEntry = (props) => {
       <br/>
       <br/>
       <AList answers={props.question.answers}/>
-      {isModalOpen && (
-    <div>
+      <ReactModal isOpen={isModalOpen} ariaHideApp={false}>
         <form>
-            <textarea placeholder="Enter your answer here"></textarea>
-            <input type="file" accept="image/*" />
-            <button>Add Answer</button>
+          <textarea placeholder="Enter your answer here"></textarea>
+          <input type='file' accept="image/*" />
+          <button>Add Answer</button>
+          <button onClick={() => setIsModalOpen(false)}>Close</button>
         </form>
-    </div>
-)}
+      </ReactModal>
     </div>
   )
 }
