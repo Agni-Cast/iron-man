@@ -17,6 +17,18 @@
   height: auto;
 }
 
+.answer-help {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
+.answer-report {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
 input {
   flex: 1;
 }

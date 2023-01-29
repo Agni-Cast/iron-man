@@ -42,8 +42,8 @@ const AnswerEntry = ({ answer }) => {
             ))}
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                <button onClick={handleHelpfulClick}> Helpful? {answerHelpfulCount} <a href="url">Yes</a> </button>
-                <button onClick={handleOpenModal}>Report</button>
+                <button className="answer-help" >| &nbsp; Helpful? <a href="url" onClick={handleHelpfulClick}> Yes({answerHelpfulCount}) </a> </button>
+                <button className="answer-report" onClick={handleOpenModal}>| &nbsp; Report</button>
             </div>
             <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal}>
                 <form>
