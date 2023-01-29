@@ -46,7 +46,7 @@ const AnswerEntry = ({ answer }) => {
                 <button className="answer-help" >| &nbsp; Helpful? <u onClick={handleHelpfulClick}> Yes({answerHelpfulCount}) </u> </button>
                 <button className="answer-report" onClick={handleOpenModal}>| &nbsp; Report</button>
             </div>
-            <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal}>
+            <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal} ariaHideApp={false}>
                 <form>
                     <label>
                         Report Reason:

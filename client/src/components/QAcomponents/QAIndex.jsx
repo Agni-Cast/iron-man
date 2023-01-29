@@ -52,7 +52,19 @@ const QAIndex = () => {
       <QAList qaData={qaData} questionsToShow={questionsToShow}/>
       <button onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
       <button onClick={addNewQuestion}>ADD A QUESTION +</button>
-      <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)}>
+      <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)} ariaHideApp={false}
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px',
+            height: '300px'
+          }
+        }}>
         <NewQuestionForm questionId={questionId} closeModal={() => setModelIsOpen(false)}/>
       </Modal>
 

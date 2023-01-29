@@ -34,8 +34,8 @@ const ListEntry = (props) => {
         <form>
           <textarea placeholder="Enter your answer here"></textarea>
           <input type='file' accept="image/*" />
-          <button>Add Answer</button>
-          <button onClick={() => setIsModalOpen(false)}>Close</button>
+          <button onClick={() => setIsModalOpen(false)}>Add Answer</button>
+
         </form>
       </ReactModal>
     </div>
