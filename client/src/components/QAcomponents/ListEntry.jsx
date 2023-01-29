@@ -24,8 +24,8 @@ const ListEntry = (props) => {
       <div className="question-container">
         <h2>Q: {props.question.question_body}</h2>
         <p>
-          <button onClick={() => voteOnHelp(props.question.quesiton_id)}>Helpful? <a url="rul">YES</a> <a>{helpfulnessCount}</a></button>
-          <button onClick={() => addAnswer(props.question.question_id)}>Add Answer</button>
+          <button className="question-help">Helpful? <a href="rul"  onClick={() => voteOnHelp(props.question.quesiton_id)}> Yes({helpfulnessCount})</a></button>
+          <button className="question-addAnswer" >| &nbsp; <a  onClick={() => addAnswer(props.question.question_id)}>Add Answer</a></button>
         </p>
       </div>
       <AList answers={props.question.answers}/>

@@ -29,6 +29,18 @@
   background: none;
 }
 
+.question-help {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
+.question-addAnswer {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
 input {
   flex: 1;
 }
