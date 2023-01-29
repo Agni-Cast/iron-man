@@ -22,12 +22,16 @@ const ListEntry = (props) => {
   return (
     <div>
       <div className="question-container">
-        <h2>Q: {props.question.question_body}</h2>
-        <p>
+        <h4 className="question-body">Q: {props.question.question_body}</h4>
+        <div className="question-actions">
           <button className="question-help">Helpful? <a href="rul"  onClick={() => voteOnHelp(props.question.quesiton_id)}> Yes({helpfulnessCount})</a></button>
           <button className="question-addAnswer" >| &nbsp; <a  onClick={() => addAnswer(props.question.question_id)}>Add Answer</a></button>
-        </p>
+        </div>
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <AList answers={props.question.answers}/>
       {isModalOpen && (
     <div>

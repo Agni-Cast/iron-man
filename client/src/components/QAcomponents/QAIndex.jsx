@@ -5,8 +5,14 @@ import axios from 'axios';
 import {token} from '/config.js';
 
 const QAIndex = () => {
-  const [questionId, setQuestionId] = useState([37315])
+
+  const [questionId, setQuestionId] = useState([37316])
   const [qaData, setQaData] = useState([])
+  // inital state for how many questions show on the DOM
+  const [questionsToShow, setQuestionsToShow] = useState(2)
+  // inital state for add new question form
+  const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false)
+
 
   function handleSearch() {
     // console.log(`sending request to server and token is ${token}`);
@@ -27,12 +33,26 @@ const QAIndex = () => {
   });
 
   }
+  // handle the show more questions func
+  function showMoreQuestions() {
+    setQuestionsToShow(questionsToShow + 2);
+  }
+
+  // handle the func to add new questions
+  function addNewQuestion() {
+    setIsAddingNewQuestion(true);
+  }
+
 
   return (
     <div>
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchComponent handleSearch={handleSearch}/>
-      <QAList qaData={qaData}/>
+      <QAList qaData={qaData} questionsToShow={questionsToShow}/>
+      <button onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button onClick={addNewQuestion}>ADD A QUESTION +</button>
+      {isAddingNewQuestion && <NewQuestionForm />}
+
     </div>
   )
 }

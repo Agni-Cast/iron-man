@@ -5,7 +5,7 @@ const AList = (props) => {
     const answersArray = Object.values(props.answers);
 
     return (
-      <div>
+      <div className="answer-list">
         {answersArray.map((answer, index) => (
             <AnswerEntry key={index} answer={answer} />
         ))}
