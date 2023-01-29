@@ -1,14 +1,20 @@
 import AnswerEntry from './AnswerEntry.jsx';
+import { useState } from 'react';
 
 const AList = (props) => {
     // console.log("im in Answer render now the incoming props looks like: ", props);
     const answersArray = Object.values(props.answers);
+    const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
 
     return (
       <div className="answer-list">
-        {answersArray.map((answer, index) => (
+        {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
             <AnswerEntry key={index} answer={answer} />
         ))}
+
+        {answersArray.length > numAnswersDisplayed && (
+          <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS</button>
+        )}
       </div>
     );
 

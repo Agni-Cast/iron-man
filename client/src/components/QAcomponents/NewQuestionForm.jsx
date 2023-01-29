@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const NewQuestionForm = (props, closeModal) => {
-  console.log("props for the form i got :", props);
+  // console.log("props for the form i got :", props);
 
   const [questionBody, setQuestionBody] = useState('');
   const [askerName, setAskerName] = useState('');
@@ -24,7 +24,7 @@ const NewQuestionForm = (props, closeModal) => {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response);
+      // console.log(response);
       alert("Success! Your question has been submitted.");
       setTimeout(() => {
         props.closeModal();
