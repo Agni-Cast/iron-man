@@ -3,6 +3,8 @@ import SearchComponent from './Searchqa.jsx';
 import {useState} from 'react';
 import axios from 'axios';
 import {token} from '/config.js';
+import NewQuestionForm from './NewQuestionForm.jsx';
+import Modal from 'react-modal';
 
 const QAIndex = () => {
 
@@ -11,7 +13,7 @@ const QAIndex = () => {
   // inital state for how many questions show on the DOM
   const [questionsToShow, setQuestionsToShow] = useState(2)
   // inital state for add new question form
-  const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false)
+  const [modelIsOpen, setModelIsOpen] = useState(false)
 
 
   function handleSearch() {
@@ -40,9 +42,8 @@ const QAIndex = () => {
 
   // handle the func to add new questions
   function addNewQuestion() {
-    setIsAddingNewQuestion(true);
+    setModelIsOpen(!modelIsOpen);
   }
-
 
   return (
     <div>
@@ -51,7 +52,9 @@ const QAIndex = () => {
       <QAList qaData={qaData} questionsToShow={questionsToShow}/>
       <button onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
       <button onClick={addNewQuestion}>ADD A QUESTION +</button>
-      {isAddingNewQuestion && <NewQuestionForm />}
+      <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)}>
+        <NewQuestionForm questionId={questionId} closeModal={() => setModelIsOpen(false)}/>
+      </Modal>
 
     </div>
   )
