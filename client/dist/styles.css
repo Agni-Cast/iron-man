@@ -50,6 +50,32 @@
 
 }
 
+.qa-wholebody {
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.butLoadMoreAns {
+  border: none;
+  border-color: transparent;
+  background: none;
+  font-weight: bold;
+}
+
+.button-show-more-answered-question{
+  background: none;
+  padding: 2%;
+  font-weight: bolder;
+
+}
+
+.button-add-a-question{
+  background: none;
+  padding: 2%;
+  font-weight: bolder;
+}
+
+
 
 input {
   flex: 1;

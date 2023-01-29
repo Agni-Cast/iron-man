@@ -11,7 +11,7 @@ const QAIndex = () => {
   const [questionId, setQuestionId] = useState([37316])
   const [qaData, setQaData] = useState([])
   // inital state for how many questions show on the DOM
-  const [questionsToShow, setQuestionsToShow] = useState(4)
+  const [questionsToShow, setQuestionsToShow] = useState(2)
   // inital state for add new question form
   const [modelIsOpen, setModelIsOpen] = useState(false)
 
@@ -46,12 +46,12 @@ const QAIndex = () => {
   }
 
   return (
-    <div>
+    <div className="qa-wholebody">
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchComponent handleSearch={handleSearch}/>
       <QAList qaData={qaData} questionsToShow={questionsToShow}/>
-      <button onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-      <button onClick={addNewQuestion}>ADD A QUESTION +</button>
+      <button className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
       <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)} ariaHideApp={false}
         style={{
           content: {

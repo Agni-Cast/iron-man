@@ -44,7 +44,7 @@ const AnswerEntry = ({ answer }) => {
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
                 <button className="answer-help" >| &nbsp; Helpful? <u onClick={handleHelpfulClick}> Yes({answerHelpfulCount}) </u> </button>
-                <button className="answer-report" onClick={handleOpenModal}>| &nbsp; Report</button>
+                <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button>
             </div>
             <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal} ariaHideApp={false} style={{
           content: {
