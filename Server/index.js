@@ -99,23 +99,38 @@ app.post('/qa/questions', (req, res) => {
 
 //Review routes:
 
+app.get('/reviews', (req, res) => {
+  console.log('REQ:', req)
+  console.log('REQ Query:', req.query)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?page=${req.query.page}&count=${req.query.count}&product_id=${req.query.product_id}&sort=${req.query.sort}`,
+  {
+   headers: {
+    'Authorization': `${TOKEN}`
+  }
+  })
+  .then((response) => {
+    return res.status(200).send(response.data);
+  })
+  .catch((error) => {
+    res.status(501).send(error);
+  });
+});
 
+app.get('/reviews/meta', (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta?&product_id=${req.query.product_id}`,
+  {
+    headers: {
+      'Authorization': `${config.TOKEN}`
+    }
+  })
+  .then((response) => {
+    res.status(200).send(response.data)
+  })
+  .catch((error) => {
+    res.status(501)
+  })
+})
 
-// app.get('/reviews/', function(req, res) {
-//   return axios({
-//     method: req.method,
-//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`,
-//     headers: {
-//       'User-Agent': 'request',
-//       'Authorization': `token ${config.TOKEN}`
-//     },
-//     data: req.body
-//   })
-//   .then((response) => {
-//     console.log(response)
-//   res.send(response.data)
-//   })
-// })
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

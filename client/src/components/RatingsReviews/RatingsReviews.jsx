@@ -1,22 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Ratings from './Ratings.jsx';
-import Reviews from './Reviews.jsx';
-const axios = require('axios');
+import ReviewsList from './ReviewsList.jsx';
+import axios from 'axios';
 
 // TESTING
-const RatingsReviews = () => {
-
-  // axios.get(`/reviews`)
-  // .then((data) => {
-  //   console.log(data)
-  //   return data
-  // })
+const RatingsReviews = (/* produt_id from overview component*/) => {
+  const product_id = 37315
 
   return (
     <div>
       <h5> RATINGS & REVIEWS</h5>
-      <Ratings/>
-      <Reviews/>
+      <Ratings product_id={product_id}/>
+      <ReviewsList product_id={product_id} />
     </div>
   );
 }
