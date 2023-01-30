@@ -1,11 +1,10 @@
 const path = require("path");
-const config =require('../config.js')
+const {token} = require('../config.js');
 const axios = require('axios');
 
 const express = require('express');
 const app = express();
 
-const {token} = require('../config.js');
 
 const PORT = process.env.PORT || 3000;
 
@@ -105,7 +104,7 @@ app.get('/reviews', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?page=${req.query.page}&count=${req.query.count}&product_id=${req.query.product_id}&sort=${req.query.sort}`,
   {
    headers: {
-    'Authorization': `${TOKEN}`
+    'Authorization': `${token}`
   }
   })
   .then((response) => {
@@ -120,7 +119,7 @@ app.get('/reviews/meta', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta?&product_id=${req.query.product_id}`,
   {
     headers: {
-      'Authorization': `${config.TOKEN}`
+      'Authorization': `${token}`
     }
   })
   .then((response) => {

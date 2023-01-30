@@ -17,7 +17,7 @@ const App = () => {
       <h1>Hello Iron Man!</h1>
       <Overview productID={productID}/>
       <QAIndex />
-      {/* <RatingsReviews/> */}
+      <RatingsReviews/>
     </div>
   )
 }
