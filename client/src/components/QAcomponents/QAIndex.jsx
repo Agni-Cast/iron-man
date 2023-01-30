@@ -1,5 +1,5 @@
 import QAList from './QAList.jsx';
-import SearchComponent from './Searchqa.jsx';
+
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {token} from '/config.js';
@@ -15,6 +15,23 @@ const QAIndex = () => {
   // inital state for add new question form
   const [modelIsOpen, setModelIsOpen] = useState(false)
 
+  // below two are used for search function
+  const [filteredData, setFilteredData] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const handleSearch = () => {
+    const lowerCasedSearchTerm = searchTerm.toLowerCase();
+    // console.log("what is data transfer to handlesearch func",qaData[0]);
+    const filtered = qaData.filter((data) => {
+      return (
+        data.question_body.toLowerCase().includes(lowerCasedSearchTerm)
+      );
+    });
+    // console.log("filtered data looks like :", filtered)
+    setFilteredData(filtered);
+  }
+
+  // this is for the test right now, render out questions and answers for product 37319
   useEffect(() => {
     $.ajax({
       type: 'GET',
@@ -33,12 +50,7 @@ const QAIndex = () => {
   }, [])
 
 
-  function handleSearch() {
-    // console.log(`sending request to server and token is ${token}`);
 
-
-
-  }
   // handle the show more questions func
   function showMoreQuestions() {
     setQuestionsToShow(questionsToShow + 2);
@@ -52,8 +64,19 @@ const QAIndex = () => {
   return (
     <div className="qa-wholebody">
       <p className="qa-head">QUESTIONS & ANSWERS</p>
-      <SearchComponent handleSearch={handleSearch}/>
-      <QAList qaData={qaData} questionsToShow={questionsToShow}/>
+
+      <div className="search-container">
+        <input
+          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit" onClick={handleSearch}>
+          <img src="./magnifier.png" alt="Amplifier"/>
+        </button>
+      </div>
+
+      <QAList qaData={filteredData.length > 0 ? filteredData : qaData} questionsToShow={questionsToShow}/>
       <button className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
       <button className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
       <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)} ariaHideApp={false}

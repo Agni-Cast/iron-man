@@ -18,7 +18,7 @@ const AnswerEntry = ({ answer }) => {
             }
           });
           alert("Thanks for voting this answer helpful! ")
-          console.log(response.data);
+          // console.log(response.data);
         } catch (error) {
           console.log(error);
         }
@@ -45,7 +45,7 @@ const AnswerEntry = ({ answer }) => {
 
 
 
-    console.log("let me see what is the answer looks like: ",  answer)
+    // console.log("let me see what is the answer looks like: ",  answer)
     return (
         <div>
             <p>A: {answer.body}</p>
