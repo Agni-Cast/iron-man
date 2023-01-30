@@ -1,6 +1,9 @@
 import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
+import axios from 'axios';
+import {token} from '/config.js';
+
 
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
@@ -16,6 +19,8 @@ const ListEntry = (props) => {
     setIsModalOpen(!isModalOpen);
   }
 
+  // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
+
   return (
     <div>
       <div className="question-container">
@@ -30,6 +35,7 @@ const ListEntry = (props) => {
       <br/>
 
       <AList answers={props.question.answers}/>
+      {/* ariaHideApp is used here to prevent ReactModal fault in console */}
       <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
@@ -42,11 +48,40 @@ const ListEntry = (props) => {
             height: '300px'
           }
         }}>
-        <form>
-          <textarea placeholder="Enter your answer here" style={{ height: '200px', width: '300px' }}></textarea>
-          <input type='file' accept="image/*" />
-          <button onClick={() => setIsModalOpen(false)}>Add Answer</button>
+          {/* handle the API request below */}
+        <form onSubmit ={async (event) => {
+          event.preventDefault();
+          // handle photo API requirement for [text] format
 
+          let photos = [];
+          for (let i = 0; i < event.target.photos.files.length; i++) {
+            photos.push(event.target.photos.files[i].name);
+          }
+
+          const data = {body: event.target.body.value, name: event.target.name.value, email: event.target.email.value, photos: photos}
+          const addAnsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${props.question.question_id}/answers`;
+
+          console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
+
+          try {
+            const response = await axios.post(addAnsUrl, data, {
+              headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+              }
+            });
+            alert("Success! Your answer has been submitted.")
+            setIsModalOpen(false);
+            console.log(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }}>
+          <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>
+          <input type='file' name="photos" accept="image/*" multiple />
+          <input type='text' name='name' placeholder='Your Name' />
+          <input type='text' name='email' placeholder='Your Email' />
+          <button type="submit">Add Answer</button>
         </form>
       </ReactModal>
     </div>

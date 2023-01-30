@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 
 
 const AnswerEntry = ({ answer }) => {
-    console.log('what is each answer looks like :', answer);
+    // console.log('what is each answer looks like :', answer);
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);

@@ -75,6 +75,10 @@
   font-weight: bolder;
 }
 
+.qa-head {
+  font-size: large;
+  color: rgb(170, 168, 168);
+}
 
 
 input {

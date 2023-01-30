@@ -47,7 +47,7 @@ const QAIndex = () => {
 
   return (
     <div className="qa-wholebody">
-      <h2>QUESTIONS & ANSWERS</h2>
+      <p className="qa-head">QUESTIONS & ANSWERS</p>
       <SearchComponent handleSearch={handleSearch}/>
       <QAList qaData={qaData} questionsToShow={questionsToShow}/>
       <button className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
