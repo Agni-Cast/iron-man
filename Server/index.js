@@ -81,7 +81,7 @@ app.get('/products/:product_id/related', (req, res) => {
 //QandA routes:
 
 //Review routes:
-
+////
 app.get('/reviews', (req, res) => {
   console.log('REQ:', req)
   console.log('REQ Query:', req.query)
