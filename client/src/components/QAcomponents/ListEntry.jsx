@@ -8,9 +8,29 @@ import {token} from '/config.js';
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
+  // define the func to send "put" request to API update the question helpful
+  const curQuestionId = props.question.question_id;
+
+  const handleVote = async (questionId) => {
+    console.log(questionId)
+    try {
+      const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${questionId}/helpful`, {}, {
+        headers: {
+          'Authorization': `${token}`
+        }
+      });
+      alert("Thanks for voting this question helpful! ")
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // this is handle after the click, the helpfulness accumulate
   const voteOnHelp = (questionId) => {
+    console.log("voteOnHep func, which question is dealing with right now ?", questionId);
     setHelpfulnessCount(helpfulnessCount + 1);
+
+    handleVote(questionId);
   }
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,14 +39,14 @@ const ListEntry = (props) => {
     setIsModalOpen(!isModalOpen);
   }
 
-  // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
+  console.log("in listEntry, i want to see the question_id :", props.question.question_id);
 
   return (
     <div>
       <div className="question-container">
         <h4 className="question-body">Q: {props.question.question_body}</h4>
         <div className="question-actions">
-          <button className="question-help">Helpful? <u onClick={() => voteOnHelp(props.question.quesiton_id)}> Yes({helpfulnessCount})</u></button>
+          <button className="question-help">Helpful? <u onClick={() => voteOnHelp(props.question.question_id)}> Yes({helpfulnessCount})</u></button>
           <button className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
