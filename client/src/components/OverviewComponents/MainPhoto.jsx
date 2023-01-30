@@ -7,10 +7,6 @@ import axios from "axios";
 const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
 
 
-//pseudocode:
-//DONE. get the list of photos
-//display photos[photoNumber]
-//add arrows that onclick will increment photo number
   const [photoList, setPhotoList] = useState([]);
 
   useEffect(() => {
@@ -24,7 +20,6 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     })
   },[]);
 
-  console.log('this is the photonumber: ', photoNumber, 'this is photolist.length:', photoList.length);
 
   //TODO: figure out why fifth photo only shows during handleprev.
   const handleNext = function() {
@@ -96,19 +91,5 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
   )
 }
 
-
-// position: "absolute",
-// top: "50%",
-// left: "15px",
-// cursor: "pointer",
-// width: "auto",
-// marginTop: "-22px",
-// padding: "16px",
-// color: "white",
-// fontWeight: "bold",
-// fontSize: "18px",
-// transition: "0.6s ease",
-// borderRadius: "0 3px 3px 0",
-// userSelect: "none",
 
 export default MainPhoto;
