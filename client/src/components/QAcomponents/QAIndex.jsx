@@ -1,6 +1,6 @@
 import QAList from './QAList.jsx';
 import SearchComponent from './Searchqa.jsx';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {token} from '/config.js';
 import NewQuestionForm from './NewQuestionForm.jsx';
@@ -8,17 +8,14 @@ import Modal from 'react-modal';
 
 const QAIndex = () => {
 
-  const [questionId, setQuestionId] = useState([37316])
+  const [questionId, setQuestionId] = useState([37319])
   const [qaData, setQaData] = useState([])
   // inital state for how many questions show on the DOM
   const [questionsToShow, setQuestionsToShow] = useState(2)
   // inital state for add new question form
   const [modelIsOpen, setModelIsOpen] = useState(false)
 
-
-  function handleSearch() {
-    // console.log(`sending request to server and token is ${token}`);
-
+  useEffect(() => {
     $.ajax({
       type: 'GET',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${questionId}`,
@@ -33,6 +30,13 @@ const QAIndex = () => {
           console.log(error);
       }
   });
+  }, [])
+
+
+  function handleSearch() {
+    // console.log(`sending request to server and token is ${token}`);
+
+
 
   }
   // handle the show more questions func

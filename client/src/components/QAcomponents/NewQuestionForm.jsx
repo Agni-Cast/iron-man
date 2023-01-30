@@ -24,7 +24,7 @@ const NewQuestionForm = (props, closeModal) => {
           'Content-Type': 'application/json'
         }
       });
-      // console.log(response);
+      // console.log(response)#;
       alert("Success! Your question has been submitted.");
       setTimeout(() => {
         props.closeModal();

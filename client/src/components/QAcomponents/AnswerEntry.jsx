@@ -4,7 +4,7 @@ import axios from 'axios';
 import {token} from '/config.js';
 
 const AnswerEntry = ({ answer }) => {
-    console.log('what is each answer_id looks like :', answer.id);
+    // console.log('what is each answer_id looks like :', answer.id);
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
@@ -45,7 +45,7 @@ const AnswerEntry = ({ answer }) => {
 
 
 
-
+    console.log("let me see what is the answer looks like: ",  answer)
     return (
         <div>
             <p>A: {answer.body}</p>
@@ -53,7 +53,7 @@ const AnswerEntry = ({ answer }) => {
                 <img
                     key={index}
                     onClick={handlePhotoClick}
-                    src={'https://terrigen-cdn-dev.marvel.com/content/prod/1x/ironman_lob_mas_hlf_02_0.jpg'}
+                    src={`${answer.photos[index]}`}
                     alt="answer photo"
                     className={isEnlarged ? 'enlarged-photo' : ''}
                 />
