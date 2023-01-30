@@ -1,2 +1,97 @@
 /* TODO */
 
+.search-container {
+  display: flex;
+}
+
+.question-container {
+
+  font-family: Arial, sans-serif;
+}
+
+.answer-infor {
+  display: flex;
+}
+
+.enlarged-photo {
+  width: 500px;
+  height: auto;
+}
+
+.answer-help {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
+.answer-report {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
+.question-help {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+
+.question-addAnswer {
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+.question-body {
+  float: left;
+}
+.question-actions {
+  float: right;
+  padding-top: 1.8%;
+
+}
+
+.qa-wholebody {
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.butLoadMoreAns {
+  border: none;
+  border-color: transparent;
+  background: none;
+  font-weight: bold;
+}
+
+.button-show-more-answered-question{
+  background: none;
+  padding: 2%;
+  font-weight: bolder;
+
+}
+
+.button-add-a-question{
+  background: none;
+  padding: 2%;
+  font-weight: bolder;
+}
+
+.qa-head {
+  font-size: large;
+  color: rgb(170, 168, 168);
+}
+
+
+input {
+  flex: 1;
+}
+
+button {
+  margin-left: 10px;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
