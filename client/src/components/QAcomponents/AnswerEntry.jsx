@@ -10,7 +10,7 @@ const AnswerEntry = ({ answer }) => {
     const [isEnlarged, setIsEnlarged] = useState(false);
 
     const handleVote = async (answerId) => {
-        console.log(answerId)
+        // console.log(answerId)
         try {
           const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answerId}/helpful`, {}, {
             headers: {
@@ -23,6 +23,7 @@ const AnswerEntry = ({ answer }) => {
           console.log(error);
         }
       }
+
 
     const handleHelpfulClick = (answerId) => {
         setAnswerHelpfulCount(answerHelpfulCount + 1);
@@ -62,7 +63,7 @@ const AnswerEntry = ({ answer }) => {
                 <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button>
                 <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button>
             </div>
-            <ReactModal isOpen={isOpen} onRequestClose={handleCloseModal} ariaHideApp={false} style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
             left: '50%',
@@ -74,7 +75,22 @@ const AnswerEntry = ({ answer }) => {
             height: '300px'
           }
         }}>
-                <form>
+                <form onSubmit={async (event) => {
+                    event.preventDefault();
+                    try {
+                        const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answer.id}/report`, {}, {
+                          headers: {
+                            'Authorization': `${token}`
+                          }
+                        });
+                        alert("Thanks for reporting this answer! ")
+                        console.log(response.data);
+                        setIsOpen(false);
+                      } catch (error) {
+                        console.log(error);
+                      }
+
+                }}>
                     <label>
                         Report Reason:
                         <input type="text" name="reportReason" />
