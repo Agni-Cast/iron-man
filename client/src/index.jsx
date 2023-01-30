@@ -16,7 +16,7 @@ const App = () => {
     <div>
       <h1>Hello Iron Man!</h1>
       <Overview productID={productID}/>
-      <QAIndex />
+      {/* <QAIndex /> */}
       <RatingsReviews/>
     </div>
   )
