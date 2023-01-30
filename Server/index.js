@@ -1,5 +1,6 @@
 const path = require("path");
-const {token} = require('../config.js');
+const config = require('../config.js')
+//const {token} = require('../config.js');
 const axios = require('axios');
 
 const express = require('express');
@@ -19,7 +20,7 @@ app.get('/products', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products?page=${req.body.page}&count=${req.body.count}`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -35,7 +36,7 @@ app.get('/products/:product_id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -51,7 +52,7 @@ app.get('/products/:product_id/styles', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}/styles`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -67,7 +68,7 @@ app.get('/products/:product_id/related', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${req.params.product_id}/related`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -83,7 +84,7 @@ app.post('/qa/questions', (req, res) => {
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions?${req.params.product_id}`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -104,7 +105,7 @@ app.get('/reviews', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?page=${req.query.page}&count=${req.query.count}&product_id=${req.query.product_id}&sort=${req.query.sort}`,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${config.token}`
   }
   })
   .then((response) => {
@@ -119,7 +120,7 @@ app.get('/reviews/meta', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta?&product_id=${req.query.product_id}`,
   {
     headers: {
-      'Authorization': `${token}`
+      'Authorization': `${config.token}`
     }
   })
   .then((response) => {
