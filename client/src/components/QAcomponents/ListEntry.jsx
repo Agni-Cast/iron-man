@@ -8,8 +8,7 @@ import {token} from '/config.js';
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
-  // define the func to send "put" request to API update the question helpful
-  const curQuestionId = props.question.question_id;
+
 
   const handleVote = async (questionId) => {
     console.log(questionId)
@@ -39,7 +38,7 @@ const ListEntry = (props) => {
     setIsModalOpen(!isModalOpen);
   }
 
-  console.log("in listEntry, i want to see the question_id :", props.question.question_id);
+  // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
 
   return (
     <div>

@@ -15,7 +15,7 @@ const NewQuestionForm = (props, closeModal) => {
     event.preventDefault();
     const data = { body: questionBody, name: askerName, email: askerEmail, product_id:props.questionId[0]};
 
-    console.log("am i sending the correct data? ", JSON.stringify(data));
+    // console.log("am i sending the correct data? ", JSON.stringify(data));
 
     try {
       const response = await axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/`, data, {
