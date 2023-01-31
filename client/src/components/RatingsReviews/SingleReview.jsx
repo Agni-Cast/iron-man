@@ -1,11 +1,16 @@
 import React from 'react';
+import Stars from './Stars.jsx';
 
 const SingleReview = ({review}) => {
+  const months = ['Januray', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const date = new Date(review.date)
+
   return (
   <div>
-    <div>{review.rating}</div>
     <span>
-        <div>{review.reviewer_name}, {review.date}</div>
+       <div><Stars rating={review.rating}/> </div>
+       <div>{review.reviewer_name}, {`${months[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`}
+       </div>
     </span>
     <div>{review.summary}</div>
     <div>{review.body}</div>
@@ -18,4 +23,4 @@ const SingleReview = ({review}) => {
   )
 }
 
-export default SingleReview;
+export default SingleReview

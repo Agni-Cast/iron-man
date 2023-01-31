@@ -100,6 +100,7 @@ app.post('/qa/questions', (req, res) => {
 //Review routes:
 
 app.get('/reviews', (req, res) => {
+  console.log(req.query)
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?count=${req.query.count}&product_id=${req.query.product_id}&sort=${req.query.sort}`,
   {
    headers: {

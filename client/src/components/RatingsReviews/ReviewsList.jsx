@@ -8,17 +8,16 @@ const ReviewsList = ({product_id}) => {
 
   useEffect(() => {
 
-    axios.get(`http://localhost:3000/reviews?count=5000&sort=newest&product_id=${product_id}`)
+    axios.get(`http://localhost:3000/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
     .then((res) => {
-     //console.log(res.data)
       setReviews(res.data.results);
     });
-  }, []);
+  }, [sortBy, product_id]);
  console.log('REVIEWS: ', reviews)
 
   return (
     <div>
-        <div> {reviews.length} reviews, sorted by
+        <div value={sortBy} onChange={(event) => {setSortBy(event.target.value)}}> {reviews.length} reviews, sorted by
           <select>
             <option value='relevance'>relevance</option>
             <option value='newest'>newest</option>

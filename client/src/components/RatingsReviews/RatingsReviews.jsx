@@ -3,7 +3,6 @@ import Ratings from './Ratings.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import axios from 'axios';
 
-// TESTING
 const RatingsReviews = (/* produt_id from overview component*/) => {
   const product_id = 37315
 
