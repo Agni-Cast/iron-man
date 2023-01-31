@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-import {token} from '/config.js';
+
 
 const AnswerEntry = ({ answer }) => {
     // console.log('what is each answer_id looks like :', answer.id);

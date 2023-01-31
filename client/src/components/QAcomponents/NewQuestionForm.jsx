@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {token} from '/config.js';
 import Modal from 'react-modal';
 import axios from 'axios';
 

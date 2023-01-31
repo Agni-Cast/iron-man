@@ -2,7 +2,7 @@ import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-import {token} from '/config.js';
+
 
 
 const ListEntry = (props) => {

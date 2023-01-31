@@ -1,8 +1,6 @@
 import QAList from './QAList.jsx';
-
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {token} from '/config.js';
 import NewQuestionForm from './NewQuestionForm.jsx';
 import Modal from 'react-modal';
 

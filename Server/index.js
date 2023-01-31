@@ -112,7 +112,7 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     }
   })
   .then(response => {
-    console.log("any response?")
+    // console.log("any response?")
     res.status(204).end();
   })
   .catch(error => {
