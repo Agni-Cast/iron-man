@@ -5,7 +5,6 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 
-
 const PORT = process.env.PORT || 3000;
 
 //Middleware:
@@ -78,29 +77,128 @@ app.get('/products/:product_id/related', (req, res) => {
   });
 });
 
-//QandA routes:
-app.post('/qa/questions', (req, res) => {
-  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions?${req.params.product_id}`,
+
+
+// Question and Answers routes
+// ***************************************************************/
+// handle the answer helpful
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  // console.log("am i geting req?", req.params)
+
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answer_id}/helpful`, {},
   {
-   headers: {
-    'Authorization': `${token}`
-  }
+    headers: {
+      'Authorization': `${token}`
+    }
   })
-  .then((response) => {
-    res.status(200).send(response.data);
+  .then(response => {
+    console.log("any response?")
+    res.status(204).end();
   })
-  .catch((error) => {
-    res.status(501).send(error.response.data);
-  });
+  .catch(error => {
+    res.status(501);
+  })
 });
 
+// handle the answer report
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  // console.log("am i geting req?", req.params)
 
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answer_id}/report`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    // console.log("any response?")
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+});
 
+// to handle add a question
+app.post('/api/qa/questions', (req, res) => {
+  // console.log('getting req for add question?', req);
+  // console.log('show me the param body', req.body);
+  const addQdata = req.body
+
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions',addQdata,
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+
+    res.status(201).end()
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
+
+// handle voting question helpful
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  // console.log("req for voting question ?", req.params)
+
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.question_id}/helpful`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then (response => {
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
+// merging
+// handle add answer to a question
+app.post('/api/qa/questions/:question_id/answers', (req, res) => {
+  // console.log("req for adding answer to this question", req.body)
+
+  const addAdata = req.body
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.question_id}/answers`, addAdata,
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    res.status(201).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
+
+// handle the first render out currently, might not be used in the final version
+app.get('/api/qa/questions', (req, res) => {
+  // console.log("first render request check :", req)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${req.query.product_id}`,
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    // console.log(response.data)
+    res.status(200).send(response.data);
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
+
+// ************************************************************** */
 //Review routes:
 
 app.get('/reviews', (req, res) => {
-  console.log('REQ:', req)
-  console.log('REQ Query:', req.query)
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?page=${req.query.page}&count=${req.query.count}&product_id=${req.query.product_id}&sort=${req.query.sort}`,
   {
    headers: {

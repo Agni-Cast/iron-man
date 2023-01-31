@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {token} from '/config.js';
 import Modal from 'react-modal';
 import axios from 'axios';
 
@@ -11,29 +10,24 @@ const NewQuestionForm = (props, closeModal) => {
   const [askerName, setAskerName] = useState('');
   const [askerEmail, setAskerEmail] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = { body: questionBody, name: askerName, email: askerEmail, product_id:props.questionId[0]};
 
-    // console.log("am i sending the correct data? ", JSON.stringify(data));
+    // console.log("show me the data that user fill?", data);
 
-    try {
-      const response = await axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/`, data, {
-        headers: {
-          'Authorization': `${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      // console.log(response);
+    axios.post('http://localhost:3000/api/qa/questions', data)
+    // console.log(response)#;
+    .then((response) => {
       alert("Success! Your question has been submitted.");
-      setTimeout(() => {
-        props.closeModal();
-      }, 1000);
-    } catch (error) {
+    setTimeout(() => {
+      props.closeModal();
+    }, 1000);
+    })
+    .catch ((error) => {
       console.log(error);
-    }
-
-    }
+    })
+  }
 
     return (
       <form onSubmit={handleSubmit}>

@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-import {token} from '/config.js';
+
 
 const AnswerEntry = ({ answer }) => {
-    console.log('what is each answer_id looks like :', answer.id);
+    // console.log('what is each answer_id looks like :', answer.id);
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
 
-    const handleVote = async (answerId) => {
-        // console.log(answerId)
-        try {
-          const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answerId}/helpful`, {}, {
-            headers: {
-              'Authorization': `${token}`
-            }
-          });
+    const handleVote = (answerId) => {
+        const apiUrl = `https://localhost:3000/qa/answers/${answerId}/helpful`;
+
+        // console.log("am in handleVote func, prepare send request to API", apiUrl);
+
+        axios.put(`http://localhost:3000/qa/answers/${answerId}/helpful`)
+        .then((response) => {
           alert("Thanks for voting this answer helpful! ")
-          console.log(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+          // console.log("voting succeed!")
+        })
+        .catch ((error) => {
+          alert('this answer voting get error: ', error);
+        })
+    }
 
 
     const handleHelpfulClick = (answerId) => {
@@ -45,7 +45,7 @@ const AnswerEntry = ({ answer }) => {
 
 
 
-
+    // console.log("let me see what is the answer looks like: ",  answer)
     return (
         <div>
             <p>A: {answer.body}</p>
@@ -53,7 +53,7 @@ const AnswerEntry = ({ answer }) => {
                 <img
                     key={index}
                     onClick={handlePhotoClick}
-                    src={'https://terrigen-cdn-dev.marvel.com/content/prod/1x/ironman_lob_mas_hlf_02_0.jpg'}
+                    src={`${answer.photos[index]}`}
                     alt="answer photo"
                     className={isEnlarged ? 'enlarged-photo' : ''}
                 />
@@ -75,22 +75,21 @@ const AnswerEntry = ({ answer }) => {
             height: '300px'
           }
         }}>
-                <form onSubmit={async (event) => {
+                <form onSubmit={(event) => {
                     event.preventDefault();
-                    try {
-                        const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answer.id}/report`, {}, {
-                          headers: {
-                            'Authorization': `${token}`
-                          }
-                        });
-                        alert("Thanks for reporting this answer! ")
-                        console.log(response.data);
-                        setIsOpen(false);
-                      } catch (error) {
-                        console.log(error);
-                      }
 
-                }}>
+                    // console.log("am i sending request to ans report API?", answer.id)
+
+                    axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
+                    .then((response) => {
+                          alert("Thanks for report this answer ! ")
+                          // console.log("voting succeed!")
+                          setIsOpen(false);
+                      })
+                    .catch ((error) => {
+                      alert('this answer report get error: ', error);
+                     })
+                    }}>
                     <label>
                         Report Reason:
                         <input type="text" name="reportReason" />
