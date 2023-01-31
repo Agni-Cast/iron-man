@@ -9,11 +9,9 @@ const ReviewsList = ({product_id}) => {
 
     axios.get(`http://localhost:3000/reviews?page=1&count=5&sort=helpful&product_id=${product_id}`)
     .then((res) => {
-     //console.log(res.data)
       setReviews(res.data.results);
     });
   }, []);
- console.log('REVIEWS: ', reviews)
 
   return (
     <div>
