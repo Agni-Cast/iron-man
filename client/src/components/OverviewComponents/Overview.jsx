@@ -1,7 +1,8 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import MainPhoto from "./MainPhoto.jsx"
+import MainPhoto from "./MainPhoto.jsx";
+
 
 
 const Overview = ({productID}) => {
@@ -13,10 +14,10 @@ const Overview = ({productID}) => {
   return (
     <div>
      <MainPhoto
-       productID={productID}
-       photoNumber={photoNumber}
-       setPhotoNumber={setPhotoNumber}
-       styleNumber={styleNumber}
+        productID={productID}
+        photoNumber={photoNumber}
+        setPhotoNumber={setPhotoNumber}
+        styleNumber={styleNumber}
      />
     </div>
   )
