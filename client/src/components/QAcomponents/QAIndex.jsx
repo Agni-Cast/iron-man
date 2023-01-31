@@ -33,20 +33,29 @@ const QAIndex = () => {
 
   // this is for the test right now, render out questions and answers for product 37319
   useEffect(() => {
-    $.ajax({
-      type: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${questionId}`,
-      headers: {
-          'Authorization': `${token}`,
-      },
-      success: function (response) {
-          // console.log("res from API looks like: ", response.results)
-          setQaData(response.results)
-      },
-      error: function (error) {
-          console.log(error);
-      }
-  });
+
+    axios.get(`http://localhost:3000/api/qa/questions/?product_id=${questionId}`)
+    .then((response) => {
+      // console.log("response return from server :", response)
+      setQaData(response.data.results)
+    })
+    .catch((error) => {
+      alert('first render got trouble!', error)
+    })
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${questionId}`,
+  //     headers: {
+  //         'Authorization': `${token}`,
+  //     },
+  //     success: function (response) {
+  //         // console.log("res from API looks like: ", response.results)
+  //         setQaData(response.results)
+  //     },
+  //     error: function (error) {
+  //         console.log(error);
+  //     }
+  // });
   }, [])
 
 
