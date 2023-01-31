@@ -1,17 +1,23 @@
-const AList = () => {
-  return (
-    <div>
-      <div>A: WHAT EVER THE ANSWER IS ... ... </div>
+import AnswerEntry from './AnswerEntry.jsx';
+import { useState } from 'react';
 
-      <img src=""/>
+const AList = (props) => {
+    // console.log("im in Answer render now the incoming props looks like: ", props);
+    const answersArray = Object.values(props.answers);
+    const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
 
-      <button id="load-more">Load More Answers</button>
+    return (
+      <div className="answer-list">
+        {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
+            <AnswerEntry key={index} answer={answer} />
+        ))}
 
-      <p className="answer-info">
-        User created: xxx | Helpful or not: Helpful | <button>Report</button>
-      </p>
-    </div>
-  )
+        {answersArray.length > numAnswersDisplayed && (
+          <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS</button>
+        )}
+      </div>
+    );
+
 }
 
 export default AList;
