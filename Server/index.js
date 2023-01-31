@@ -78,22 +78,10 @@ app.get('/products/:product_id/related', (req, res) => {
   });
 });
 
+
+
 // Question and Answers routes
-//
-app.post('/qa/questions', (req, res) => {
-  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions?${req.params.product_id}`,
-  {
-   headers: {
-    'Authorization': `${token}`
-  }
-  })
-  .then((response) => {
-    res.status(200).send(response.data);
-  })
-  .catch((error) => {
-    res.status(501).send(error.response.data);
-  });
-});
+// ***************************************************************/
 // handle the answer helpful
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   // console.log("am i geting req?", req.params)
@@ -115,7 +103,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 
 // handle the answer report
 app.put('/qa/answers/:answer_id/report', (req, res) => {
-  console.log("am i geting req?", req.params)
+  // console.log("am i geting req?", req.params)
 
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answer_id}/report`, {},
   {
@@ -132,11 +120,31 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
   })
 });
 
+// to handle add a question
+app.post('/api/qa/questions', (req, res) => {
+  // console.log('getting req for add question?', req);
+  // console.log('show me the param body', req.body);
+  const addQdata = req.body
+
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions',addQdata,
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+
+    res.status(201).end()
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
 
 
 
 
-
+// ************************************************************** */
 //Review routes:
 
 
