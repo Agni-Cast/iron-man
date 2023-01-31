@@ -42,20 +42,7 @@ const QAIndex = () => {
     .catch((error) => {
       alert('first render got trouble!', error)
     })
-  //   $.ajax({
-  //     type: 'GET',
-  //     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${questionId}`,
-  //     headers: {
-  //         'Authorization': `${token}`,
-  //     },
-  //     success: function (response) {
-  //         // console.log("res from API looks like: ", response.results)
-  //         setQaData(response.results)
-  //     },
-  //     error: function (error) {
-  //         console.log(error);
-  //     }
-  // });
+
   }, [])
 
 
