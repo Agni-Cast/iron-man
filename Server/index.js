@@ -78,7 +78,8 @@ app.get('/products/:product_id/related', (req, res) => {
   });
 });
 
-//QandA routes:
+// Question and Answers routes
+//
 app.post('/qa/questions', (req, res) => {
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions?${req.params.product_id}`,
   {
@@ -93,6 +94,46 @@ app.post('/qa/questions', (req, res) => {
     res.status(501).send(error.response.data);
   });
 });
+// handle the answer helpful
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  // console.log("am i geting req?", req.params)
+
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answer_id}/helpful`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    console.log("any response?")
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+});
+
+// handle the answer report
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  console.log("am i geting req?", req.params)
+
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${req.params.answer_id}/report`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    console.log("any response?")
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+});
+
+
+
 
 
 
