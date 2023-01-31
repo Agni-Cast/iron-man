@@ -1,7 +1,7 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import MainPhoto from "./MainPhoto.jsx"
+import MainPhoto from "./MainPhoto.jsx";
 
 
 
