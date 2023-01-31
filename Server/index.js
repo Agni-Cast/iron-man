@@ -143,7 +143,7 @@ app.post('/api/qa/questions', (req, res) => {
 
 // handle voting question helpful
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
-  console.log("req for voting question ?", req.params)
+  // console.log("req for voting question ?", req.params)
 
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.question_id}/helpful`, {},
   {
@@ -159,6 +159,24 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
   })
 })
 
+// handle add answer to a question
+app.post('/api/qa/questions/:question_id/answers', (req, res) => {
+  console.log("req for adding answer to this question", req)
+
+  const addAdata = req.body
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${req.params.question_id}/answers`, addAdata,
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    res.status(201).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+})
 
 
 // ************************************************************** */
