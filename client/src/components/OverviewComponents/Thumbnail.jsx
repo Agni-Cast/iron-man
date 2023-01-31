@@ -13,7 +13,7 @@ const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoLi
   },[]);
 
 
-  //TODO: figure out wht fifth photo only shows during handleprev.
+  //TODO: figure out why fifth photo only shows during handleprev.
   const handleNext = function() {
     if (photoNumber === photoList.length - 1) {
       setPhotoNumber(0);

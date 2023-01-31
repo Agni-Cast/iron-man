@@ -16,7 +16,7 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
       setPhotoList(response.data.results[styleNumber].photos);
     })
     .catch((error) => {
-      console.log('this is an axios get error it MainPhoto.jsx: ', error);
+      console.log('this is an axios get error in MainPhoto.jsx: ', error);
     })
   },[]);
 

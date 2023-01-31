@@ -14,10 +14,10 @@ const Overview = ({productID}) => {
   return (
     <div>
      <MainPhoto
-       productID={productID}
-       photoNumber={photoNumber}
-       setPhotoNumber={setPhotoNumber}
-       styleNumber={styleNumber}
+        productID={productID}
+        photoNumber={photoNumber}
+        setPhotoNumber={setPhotoNumber}
+        styleNumber={styleNumber}
      />
     </div>
   )
