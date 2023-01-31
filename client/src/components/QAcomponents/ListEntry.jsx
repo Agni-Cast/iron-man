@@ -11,19 +11,18 @@ const ListEntry = (props) => {
 
 
   const handleVote = async (questionId) => {
-    console.log(questionId)
-    try {
-      const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${questionId}/helpful`, {}, {
-        headers: {
-          'Authorization': `${token}`
-        }
-      });
-      alert("Thanks for voting this question helpful! ")
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("correct question ID here?", questionId)
+
+    axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
+    .then((response) => {
+      alert("Thanks for voting this question helpful! ");
+      // console.log(response.data);
+    })
+    .catch((error) => {
+      alert("This question helpful voting got error", error);
+    })
   }
+
   // this is handle after the click, the helpfulness accumulate
   const voteOnHelp = (questionId) => {
     console.log("voteOnHep func, which question is dealing with right now ?", questionId);
