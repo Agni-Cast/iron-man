@@ -24,13 +24,8 @@ yarn-error.log*
 
 #API keys##
 config.js
-<<<<<<< HEAD
-bundle.js
-bundle.js.map
-=======
 
 client/dist/bundle.js
 client/dist/bundle.js.map
 
->>>>>>> 312375cfb95469c352f3a132d490fee535a85996
 
