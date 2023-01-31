@@ -2,7 +2,7 @@ import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-import {token} from '/config.js';
+
 
 
 const ListEntry = (props) => {
@@ -11,22 +11,21 @@ const ListEntry = (props) => {
 
 
   const handleVote = async (questionId) => {
-    console.log(questionId)
-    try {
-      const response = await axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${questionId}/helpful`, {}, {
-        headers: {
-          'Authorization': `${token}`
-        }
-      });
-      alert("Thanks for voting this question helpful! ")
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("correct question ID here?", questionId)
+
+    axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
+    .then((response) => {
+      alert("Thanks for voting this question helpful! ");
+      // console.log(response.data);
+    })
+    .catch((error) => {
+      alert("This question helpful voting got error", error);
+    })
   }
+
   // this is handle after the click, the helpfulness accumulate
   const voteOnHelp = (questionId) => {
-    console.log("voteOnHep func, which question is dealing with right now ?", questionId);
+    // console.log("voteOnHep func, which question is dealing with right now ?", questionId);
     setHelpfulnessCount(helpfulnessCount + 1);
 
     handleVote(questionId);
@@ -68,7 +67,7 @@ const ListEntry = (props) => {
           }
         }}>
           {/* handle the API request below */}
-        <form onSubmit ={async (event) => {
+        <form onSubmit ={(event) => {
           event.preventDefault();
           // handle photo API requirement for [text] format
 
@@ -78,23 +77,20 @@ const ListEntry = (props) => {
           }
 
           const data = {body: event.target.body.value, name: event.target.name.value, email: event.target.email.value, photos: photos}
-          const addAnsUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${props.question.question_id}/answers`;
+
+
+          const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
 
           console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
 
-          try {
-            const response = await axios.post(addAnsUrl, data, {
-              headers: {
-                'Authorization': `${token}`,
-                'Content-Type': 'application/json'
-              }
-            });
+          axios.post(addAnsUrl, data)
+          .then((response) => {
             alert("Success! Your answer has been submitted.")
             setIsModalOpen(false);
-            console.log(response.data);
-          } catch (error) {
-            console.log(error);
-          }
+          })
+          .catch((error) => {
+            alert('this answer submit get error', error)
+          })
         }}>
           <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>
           <input type='file' name="photos" accept="image/*" multiple />
