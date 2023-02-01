@@ -26,6 +26,7 @@ const Overview = ({productID}) => {
      <ProdInfo
         productID={productID}
         styleNumber={styleNumber}
+        setStyleNumber={setStyleNumber}
       />
     </div>
   )
