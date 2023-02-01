@@ -14,7 +14,12 @@
 }
 
 .enlarged-photo {
-  width: 500px;
+  width: 700px;
+  height: auto;
+}
+.answer-photo-orign {
+  padding:20px;
+  width:160px;
   height: auto;
 }
 
