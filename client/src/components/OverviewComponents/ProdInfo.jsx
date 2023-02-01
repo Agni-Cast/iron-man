@@ -1,9 +1,10 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Styles from "./Styles.jsx";
 
 
-const ProdInfo = ({productID, styleNumber}) => {
+const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
 
 
   const [styleEntry, setStyleEntry] = useState({});
@@ -30,20 +31,7 @@ const ProdInfo = ({productID, styleNumber}) => {
       console.log('this is an axios get error in ProdInfo.jsx: ', error);
     })
 
-  },[]);
-
-
-  //TODO: figure out why fifth photo only shows during handleprev.
-  const handleNext = function() {
-
-  }
-
-
-
-  const handlePrev = function() {
-
-  }
-
+  },[styleNumber]);
 
   //CSS:
   const prodNameStyle = {
@@ -70,24 +58,55 @@ const ProdInfo = ({productID, styleNumber}) => {
     padding: "15px"
   }
 
+  const styleTypeStyle = {
+    fontFamily: "Helvetica",
+    fontSize: "16px",
+    padding: "15px"
+  }
+
+  const prodInfoContainerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "400px"
+  }
+
+  const stylesStyle = {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "left",
+    justifyContent: "space-around"
+  }
+
   return (
   <>
-    <div className="prodInfoContainer">
-     <div className="review" style={reviewStyle}>
-      *STAR MODULE HERE*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="url" style={{color: "Gray"}}>Read all reviews</a>
-     </div>
-     <div className="category" style={categoryStyle}>
-      {newCategory}
-     </div>
-     <div className="prodName" style={prodNameStyle}>
-      <b>{prodEntry.name}</b>
-     </div>
-     <div className="prodPrice" style={prodPriceStyle}>
-      ${styleEntry.original_price}  {styleEntry.sale_price}
-     </div>
+    <div className="prodInfoContainer" style={prodInfoContainerStyle}>
+      <div>
+        <div className="review" style={reviewStyle}>
+          *STAR MODULE HERE*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="url" style={{color: "Gray"}}>Read all reviews</a>
+        </div>
+        <div className="category" style={categoryStyle}>
+          {newCategory}
+        </div>
+        <div className="prodName" style={prodNameStyle}>
+          <b>{prodEntry.name}</b>
+        </div>
+        <div className="prodPrice" style={prodPriceStyle}>
+          ${styleEntry.original_price}  {styleEntry.sale_price}
+        </div>
+        <div className="styleType" style={styleTypeStyle}>
+        <b>Style</b> &nbsp; > &nbsp;{styleEntry.name}
+        </div>
+      </div>
+      <div className="styles" style={stylesStyle}>
+        <Styles
+          styleNumber={styleNumber}
+          setStyleNumber={setStyleNumber}
+          productID={productID}
+          />
+      </div>
     </div>
-
   </>
   )
 }
