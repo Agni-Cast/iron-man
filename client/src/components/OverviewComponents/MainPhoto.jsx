@@ -9,6 +9,7 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
 
   const [photoList, setPhotoList] = useState([]);
 
+
   useEffect(() => {
 
     axios.get(`http://localhost:3000/products/${productID}/styles`)
@@ -18,7 +19,7 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     .catch((error) => {
       console.log('this is an axios get error in MainPhoto.jsx: ', error);
     })
-  },[]);
+  },[styleNumber]);
 
 
   //TODO: figure out why fifth photo only shows during handleprev.

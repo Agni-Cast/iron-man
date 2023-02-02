@@ -1,23 +1,26 @@
 import React from 'react';
+import Stars from './Stars.jsx';
 
 const SingleReview = ({review}) => {
+  const months = ['Januray', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const date = new Date(review.date)
+
   return (
   <div>
-    <div>One review</div>
-    <div>Star Rating: {review.rating}</div>
-    <div>Use: {review.reviewer_name}</div>
-    <div>Date: {review.date}</div>
-    <div>Summary: {review.summary}</div>
-    <div>Body: {review.body}</div>
-    <div>I reccomand this product: {review.reccomend}</div>
-    <div>Response: {review.response}</div>
-    <div>Images {review.photos.map((photo) => {return (<img src={photo.url}/>)})}</div>
-    <p>Helpful? <button> Yes!</button> <button>Report</button> </p>
+    <span>
+       <div><Stars rating={review.rating}/> </div>
+       <div>{review.reviewer_name}, {`${months[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`}
+       </div>
+    </span>
+    <div>{review.summary}</div>
+    <div>{review.body}</div>
+    <div>{review.reccomend}</div>
+    <div>{review.response}</div>
+    <div>{review.photos.map((photo) => {return (<img src={photo.url}/>)})}</div>
+    <p>Helpful? <button> Yes! </button> | <button>Report</button> </p>
 
   </div>
-// commen
-//new comment
   )
 }
 
-export default SingleReview;
+export default SingleReview
