@@ -45,9 +45,8 @@ const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoLi
 
   let thumbnailList = photoList.map((photo, index) => {
     return (
-      <li style={{ listStyle: 'none', listStyleType: 'none' , left: "0%", position: "relative"}}>
+      <li key={index} style={{ listStyle: 'none', listStyleType: 'none' , left: "0%", position: "relative"}}>
         <img
-          key={index}
           className={index}
           src={photoList[index].thumbnail_url}
           style={thumbnail}
