@@ -15,7 +15,7 @@ const EnlargedImageModal = ({imageUrl, isOpen, onClose }) => {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-          width: '60%',
+          width: '90%',
           height: '80%',
           display: 'flex',
           justifyContent: 'center',
@@ -24,9 +24,9 @@ const EnlargedImageModal = ({imageUrl, isOpen, onClose }) => {
       }}
     >
 
-      <img src={imageUrl} alt="enlarged answer photo" style={{ height: '750px', width: 'auto' }} />
+      <img src={imageUrl} alt="enlarged answer photo" style={{ height: '650px', width: '950px' }} />
       <div className="overlay" onClick={onClose}></div>
-      {/* <button onClick={onClose} style={{position: 'absolute', bottom: '5px'}}>Close</button> */}
+
 
     </ReactModal>
   );

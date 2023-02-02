@@ -48,12 +48,12 @@ const ListEntry = (props) => {
           <button className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
-      <br/>
-      <br/>
-      <br/>
 
-      <AList answers={props.question.answers}/>
-      {/* ariaHideApp is used here to prevent ReactModal fault in console */}
+      <div className='flexbox-container'>
+        <h4 className="answer-head">A:</h4>
+        <AList answers={props.question.answers}/>
+        {/* ariaHideApp is used here to prevent ReactModal fault in console */}
+      </div>
       <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
@@ -81,7 +81,7 @@ const ListEntry = (props) => {
 
           const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
 
-          console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
+          // console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
 
           axios.post(addAnsUrl, data)
           .then((response) => {
@@ -89,7 +89,7 @@ const ListEntry = (props) => {
             setIsModalOpen(false);
           })
           .catch((error) => {
-            alert('this answer submit get error', error)
+            alert('please check your format', error)
           })
         }}>
           <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>

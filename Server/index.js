@@ -92,7 +92,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
     }
   })
   .then(response => {
-    console.log("any response?")
+    // console.log("any response?")
     res.status(204).end();
   })
   .catch(error => {
@@ -157,7 +157,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     res.status(501);
   })
 })
-// merging
+
 // handle add answer to a question
 app.post('/api/qa/questions/:question_id/answers', (req, res) => {
   // console.log("req for adding answer to this question", req.body)
@@ -173,7 +173,8 @@ app.post('/api/qa/questions/:question_id/answers', (req, res) => {
     res.status(201).end();
   })
   .catch(error => {
-    res.status(501);
+    // console.log("i got an error when submit an answer", error)
+    res.status(501).send(error);
   })
 })
 

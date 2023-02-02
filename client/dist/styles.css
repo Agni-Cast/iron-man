@@ -1,4 +1,17 @@
 /* TODO */
+/* .flexbox-container {
+  width: 50%;
+  justify-content: flex-start;
+  display: flex;
+} */
+
+.flexbox-container {
+  display: flex;
+  align-items:flex-start;
+  justify-content: flex-start;
+}
+
+
 
 .search-container {
   display: flex;
@@ -6,12 +19,15 @@
 
 .question-container {
 
-  font-family: Arial, sans-serif;
+  font-family: Helvetica;
 }
 
+.answer-text {
+  padding-top: 6px;
+}
 .answer-infor {
   display: flex;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Helvetica;
   color:gray;
   font-size: small;
 }
@@ -32,7 +48,7 @@
   border: none;
   border-color: transparent;
   background: none;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Helvetica;
   color:gray;
   font-size: small;
 }
@@ -42,9 +58,31 @@
   border: none;
   border-color: transparent;
   background: none;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Helvetica;
   color:gray;
   font-size: small;
+}
+.answer-head-and-list {
+  width: 50%;
+  margin: 0 auto;
+  margin-left: 0;
+  text-align: left;
+}
+.answer-head {
+  display:inline-block;
+  vertical-align: top;
+  margin-left: 0%;
+
+}
+
+.answer-list {
+  display:inline-block;
+
+}
+
+.question-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .question-help {
@@ -61,7 +99,8 @@
   color:gray
 }
 .question-body {
-  float: left;
+  flex: left;
+  font-family: Helvetica;
 }
 .question-actions {
   float: right;

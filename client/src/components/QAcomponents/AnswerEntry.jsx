@@ -46,7 +46,7 @@ const AnswerEntry = ({ answer }) => {
     // console.log("let me see what is the answer looks like: ",  answer)
     return (
         <div>
-            <p>A: {answer.body}</p>
+            <p className="answer-text">{answer.body}</p>
             {answer.photos.map((photo, index) => (
                 <img
                     key={index}
@@ -97,7 +97,8 @@ const AnswerEntry = ({ answer }) => {
                     }}>
                     <label>
                         Report Reason:
-                        <input type="text" name="reportReason" />
+
+                        <input type="text" name="reportReason" size="50" />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
