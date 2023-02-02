@@ -2,6 +2,7 @@ import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Styles from "./Styles.jsx";
+import Checkout from "./Checkout.jsx";
 
 
 const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
@@ -9,7 +10,6 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
 
   const [styleEntry, setStyleEntry] = useState({});
   const [prodEntry, setProdEntry] = useState({});
-
   const [newCategory, setNewCategory] = useState("");
 
   useEffect(() => {
@@ -104,6 +104,11 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
           styleNumber={styleNumber}
           setStyleNumber={setStyleNumber}
           productID={productID}
+          />
+      </div>
+      <div className="chekcout">
+          <Checkout
+              styleEntry={styleEntry}
           />
       </div>
     </div>

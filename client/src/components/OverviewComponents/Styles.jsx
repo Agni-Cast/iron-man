@@ -13,7 +13,6 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
 
     axios.get(`http://localhost:3000/products/${productID}/styles`)
     .then((response) => {
-      console.log('style list: ', response.data.results);
       setStyleList(response.data.results);
     })
     .catch((error) => {
