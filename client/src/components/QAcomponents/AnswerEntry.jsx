@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
 import EnlargedImageModal from './EnlargedImageModal.jsx';
@@ -60,6 +60,7 @@ const AnswerEntry = ({ answer }) => {
              <EnlargedImageModal
                 imageUrl={answer.photos[enlargePhotoIndex]}
                 isOpen={isEnlarged}
+                ariaHideApp={false}
                 onClose={() => setIsEnlarged(false)}
             />
             <div className="answer-infor">

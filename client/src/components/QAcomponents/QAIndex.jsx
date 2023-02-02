@@ -57,7 +57,7 @@ const QAIndex = () => {
 
   return (
     <div className="qa-wholebody">
-      <p className="qa-head">QUESTIONS & ANSWERS</p>
+      <p data-testid="todo-1" className="qa-head">QUESTIONS & ANSWERS</p>
 
       <div className="search-container">
         <input

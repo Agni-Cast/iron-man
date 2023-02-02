@@ -10,7 +10,7 @@ const ListEntry = (props) => {
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
 
 
-  const handleVote = async (questionId) => {
+  const handleVote = (questionId) => {
     console.log("correct question ID here?", questionId)
 
     axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
