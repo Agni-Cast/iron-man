@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 
 const QAIndex = () => {
 
-  const [questionId, setQuestionId] = useState([37319])
+  const [questionId, setQuestionId] = useState([37322])
   const [qaData, setQaData] = useState([])
   // inital state for how many questions show on the DOM
   const [questionsToShow, setQuestionsToShow] = useState(2)
@@ -29,7 +29,7 @@ const QAIndex = () => {
     setFilteredData(filtered);
   }
 
-  // this is for the test right now, render out questions and answers for product 37319
+  // this is for the test right now, render out questions and answers for product 37322
   useEffect(() => {
 
     axios.get(`http://localhost:3000/api/qa/questions/?product_id=${questionId}`)
@@ -57,7 +57,7 @@ const QAIndex = () => {
 
   return (
     <div className="qa-wholebody">
-      <p className="qa-head">QUESTIONS & ANSWERS</p>
+      <p data-testid="todo-1" className="qa-head">QUESTIONS & ANSWERS</p>
 
       <div className="search-container">
         <input

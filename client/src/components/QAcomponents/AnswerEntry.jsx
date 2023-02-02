@@ -1,19 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-
+import EnlargedImageModal from './EnlargedImageModal.jsx';
 
 const AnswerEntry = ({ answer }) => {
     // console.log('what is each answer_id looks like :', answer.id);
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
+    const [enlargePhotoIndex, setEnlargedPhotoIndex] = useState(-1);
+
 
     const handleVote = (answerId) => {
-        const apiUrl = `https://localhost:3000/qa/answers/${answerId}/helpful`;
-
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
-
         axios.put(`http://localhost:3000/qa/answers/${answerId}/helpful`)
         .then((response) => {
           alert("Thanks for voting this answer helpful! ")
@@ -23,7 +22,6 @@ const AnswerEntry = ({ answer }) => {
           alert('this answer voting get error: ', error);
         })
     }
-
 
     const handleHelpfulClick = (answerId) => {
         setAnswerHelpfulCount(answerHelpfulCount + 1);
@@ -38,12 +36,12 @@ const AnswerEntry = ({ answer }) => {
       setIsOpen(false);
     }
 
-    const handlePhotoClick = () => {
+    const handlePhotoClick = (index) => {
         // console.log("enlarge func active ?")
+        setEnlargedPhotoIndex(index);
         setIsEnlarged(!isEnlarged);
+
     }
-
-
 
     // console.log("let me see what is the answer looks like: ",  answer)
     return (
@@ -52,12 +50,19 @@ const AnswerEntry = ({ answer }) => {
             {answer.photos.map((photo, index) => (
                 <img
                     key={index}
-                    onClick={handlePhotoClick}
+                    onClick={() => handlePhotoClick(index)}
                     src={`${answer.photos[index]}`}
                     alt="answer photo"
-                    className={isEnlarged ? 'enlarged-photo' : ''}
+                    className={index === enlargePhotoIndex && isEnlarged ? 'enlarged-photo' : 'answer-photo-orign' }
                 />
+
             ))}
+             <EnlargedImageModal
+                imageUrl={answer.photos[enlargePhotoIndex]}
+                isOpen={isEnlarged}
+                ariaHideApp={false}
+                onClose={() => setIsEnlarged(false)}
+            />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
                 <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button>

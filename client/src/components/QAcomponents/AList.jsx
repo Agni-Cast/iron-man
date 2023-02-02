@@ -13,7 +13,7 @@ const AList = (props) => {
         ))}
 
         {answersArray.length > numAnswersDisplayed && (
-          <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS</button>
+          <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS 👈</button>
         )}
       </div>
     );
