@@ -10,6 +10,10 @@ const AnswerEntry = ({ answer }) => {
     const [isEnlarged, setIsEnlarged] = useState(false);
     const [enlargePhotoIndex, setEnlargedPhotoIndex] = useState(-1);
 
+    const [votedHelpful, setVotedHelpful] = useState(false);
+    const [reportActed, setReportActed] = useState(false);
+
+
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
@@ -17,6 +21,7 @@ const AnswerEntry = ({ answer }) => {
         .then((response) => {
           alert("Thanks for voting this answer helpful! ")
           // console.log("voting succeed!")
+          setVotedHelpful(true);
         })
         .catch ((error) => {
           alert('this answer voting get error: ', error);
@@ -46,7 +51,7 @@ const AnswerEntry = ({ answer }) => {
     // console.log("let me see what is the answer looks like: ",  answer)
     return (
         <div>
-            <p>A: {answer.body}</p>
+            <p className="answer-text">{answer.body}</p>
             {answer.photos.map((photo, index) => (
                 <img
                     key={index}
@@ -65,8 +70,35 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button>
-                <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button>
+                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
+                <button className="answer-help">
+                  | &nbsp; Helpful? &nbsp;
+                  <u
+                    onClick={() => {
+                      if (!votedHelpful) {
+                        handleHelpfulClick(answer.id);
+                      }
+                    }}
+                    disabled={votedHelpful}
+                  >
+                    {votedHelpful ? 'Voted ' : `Yes (${answerHelpfulCount}) `}
+                  </u>
+              </button>
+                {/* <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button> */}
+                <button className="answer-report">
+                  <p>| &nbsp; &nbsp;
+                    <u
+                      onClick={() => {
+                        if (!reportActed) {
+                          handleOpenModal()
+                        }
+                      }}
+                      disabled={reportActed}
+                      >
+                        {reportActed ? 'Reported' : 'Report'}
+                      </u>
+                    </p>
+                </button>
             </div>
             <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
           content: {
@@ -90,14 +122,16 @@ const AnswerEntry = ({ answer }) => {
                           alert("Thanks for report this answer ! ")
                           // console.log("voting succeed!")
                           setIsOpen(false);
+                          setReportActed(true);
                       })
                     .catch ((error) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
                     <label>
-                        Report Reason:
-                        <input type="text" name="reportReason" />
+                        Report This Answer:
+
+                        <input type="text" name="reportReason" size="50" />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>

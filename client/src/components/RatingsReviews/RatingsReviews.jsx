@@ -7,7 +7,7 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
   const product_id = 37315
 
   return (
-    <div>
+    <div id='ratings&reviews'>
       <h5> RATINGS & REVIEWS</h5>
       <Ratings product_id={product_id}/>
       <ReviewsList product_id={product_id} />

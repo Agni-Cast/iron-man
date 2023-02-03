@@ -126,7 +126,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
     }
   })
   .then(response => {
-    console.log("any response?")
+    // console.log("any response?")
     res.status(204).end();
   })
   .catch(error => {
@@ -191,7 +191,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     res.status(501);
   })
 })
-// merging
+
 // handle add answer to a question
 app.post('/api/qa/questions/:question_id/answers', (req, res) => {
   // console.log("req for adding answer to this question", req.body)
@@ -207,7 +207,8 @@ app.post('/api/qa/questions/:question_id/answers', (req, res) => {
     res.status(201).end();
   })
   .catch(error => {
-    res.status(501);
+    // console.log("i got an error when submit an answer", error)
+    res.status(501).send(error);
   })
 })
 
@@ -262,6 +263,20 @@ app.get('/reviews/meta', (req, res) => {
   })
 })
 
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${req.params.review_id}/helpful`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+});
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

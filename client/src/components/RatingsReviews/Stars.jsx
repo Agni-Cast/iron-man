@@ -3,6 +3,7 @@ import { ImStarFull, ImStarEmpty, ImStarHalf} from "react-icons/im";
 
 
 const Stars = ({rating}) => {
+  //console.log('rating:', rating)
   const totalStars = 5;
   const stars = Array.from({length: totalStars}, () => <ImStarEmpty />);
   let i;

@@ -8,15 +8,15 @@ import axios from 'axios';
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
-
-
+  const [votedHelpful, setVotedHelpful] = useState(false);
   const handleVote = (questionId) => {
-    console.log("correct question ID here?", questionId)
+    // console.log("correct question ID here?", questionId)
 
     axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
     .then((response) => {
       alert("Thanks for voting this question helpful! ");
       // console.log(response.data);
+      setVotedHelpful(true);
     })
     .catch((error) => {
       alert("This question helpful voting got error", error);
@@ -39,21 +39,34 @@ const ListEntry = (props) => {
 
   // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
 
+  console.log("what is props here looks like?", props)
   return (
     <div>
       <div className="question-container">
         <h4 className="question-body">Q: {props.question.question_body}</h4>
         <div className="question-actions">
-          <button className="question-help">Helpful? <u onClick={() => voteOnHelp(props.question.question_id)}> Yes({helpfulnessCount})</u></button>
+        <button className="question-help">
+          Helpful? &nbsp;
+          <u
+            onClick={() => {
+              if (!votedHelpful) {
+                voteOnHelp(props.question.question_id);
+              }
+            }}
+            disabled={votedHelpful}
+          >
+            {votedHelpful ? 'Voted' : `Yes (${helpfulnessCount})`}
+          </u>
+        </button>
           <button className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
-      <br/>
-      <br/>
-      <br/>
 
-      <AList answers={props.question.answers}/>
-      {/* ariaHideApp is used here to prevent ReactModal fault in console */}
+      <div className='flexbox-container'>
+        <h4 className="answer-head">A:</h4>
+        <AList answers={props.question.answers}/>
+        {/* ariaHideApp is used here to prevent ReactModal fault in console */}
+      </div>
       <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
@@ -63,10 +76,14 @@ const ListEntry = (props) => {
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
             width: '400px',
-            height: '300px'
+            height: '400px'
           }
         }}>
           {/* handle the API request below */}
+        <div style={{display: 'flex', flexDirection: 'column', aligItems: 'center' }}>
+          <h3>Submit Your Answer 👇</h3>
+
+        </div>
         <form onSubmit ={(event) => {
           event.preventDefault();
           // handle photo API requirement for [text] format
@@ -81,7 +98,7 @@ const ListEntry = (props) => {
 
           const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
 
-          console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
+          // console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
 
           axios.post(addAnsUrl, data)
           .then((response) => {
@@ -89,7 +106,7 @@ const ListEntry = (props) => {
             setIsModalOpen(false);
           })
           .catch((error) => {
-            alert('this answer submit get error', error)
+            alert('please check your format', error)
           })
         }}>
           <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>
