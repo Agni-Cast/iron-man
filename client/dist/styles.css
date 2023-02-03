@@ -34,6 +34,18 @@
   font-size: small;
 }
 
+.add-answer-body{
+  color:rgb(190, 186, 186);
+  font-size: small;
+
+}
+
+.add-answer-email {
+  color:rgb(190, 186, 186);
+  font-size: small;
+}
+
+
 .enlarged-photo {
   width: 100%;
   height: 100%;

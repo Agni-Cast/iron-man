@@ -11,12 +11,24 @@ const ListEntry = (props) => {
   // state for voting helpful
   const [votedHelpful, setVotedHelpful] = useState(false);
 
+  const [email, setEmail] = useState('');
+  const [body, setBody] = useState('');
+  const [wordCount, setWordCount] = useState(0);
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
 
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setIsValidEmail(re.test(value));
+  }
 
-
-
-
+  const handleBodyChange = (event) => {
+    const value = event.target.value;
+    setBody(value);
+    setWordCount(value.split(" ").length);
+  }
 
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
@@ -84,7 +96,7 @@ const ListEntry = (props) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
+            width: '500px',
             height: '400px'
           }
         }}>
@@ -118,11 +130,22 @@ const ListEntry = (props) => {
             alert('please check your format', error)
           })
         }}>
-          <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>
+          <textarea name="body" placeholder="Enter your answer here" onChange={handleBodyChange} style={{ height: '200px', width: '350px' }}></textarea>
+          {wordCount >= 5 ? <span style={{ color: "green" }}> &#10003; </span> : <span className = "add-answer-body">  {5 - wordCount} words to submit </span> }
+
+          <br/>
           <input type='file' name="photos" accept="image/*" multiple />
+          <br/>
+          <br/>
+
           <input type='text' name='name' placeholder='Your Name' />
-          <input type='text' name='email' placeholder='Your Email' />
-          <button type="submit">Add Answer</button>
+          <br/>
+          <br/>
+          <input type='text' name='email' placeholder='Your Email' onChange={handleEmailChange}/>
+          {isValidEmail ? <span style={{ color: "green" }}> &#10003; </span> : <span className="add-answer-email"> Invalid Email format</span>}
+          <br/>
+          <br/>
+          <button type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
         </form>
       </ReactModal>
     </div>
