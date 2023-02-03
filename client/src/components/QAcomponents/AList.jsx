@@ -7,17 +7,21 @@ const AList = (props) => {
     const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
 
     return (
-      <div className="answer-list">
-        {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
-            <AnswerEntry key={index} answer={answer} />
-        ))}
+      <div className="flexbox-item answer-list">
 
-        {answersArray.length > numAnswersDisplayed && (
-          <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS 👈</button>
-        )}
+        <div >
+          {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
+              <AnswerEntry key={index} answer={answer} />
+          ))}
+
+          {answersArray.length > numAnswersDisplayed && (
+            <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS 👈</button>
+          )}
+        </div>
       </div>
     );
 
 }
 
 export default AList;
+
