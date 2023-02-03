@@ -5,6 +5,7 @@ import SingleReview from './SingleReview.jsx'
 const ReviewsList = ({product_id}) => {
   const[reviews, setReviews] = useState([]);
   const[sortBy, setSortBy] = useState(sortBy || 'relevant');
+  const[reviewsShown, setReviewsShown] = useState(2);
 
   useEffect(() => {
 
@@ -13,7 +14,7 @@ const ReviewsList = ({product_id}) => {
       setReviews(res.data.results);
     });
   }, [sortBy, product_id]);
- console.log('REVIEWS: ', reviews)
+ //console.log('REVIEWS: ', reviews)
 
   return (
     <div>
@@ -25,12 +26,17 @@ const ReviewsList = ({product_id}) => {
           </select>
         </div>
 
-        {reviews.map((singleReview) => {
+        {reviews.slice(0, reviewsShown).map((singleReview) => {
           return (
             <div key={singleReview.review_id}><SingleReview review={singleReview}/></div>
           )
         })}
-        <div><button>MORE REVIEWS</button> <button>ADD A REVIEW +</button></div>
+
+        <div>
+        {reviews.length > reviewsShown && (
+          <button onClick={() => setReviewsShown(reviewsShown + 2)}> MORE REVIEWS</button>
+        )}
+           <button>ADD A REVIEW +</button></div>
     </div>
 
   )
