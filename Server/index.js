@@ -229,6 +229,20 @@ app.get('/reviews/meta', (req, res) => {
   })
 })
 
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/${req.params.review_id}/helpful`, {},
+  {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+  .then(response => {
+    res.status(204).end();
+  })
+  .catch(error => {
+    res.status(501);
+  })
+});
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
