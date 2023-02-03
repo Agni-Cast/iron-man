@@ -19,7 +19,7 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
       console.log('this is an axios get error in Styles.jsx: ', error);
     })
 
-  },[]);
+  },[productID]);
 
   const circleStyle = {
     flex: "75px",
@@ -32,7 +32,7 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
     background: "Gray",
   }
 
-  const handleClick = (event) => {
+  const handleStylesClick = (event) => {
     setStyleNumber(event.target.className);
   }
 
@@ -48,7 +48,7 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
                   style={circleStyle}
                   src={entry.photos[0].thumbnail_url}
                   alt="Italian Trulli"
-                  onClick={handleClick}
+                  onClick={handleStylesClick}
           />
     )
   })

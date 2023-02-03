@@ -36,6 +36,7 @@ const Ratings = ({product_id}) => {
     return Math.round(Number(obj.true)/ (Number(obj.true) + Number(obj.false)) * 100)
   }
 
+
   function calculateStarPercentage(obj) {
     let sum = Number(obj[5]) + Number(obj[4]) + Number(obj[3]) + Number(obj[2]) + Number(obj[1]);
     return ({

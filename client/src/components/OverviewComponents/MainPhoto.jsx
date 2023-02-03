@@ -6,20 +6,21 @@ import Thumbnail from "./Thumbnail.jsx"
 
 const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
 
+  //console.log('This is what MainPhoto thinks productID is: ', productID);
 
   const [photoList, setPhotoList] = useState([]);
 
-
   useEffect(() => {
-
     axios.get(`http://localhost:3000/products/${productID}/styles`)
     .then((response) => {
+      //console.log('this is response.data.results[styleNumber]',response.data.results.photos);
       setPhotoList(response.data.results[styleNumber].photos);
+      //console.log('this is photolist: ',photoList);
     })
     .catch((error) => {
       console.log('this is an axios get error in MainPhoto.jsx: ', error);
-    })
-  },[styleNumber]);
+    });
+  },[productID, styleNumber]);
 
 
   //TODO: figure out why fifth photo only shows during handleprev.
@@ -91,8 +92,8 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
       height: "100%",
   }
 
-  return (
-  <>
+    return (
+      <>
     <div className="imageContainer" style={imageContainer}>
      <img className="mainPhoto" src={photoList[photoNumber].url} alt="Italian Trulli"
      style={mainPhoto}/>
@@ -104,9 +105,8 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
        setPhotoNumber={setPhotoNumber}
        styleNumber={styleNumber}
        photoList={photoList}
-     />
+       />
     </div>
-
   </>
   )
 }

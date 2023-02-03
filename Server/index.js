@@ -10,9 +10,10 @@ const PORT = process.env.PORT || 3000;
 //Middleware:
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../client/dist")))
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 //Overview routes:
+
 
 app.get('/products', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products?page=${req.body.page}&count=${req.body.count}`,
@@ -74,6 +75,39 @@ app.get('/products/:product_id/related', (req, res) => {
   })
   .catch((error) => {
     res.status(501).send(error.response.data);
+  });
+});
+
+app.get('/cart', (req, res) => {
+
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,
+  {
+   headers: {
+    'Authorization': `${token}`
+  }
+  })
+  .then((response) => {
+    res.status(200).send(response);
+  })
+  .catch((error) => {
+    res.status(501).send(error);
+  });
+});
+
+app.post('/cart', (req, res) => {
+  console.log(req.body);
+  let cartInfo = req.body;
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,cartInfo,
+  {
+   headers: {
+    'Authorization': `${token}`
+  }
+  })
+  .then((response) => {
+    res.status(200).send(response);
+  })
+  .catch((error) => {
+    res.status(501).send(error);
   });
 });
 

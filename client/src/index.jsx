@@ -10,15 +10,35 @@ const App = () => {
 
   const [productID, setProductID] = useState(37311);
 
+  const onClick = () => {
+    //start: 37311
+    //end: 38321
+    setProductID(37311+Math.floor(Math.random()*(38321-37311+1)));
+  }
 
+
+
+  const logoStyle = {
+    height: "100px",
+    width: "auto",
+    background: "white"
+  }
+
+  const logoContainerStyle = {
+    background: "white"
+  }
 
   return (
+    <>
+    <div className="logoContainer" style={logoContainerStyle}>
+      <img style={logoStyle} src="starklogo.png" onClick={onClick}/>
+    </div>
     <div>
-      <h1>Hello Iron Man!</h1>
       <Overview productID={productID}/>
       <QAIndex />
       <RatingsReviews/>
     </div>
+    </>
   )
 }
 

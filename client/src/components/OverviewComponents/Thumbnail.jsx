@@ -7,10 +7,41 @@ import axios from "axios";
 const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoList}) => {
 
 
+  const [thumbnailList, setThumbnailList] = useState([]);
+
+
+  const handleThumbnailClick = (event) => {
+    setPhotoNumber(event.target.className);
+   }
+
+   const thumbnail = {
+     display: "block",
+     left: "0%",
+     width: "75px",
+     height: "75px",
+     padding: "1px 0 1px 0"
+ }
+
+
 
   useEffect(() => {
 
-  },[]);
+    let thumbnailArray = photoList.map((photo, index) => {
+      //console.log('mapping ', index);
+      return (
+        <li key={index} style={{ listStyle: 'none', listStyleType: 'none' , left: "0%", position: "relative"}}>
+          <img
+            className={index}
+            src={photoList[index].thumbnail_url}
+            style={thumbnail}
+            alt="Italian Trulli"
+            onClick={handleThumbnailClick}/>
+        </li>
+      )
+    })
+    //console.log('this is thumbnail array', thumbnailArray)
+    setThumbnailList(thumbnailArray);
+  },[photoList, productID]);
 
 
   //TODO: figure out why fifth photo only shows during handleprev.
@@ -29,32 +60,6 @@ const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoLi
       setPhotoNumber(photoNumber--);
     }
   }
-
-  const handleClick = (event) => {
-   setPhotoNumber(event.target.className);
-
-  }
-
-  const thumbnail = {
-    display: "block",
-    left: "0%",
-    width: "75px",
-    height: "75px",
-    padding: "1px 0 1px 0"
-}
-
-  let thumbnailList = photoList.map((photo, index) => {
-    return (
-      <li key={index} style={{ listStyle: 'none', listStyleType: 'none' , left: "0%", position: "relative"}}>
-        <img
-          className={index}
-          src={photoList[index].thumbnail_url}
-          style={thumbnail}
-          alt="Italian Trulli"
-          onClick={handleClick}/>
-      </li>
-    )
-  })
 
 
   if (photoList.length === 0) {

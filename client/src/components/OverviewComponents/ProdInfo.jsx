@@ -31,7 +31,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       console.log('this is an axios get error in ProdInfo.jsx: ', error);
     })
 
-  },[styleNumber]);
+  },[styleNumber, productID]);
 
   //CSS:
   const prodNameStyle = {
@@ -75,7 +75,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "left",
-    justifyContent: "space-around"
+    justifyContent: "flex-start"
   }
 
   return (
@@ -93,7 +93,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
           <b>{prodEntry.name}</b>
         </div>
         <div className="prodPrice" style={prodPriceStyle}>
-          ${styleEntry.original_price}  {styleEntry.sale_price}
+          ${styleEntry.original_price ? styleEntry.original_price : ''}  {styleEntry.sale_price}
         </div>
         <div className="styleType" style={styleTypeStyle}>
         <b>Style</b> &nbsp; > &nbsp;{styleEntry.name}
@@ -108,6 +108,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       </div>
       <div className="chekcout">
           <Checkout
+              productID={productID}
               styleEntry={styleEntry}
           />
       </div>
