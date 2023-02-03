@@ -8,7 +8,16 @@ import axios from 'axios';
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
+  // state for voting helpful
   const [votedHelpful, setVotedHelpful] = useState(false);
+
+
+
+
+
+
+
+
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
 
@@ -39,7 +48,7 @@ const ListEntry = (props) => {
 
   // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
 
-  console.log("what is props here looks like?", props)
+  // console.log("what is props here looks like?", props)
   return (
     <div>
       <div className="question-container">

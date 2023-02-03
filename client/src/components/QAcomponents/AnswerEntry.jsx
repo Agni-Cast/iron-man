@@ -13,7 +13,12 @@ const AnswerEntry = ({ answer }) => {
     const [votedHelpful, setVotedHelpful] = useState(false);
     const [reportActed, setReportActed] = useState(false);
 
+    const [reportReason, setReportReason] = useState("");
+    const [wordCount, setWordCount] = useState(0);
 
+    useEffect(() => {
+      setWordCount(reportReason.split(" ").length);
+    }, [reportReason]);
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
@@ -113,8 +118,8 @@ const AnswerEntry = ({ answer }) => {
           }
         }}>
                 <form onSubmit={(event) => {
-                    event.preventDefault();
 
+                    event.preventDefault();
                     // console.log("am i sending request to ans report API?", answer.id)
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
@@ -130,10 +135,20 @@ const AnswerEntry = ({ answer }) => {
                     }}>
                     <label>
                         Report This Answer:
+                        <br />
 
-                        <input type="text" name="reportReason" size="50" />
+                        {/* <textarea name="reportReason" placehoder="Tell us what you want to report, at least 4 words..." onChange={(e) => setReportReason(e.target.value)} style={{ height: '200px', width: '200px' }}/> */}
+                        <textarea
+                          name="reportReason"
+                          onChange={(e) => setReportReason(e.target.value)}
+                          style={{ height: '200px', width: '200px' }}
+                          placeholder="Enter your report reason here"
+                        />
+
                     </label>
-                    <input type="submit" value="Submit" />
+                    <br />
+                    <input type="submit" value="Submit" disabled={wordCount < 5}/>
+                    {wordCount > 4 ? <span style={{ color: "green" }}> &#10003; </span> : <span className="report-type"> &nbsp; &nbsp; {5 - wordCount} words to submit</span>}
                 </form>
             </ReactModal>
         </div>

@@ -11,7 +11,9 @@
   justify-content: flex-start;
 }
 
-
+.report-type {
+  color:rgb(227, 218, 218)
+}
 
 .search-container {
   display: flex;
