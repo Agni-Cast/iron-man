@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 
-const Checkout = ({styleEntry}) => {
+const Checkout = ({styleEntry, productID}) => {
 
   const [sizeDropDown, setSizeDropDown] = useState("");
   const [quantityDropDown, setQuantityDropDown] = useState("");
@@ -42,7 +42,7 @@ const Checkout = ({styleEntry}) => {
       setQuantityDropDown(finalQty);
     }
 
-  },[styleEntry, size]);
+  },[styleEntry, size, productID]);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -54,6 +54,10 @@ const Checkout = ({styleEntry}) => {
     } else if (event.target.innerText === '★') {
       event.target.innerText = '☆';
     }
+  }
+
+  const handleClick = (event) => {
+    //axios post call
   }
 
 
@@ -81,6 +85,12 @@ const Checkout = ({styleEntry}) => {
 
   const addToCartContainerStyle = {
     display: "flex"
+  }
+
+  const socialMediaContainerStyle = {
+    display: "flex",
+    justifyContent: "space-around",
+    padding: "15px"
   }
 
   const buttonStyle = {
@@ -121,8 +131,29 @@ const Checkout = ({styleEntry}) => {
       </div>
     </div>
     <div className="addToCartContainer" style={addToCartContainerStyle}>
-      <button id="addToCart" style={buttonStyle}>&nbsp;&nbsp;ADD TO CART</button>
+      <button id="addToCart" style={buttonStyle} onClick={handleClick}>&nbsp;&nbsp;ADD TO CART</button>
       <button id="addToFavorite" style={favoriteStyle} onClick={handleFavorite}>&#9734;</button>
+    </div>
+    <div className="socialMediaContainer" style={socialMediaContainerStyle}>
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg"/></a><script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+       <div className="facebook">
+
+          <div id="fb-root"></div>
+          <script>{(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'))}</script>
+
+          <div className="fb-share-button"
+          data-href="http://localhost:3000"
+          data-layout="button_count">
+          </div>
+       </div>
+
+      <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
     </div>
   </>
   )

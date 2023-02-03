@@ -13,7 +13,7 @@ const ReviewsList = ({product_id}) => {
       setReviews(res.data.results);
     });
   }, [sortBy, product_id]);
- console.log('REVIEWS: ', reviews)
+ //console.log('REVIEWS: ', reviews)
 
   return (
     <div>

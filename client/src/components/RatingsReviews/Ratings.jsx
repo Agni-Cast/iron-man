@@ -26,7 +26,7 @@ const Ratings = ({product_id}) => {
   function calculatePercentageRecommend(obj) {
     return Math.round(Number(obj.true)/ (Number(obj.true) + Number(obj.false)) * 100)
   }
-  console.log('RATINGS: ', ratings)
+  //console.log('RATINGS: ', ratings)
 
   return (
   <div>
