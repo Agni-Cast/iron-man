@@ -5,13 +5,13 @@ import axios from 'axios';
 
 const NewQuestionForm = (props, closeModal) => {
   // console.log("props for the form i got :", props);
-
   const [questionBody, setQuestionBody] = useState('');
   const [askerName, setAskerName] = useState('');
   const [askerEmail, setAskerEmail] = useState('');
 
   const isValid = questionBody.length > 0 && askerName.length > 0 && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(askerEmail);
-  const buttonClass = isValid ? "form-submit form-submit-valid" : "form-submit";
+
+  const buttonClass = isValid ? "form-submit form-submit-valid" : "addquestion-form-submit";
 
   const handleSubmit = (event) => {
     event.preventDefault();

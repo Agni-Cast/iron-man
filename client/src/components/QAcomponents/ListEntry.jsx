@@ -18,10 +18,6 @@ const ListEntry = (props) => {
   // handle the photos upload
   const [fileInputs, setFileInputs] = useState([0]);
 
-
-
-
-
   const addFileInput = () => {
     if (fileInputs.length < 3) {
       setFileInputs([...fileInputs, fileInputs.length]);
@@ -113,16 +109,8 @@ const ListEntry = (props) => {
             background: 'none'
           }
         }}>
-          {/* handle the API request below */}
-
-
-
-
         <form className="iron-man-form" onSubmit ={(event) => {
           event.preventDefault();
-          // handle photo API requirement for [text] format
-
-
           let photos = [];
           for (let i = 0; i < fileInputs.length; i++) {
             if (event.target[`photos-${i}`].files.length > 0) {
@@ -134,11 +122,6 @@ const ListEntry = (props) => {
 
 
           const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
-
-          // console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
-
-
-
 
           axios.post(addAnsUrl, data)
           .then((response) => {
@@ -176,7 +159,7 @@ const ListEntry = (props) => {
             <input  className="form-input" type='text' name='name' placeholder='Your Name' />
             <br/>
             <br/>
-            <input  className="form-input" type='text' name='email' placeholder='Your Email' onChange={handleEmailChange}/>
+            <input  className="form-input" type='email' name='email' placeholder='Your Email' onChange={handleEmailChange}/>
             {isValidEmail ? <span style={{ color: "green" }}> &#10003; </span> : <span className="add-answer-email"> Invalid Email format</span>}
             <br/>
             <br/>

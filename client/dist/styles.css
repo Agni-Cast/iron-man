@@ -54,6 +54,17 @@ button.form-submit:not([disabled]) {
   font-size: medium;
 }
 
+.addquestion-form-submit {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  background-color: #ffffff;
+  color: #ff8c00;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 0px #000000;
+}
 
 .enlarged-photo {
   width: 100%;
@@ -227,6 +238,11 @@ img {
   box-shadow: 0px 0px 5px 0px #000000;
 }
 
+.form-submit-valid {
+  background-color: green;
+}
+
+
 .addphoto-submit {
     width: 50%;
     padding: 15px;
@@ -239,9 +255,7 @@ img {
     box-shadow: 0px 0px 5px 0px #000000;
 }
 
-.form-submit-valid {
-  background-color: green;
-}
+
 
 .report-form-container {
   background-image: linear-gradient(to right, #ed8506, #ff0000);
