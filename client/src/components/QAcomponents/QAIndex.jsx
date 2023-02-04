@@ -82,8 +82,10 @@ const QAIndex = () => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
-            height: '300px'
+            width: 'auto',
+            height: 'auto',
+            border: 'none',
+            background: 'none'
           }
         }}>
         <NewQuestionForm questionId={questionId} closeModal={() => setModelIsOpen(false)}/>
