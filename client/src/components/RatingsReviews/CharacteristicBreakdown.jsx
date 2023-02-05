@@ -5,14 +5,14 @@ import styled from 'styled-components';
   const CharContainer = styled.div`
     position: relative;
     width: 370px;
-    left: 2em;
+    left: 0px;
     height:55px;
     margin: 0px;
   `;
 
   const SingleBar = styled.div`
     display: inline-flex;
-    background-color: grey;
+    background-color: #D3D3D3;
     height: 10px;
     width: 70px;
     margin: 0 1px;
@@ -62,8 +62,10 @@ import styled from 'styled-components';
   `;
 
 
-const CharacteristicBreakdown = ({characteristic, category}) => {
+const CharacteristicBreakdown = ({categoryValue, category}) => {
 
+  // console.log('categoryValue: ', categoryValue)
+  // console.log('category: ', category)
   const checkCategory = (category) => {
     if (category === 'Size') {
       return(
@@ -127,7 +129,7 @@ const CharacteristicBreakdown = ({characteristic, category}) => {
       )
     }
   }
-  const arrowPosition = Math.round(characteristic * 354 / 5)
+  const arrowPosition = Math.round(categoryValue * 354 / 5)
   return (
    <CharContainer>
     <div>{category}</div>

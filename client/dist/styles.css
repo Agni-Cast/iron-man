@@ -120,7 +120,7 @@
   font-weight: bold;
 }
 
-.button-show-more-answered-question{
+.button-show-more-answered-question, .more-reviews, .add-review {
   background: none;
   padding: 2%;
   font-weight: bolder;
@@ -153,3 +153,136 @@ img {
   object-fit: contain;
 }
 
+/*  */
+
+#ratings-reviews{
+  font-family: Helvetica;
+  padding-right: 10%;
+  padding-left: 10%;
+  margin-top: 70px;
+}
+.ratings-reviews-title {
+  color:gray;
+}
+
+.reviews-list {
+  font-family: Helvetica;
+  /*display: flex;
+  justify-content: right;
+  flex-direction: column;
+  padding-left: 150px;
+  padding-right: 140px; */
+  display: inline-block;
+  /* margin: 0 1.5%; */
+  width: 60%;
+  /* padding-left: 10px; */
+  margin-left: 180px;
+}
+
+.review-summary {
+  font-weight: bold;
+}
+
+.ratings {
+  font-family: Helvetica;
+  /* float:left;
+  padding-left: 140px; */
+  display: inline-block;
+  /* margin: 0 1.5%; */
+  width: 20%;
+  /* padding-right: 10px; */
+}
+
+/* .star-rating {
+  bottom: 37px;
+  font-size: small;
+} */
+.ratings, .reviews-list {
+  vertical-align: top;
+}
+
+.reviews-tot-sorted-by {
+  font-weight: bold;
+}
+
+.sort-by{
+  border: none;
+  border-bottom: solid;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.single-review{
+  margin-top: 30px;
+}
+
+.review-help {
+  border: none;
+  border-color: transparent;
+  background: none;
+  font-family: Helvetica;
+  color:gray;
+  font-size: small;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+
+.review-report {
+  border: none;
+  border-color: transparent;
+  background: none;
+  font-family: Helvetica;
+  color:gray;
+  font-size: small;
+}
+
+.review-summary, .review-body, .review-recommend, .review-photo, .review-response, .rewiew-help, .review-report {
+  margin-top: 20px;
+}
+
+.name-date{
+  color:gray;
+  font-size: small;
+  display: inline-block;
+  width:50%;
+  margin-right:0px;
+  text-align: right;
+}
+
+.star-rating{
+  display: inline-block;
+  width: 50%;
+}
+
+.average-rating {
+  font-size: xxx-large;
+  font-weight: bold;
+  display: inline-block;
+  width: 50%;
+}
+
+.average-star{
+  display: inline-block;
+  width: 50%;
+}
+.average-star, .average-rating {
+  vertical-align: top;
+}
+
+.average-star-rating{
+  width: 370px;
+}
+
+.recommend-pecent {
+  width: 370px;
+  margin-top: 30px;
+}
+
+.stars-bars {
+  margin-top: 40px;
+}
+
+.characteristics {
+  margin-top: 30px;
+}
