@@ -46,8 +46,27 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
     padding: "0 15px 0 15px"
   }
 
+  const priceContainerStyle = {
+    display: "flex",
+
+  }
+
   const prodPriceStyle = {
     fontFamily: "Helvetica",
+    fontSize: "16px",
+    padding: "15px"
+  }
+
+  const prodPriceSlashStyle = {
+    fontFamily: "Helvetica",
+    textDecoration: "line-through",
+    fontSize: "16px",
+    padding: "15px"
+  }
+
+  const salePriceStyle = {
+    fontFamily: "Helvetica",
+    color: "red",
     fontSize: "16px",
     padding: "15px"
   }
@@ -92,8 +111,13 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
         <div className="prodName" style={prodNameStyle}>
           <b>{prodEntry.name}</b>
         </div>
-        <div className="prodPrice" style={prodPriceStyle}>
-          ${styleEntry.original_price ? styleEntry.original_price : ''}  {styleEntry.sale_price}
+        <div className="priceContainer" style={priceContainerStyle}>
+            <div className="prodPrice" style={styleEntry.sale_price ? prodPriceSlashStyle : prodPriceStyle}>
+              ${styleEntry.original_price ? styleEntry.original_price : ''}
+            </div>
+            <div className="salePrice" style={salePriceStyle}>
+              {styleEntry.sale_price ? '$' + styleEntry.sale_price : ''}
+            </div>
         </div>
         <div className="styleType" style={styleTypeStyle}>
         <b>Style</b> &nbsp; > &nbsp;{styleEntry.name}
@@ -109,6 +133,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       <div className="chekcout">
           <Checkout
               productID={productID}
+              styleNumber={styleNumber}
               styleEntry={styleEntry}
           />
       </div>

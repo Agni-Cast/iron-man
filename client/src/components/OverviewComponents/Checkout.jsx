@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 
-const Checkout = ({styleEntry, productID}) => {
+const Checkout = ({styleEntry, productID, styleNumber}) => {
 
   const [sizeDropDown, setSizeDropDown] = useState("");
   const [quantityDropDown, setQuantityDropDown] = useState("");
@@ -42,7 +42,7 @@ const Checkout = ({styleEntry, productID}) => {
       setQuantityDropDown(finalQty);
     }
 
-  },[styleEntry, size, productID]);
+  },[styleEntry, size, productID, styleNumber]);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -125,7 +125,7 @@ const Checkout = ({styleEntry, productID}) => {
       </div>
       <div className="quantityDropdown">
         <select name="quantity" id="quantity" style={quantityStyle}>
-          <option value="selectQuantity">&nbsp;&nbsp;-</option>
+          <option value="selectQuantity">&nbsp;&nbsp;{(size === "") ? '-' : 1}</option>
           {quantityDropDown}
         </select>
       </div>
