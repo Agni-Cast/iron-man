@@ -2,7 +2,15 @@ import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const BottomLine = styled.div`
+background-color: #D3D3D3;
+height: 2px;
+width: 100%;
+margin-top: 20px;
+margin-bottom:15px;
+`
 
 
 const ListEntry = (props) => {
@@ -95,6 +103,9 @@ const ListEntry = (props) => {
         <AList answers={props.question.answers}/>
         {/* ariaHideApp is used here to prevent ReactModal fault in console */}
       </div>
+
+      <BottomLine></BottomLine>
+
       <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
