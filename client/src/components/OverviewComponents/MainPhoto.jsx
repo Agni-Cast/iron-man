@@ -1,44 +1,38 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import Thumbnail from "./Thumbnail.jsx"
+import Thumbnail from "./Thumbnail.jsx";
+import MiniGallery from "./MiniGallery.jsx";
 
 
 const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
-
-  //console.log('This is what MainPhoto thinks productID is: ', productID);
 
   const [photoList, setPhotoList] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/products/${productID}/styles`)
     .then((response) => {
-      //console.log('this is response.data.results[styleNumber]',response.data.results.photos);
       setPhotoList(response.data.results[styleNumber].photos);
-      //console.log('this is photolist: ',photoList);
     })
     .catch((error) => {
       console.log('this is an axios get error in MainPhoto.jsx: ', error);
     });
   },[productID, styleNumber]);
 
-
-  //TODO: figure out why fifth photo only shows during handleprev.
   const handleNext = function() {
-    if (photoNumber === photoList.length - 1) {
-      setPhotoNumber(0);
+    if (photoNumber === photoList.length) {
+
     } else {
-      setPhotoNumber(photoNumber++);
+      setPhotoNumber(photoNumber + 1);
+
     }
   }
 
-
-
   const handlePrev = function() {
     if (photoNumber === 0) {
-      setPhotoNumber(photoList.length - 1);
+
     } else {
-      setPhotoNumber(photoNumber--);
+      setPhotoNumber(photoNumber - 1);
     }
   }
 
@@ -59,9 +53,6 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     color: "black",
     fontWeight: "bold",
     fontSize: "38px",
-    transition: "0.6s ease",
-    borderRadius: "0 3px 3px 0",
-    userSelect: "none",
   }
 
   const arrowStyleNext = {
@@ -74,9 +65,6 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     color: "black",
     fontWeight: "bold",
     fontSize: "38px",
-    transition: "0.6s ease",
-    borderRadius: "0 3px 3px 0",
-    userSelect: "none",
   }
 
   const imageContainer = {
@@ -97,14 +85,22 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     <div className="imageContainer" style={imageContainer}>
      <img className="mainPhoto" src={photoList[photoNumber].url} alt="Italian Trulli"
      style={mainPhoto}/>
-      <a className="prev"  style={arrowStylePrev} onClick={handlePrev}>&#10094;</a>
-      <a className="next"  style={arrowStyleNext} onClick={handleNext}>&#10095;</a>
-      <Thumbnail
-       productID={productID}
-       photoNumber={photoNumber}
-       setPhotoNumber={setPhotoNumber}
-       styleNumber={styleNumber}
-       photoList={photoList}
+      <a className="prev"
+        style={arrowStylePrev}
+        onClick={handlePrev}
+        hidden={photoNumber === 0 ? true : false}
+        >&#10094;
+      </a>
+      <a className="next"
+        style={arrowStyleNext}
+        onClick={handleNext}
+        hidden={photoNumber === photoList.length - 1 ? true : false}
+        >&#10095;
+      </a>
+       <MiniGallery
+         photoList={photoList}
+         setPhotoNumber={setPhotoNumber}
+         photoNumber={photoNumber}
        />
     </div>
   </>
@@ -113,3 +109,11 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
 
 
 export default MainPhoto;
+
+/* <Thumbnail
+productID={productID}
+photoNumber={photoNumber}
+setPhotoNumber={setPhotoNumber}
+styleNumber={styleNumber}
+photoList={photoList}
+/> */
