@@ -8,7 +8,35 @@ import axios from 'axios';
 const ListEntry = (props) => {
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
+  // state for voting helpful
   const [votedHelpful, setVotedHelpful] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [body, setBody] = useState('');
+  const [wordCount, setWordCount] = useState(0);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  // handle the photos upload
+  const [fileInputs, setFileInputs] = useState([0]);
+
+  const addFileInput = () => {
+    if (fileInputs.length < 3) {
+      setFileInputs([...fileInputs, fileInputs.length]);
+    }
+  }
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setIsValidEmail(re.test(value));
+  }
+
+  const handleBodyChange = (event) => {
+    const value = event.target.value;
+    setBody(value);
+    setWordCount(value.split(" ").length);
+  }
+
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
 
@@ -39,7 +67,7 @@ const ListEntry = (props) => {
 
   // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
 
-  console.log("what is props here looks like?", props)
+  // console.log("what is props here looks like?", props)
   return (
     <div>
       <div className="question-container">
@@ -75,30 +103,25 @@ const ListEntry = (props) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
-            height: '400px'
+            width: 'auto',
+            height: 'auto',
+            border: 'none',
+            background: 'none'
           }
         }}>
-          {/* handle the API request below */}
-        <div style={{display: 'flex', flexDirection: 'column', aligItems: 'center' }}>
-          <h3>Submit Your Answer 👇</h3>
-
-        </div>
-        <form onSubmit ={(event) => {
+        <form className="iron-man-form" onSubmit ={(event) => {
           event.preventDefault();
-          // handle photo API requirement for [text] format
-
           let photos = [];
-          for (let i = 0; i < event.target.photos.files.length; i++) {
-            photos.push(event.target.photos.files[i].name);
+          for (let i = 0; i < fileInputs.length; i++) {
+            if (event.target[`photos-${i}`].files.length > 0) {
+              photos.push(event.target[`photos-${i}`].files[0].name);
+            }
           }
 
           const data = {body: event.target.body.value, name: event.target.name.value, email: event.target.email.value, photos: photos}
 
 
           const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
-
-          // console.log("here is the data for the req :", JSON.stringify(data), "Url sending is :", addAnsUrl);
 
           axios.post(addAnsUrl, data)
           .then((response) => {
@@ -109,11 +132,39 @@ const ListEntry = (props) => {
             alert('please check your format', error)
           })
         }}>
-          <textarea name="body" placeholder="Enter your answer here" name="body" style={{ height: '200px', width: '300px' }}></textarea>
-          <input type='file' name="photos" accept="image/*" multiple />
-          <input type='text' name='name' placeholder='Your Name' />
-          <input type='text' name='email' placeholder='Your Email' />
-          <button type="submit">Add Answer</button>
+          <div className="form-group">
+            <h2 className="form-title">Submit Your Answer 👇</h2>
+
+            <textarea className="form-input" name="body" placeholder="Enter your answer here" onChange={handleBodyChange} style={{ height: '200px', width: '350px' }}></textarea>
+            {wordCount >= 5 ? <span style={{ color: "green" }}> &#10003; </span> : <span className = "add-answer-body">  {5 - wordCount} words to submit </span> }
+            <br/>
+            <br/>
+            <br/>
+            {fileInputs.map((input, index) => (
+                <>
+                  <input key={index} className="form-input" type="file" name={`photos-${index}`} accept="image/*" />
+                  <br />
+                  <br />
+                </>
+              ))}
+              {fileInputs.length < 3 && (
+                <button className="addphoto-submit" onClick={(event) => {
+                  event.preventDefault();
+                  addFileInput();
+                }}>Add Another Photo</button>
+              )}
+            <br/>
+            <br/>
+
+            <input  className="form-input" type='text' name='name' placeholder='Your Name' />
+            <br/>
+            <br/>
+            <input  className="form-input" type='email' name='email' placeholder='Your Email' onChange={handleEmailChange}/>
+            {isValidEmail ? <span style={{ color: "green" }}> &#10003; </span> : <span className="add-answer-email"> Invalid Email format</span>}
+            <br/>
+            <br/>
+            <button className="form-submit" type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
+          </div>
         </form>
       </ReactModal>
     </div>

@@ -5,10 +5,13 @@ import axios from 'axios';
 
 const NewQuestionForm = (props, closeModal) => {
   // console.log("props for the form i got :", props);
-
   const [questionBody, setQuestionBody] = useState('');
   const [askerName, setAskerName] = useState('');
   const [askerEmail, setAskerEmail] = useState('');
+
+  const isValid = questionBody.length > 0 && askerName.length > 0 && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(askerEmail);
+
+  const buttonClass = isValid ? "form-submit form-submit-valid" : "addquestion-form-submit";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,25 +32,45 @@ const NewQuestionForm = (props, closeModal) => {
     })
   }
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <label>
-          Question Body:
-          <input type='text' value={questionBody} onChange = {e => setQuestionBody(e.target.value)}/>
-        </label>
-        <br />
-        <label>
-          Your Name:
-          <input type='text' value={askerName} onChange = {e => setAskerName(e.target.value)}/>
-        </label>
-        <br />
-        <label>
-          Your Email:
-          <input type='email' value={askerEmail} onChange = {e => setAskerEmail(e.target.value)}/>
-        </label>
-        <br />
-        <button type="submit" onClick={handleSubmit}>Submit</button>
-      </form>
-    )
+  return (
+    <form onSubmit={handleSubmit} className="iron-man-form">
+      <h2 className="form-title">STARK VALUE YOUR QUESTIONS</h2>
+      <div className="form-group">
+        <label htmlFor="question-body" className="form-label">Question Body:</label>
+        <input
+          type="text"
+          value={questionBody}
+          onChange={e => setQuestionBody(e.target.value)}
+          id="question-body"
+          className="form-input"
+          placeholder="Enter your question"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="asker-name" className="form-label">Your Name:</label>
+        <input
+          type="text"
+          value={askerName}
+          onChange={e => setAskerName(e.target.value)}
+          id="asker-name"
+          className="form-input"
+          placeholder="Enter your name"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="asker-email" className="form-label">Your Email:</label>
+        <input
+          type="email"
+          value={askerEmail}
+          onChange={e => setAskerEmail(e.target.value)}
+          id="asker-email"
+          className="form-input"
+          placeholder="Enter your email"
+        />
+      </div>
+      <button type="submit" className={buttonClass}>Submit</button>
+    </form>
+  );
+
 }
 export default NewQuestionForm;
