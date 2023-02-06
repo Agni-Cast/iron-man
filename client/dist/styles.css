@@ -291,7 +291,7 @@ img {
 
 #ratings-reviews{
   font-family: Helvetica;
-  padding-right: 10%;
+  padding-right: 4%;
   padding-left: 10%;
   margin-top: 70px;
 }
@@ -311,7 +311,14 @@ img {
   width: 60%;
   /* padding-left: 10px; */
   margin-left: 180px;
+  /* height: 600px;
+  overflow: auto; */
 }
+.reviews-shown {
+  height: 800px;
+  overflow: auto;
+}
+
 
 .review-summary {
   font-weight: bold;
@@ -433,4 +440,5 @@ img {
   border-color: transparent;
   background: none;
 }
+
 

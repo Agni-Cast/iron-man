@@ -15,10 +15,13 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
   const [photos, setPhotos] = useState([]);
   const [charChosen, setCharChosen] = useState({});
 
+  const [toggle, setToggle] = useState(true)
+
   const charKeys = Object.keys(characteristics);
   // console.log('LET"S SEEEEEEE ->>>>', charChosen)
 
   const handleSubmit = (event) => {
+    closeModal();
     event.preventDefault();
     const data = {
       summary: reviewSummary,
@@ -57,23 +60,31 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
       <form onSubmit={handleSubmit}>
         <label>
           Summary:
-          <input type='text' value={reviewSummary} onChange = {e => setReviewSummary(e.target.value)}/>
+          <input type='text' value={reviewSummary} onChange = {e => setReviewSummary(e.target.value)} maxLength="60" placeholder={'Example: Best purchase ever!'}/>
         </label>
+        <br />
         <br />
         <label>
           Body:
-          <input type='text' value={reviewBody} onChange = {e => setReviewBody(e.target.value)}/>
+          <input type='text' value={reviewBody} onChange = {e => setReviewBody(e.target.value)} placeholder={'Why did you like the product or not?'}/>
         </label>
+        <br />
         <br />
         <label>
           Username:
-          <input type='text' value={username} onChange = {e => setUsername(e.target.value)}/>
+          <input type='text' value={username} onChange = {e => setUsername(e.target.value)} placeholder={'Example: jackson11!'}/>
         </label>
+        <br />
+        For privacy reasons, do not use your full name or email address
+        <br />
         <br />
         <label>
           Email:
-          <input type='email' value={email} onChange = {e => setEmail(e.target.value)}/>
+          <input type='email' value={email} onChange = {e => setEmail(e.target.value)} placeholder={'Example: jackson11@email.com'}/>
         </label>
+        <br />
+        For authentication reasons, you will not be emailed
+        <br />
         <br />
         <label>
           Rating:
@@ -82,6 +93,7 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
            <StarRatingForm rating={rating} setRating={setRating}/>
         </label>
         <br />
+        <br />
         <div>
         <label>
           Characteristics:
@@ -89,10 +101,12 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
         </label>
         </div>
         <br />
+        <br />
         <label>
           Recommend:
-          <input type='radio' value={recommend} onClick = {e => setRecommend(e.target.value)}/> Yes
+          <input type='radio' value={recommend} onClick = {(e) => {setRecommend(e.target.value); setToggle(!toggle)}}/> Yes
         </label>
+        <br />
         <br />
         <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>

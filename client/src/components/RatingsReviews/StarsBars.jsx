@@ -32,11 +32,17 @@ const GrayBar = styled.div`
   background-color: #D3D3D3;
   margin: 0px;
   margin-top: 10px;
+  &:hover {
+    background-color: red;
+  }
 `
 const GreenBar = styled.div`
   height: 100%;
   background-color: #009f00;
   width: 0%;
+  &:hover {
+    background-color: red;
+  }
 `
 const RatingsNum = styled.span`
   padding: 5px;
@@ -45,6 +51,9 @@ const RatingsNum = styled.span`
   left: 240px;
   bottom: 10px;
   font-size: small;
+  &:hover {
+    color: red;
+  }
 `
 const StarNum = styled.u`
   // padding: 5px;
@@ -53,29 +62,36 @@ const StarNum = styled.u`
   left: -50px;
   bottom: 14px;
   font-size: small;
+  &:hover {
+    color: red;
+  }
 `
 
 const Container = styled.div`
-position: relative;
-width: 335px;
-left: 50px;
-height:25px;
-margin: 0px;
-`;
+  position: relative;
+  width: 335px;
+  left: 50px;
+  height:25px;
+  margin: 0px;
+`
 
-const StarsBars = ({ percentages, rating, num, reviews, setReviews }) => {
+const StarsBars = ({ percentages, rating, num, reviews, setReviews, allReviews}) => {
   // console.log('Reviews --->', reviews)
-  // console.log('percentages: ', percentages[5])
 
-  // const barPercentage5 = percentages[5];
-  // const barPercentage4 = percentages[4];
-  // const barPercentage3 = percentages[3];
-  // const barPercentage2 = percentages[2];
-  // const barPercentage1 = percentages[1];
-  // const reviewsArr = Object.
+  const [isHover, setIsHover] = useState(false);
+  const [toggle, setToggle] = useState(true)
+  const [removeFilters, setRemoveFilters] = useState(false);
 
+  const handleMouseEnter = () => {
+     setIsHover(true);
+  };
+
+  const handleMouseLeave = () => {
+     setIsHover(false);
+  };
 
   const filterReviews = (num) => {
+    if (toggle) {
     const numClicked = Number(num);
     const newArr = [];
     // console.log(num)
@@ -83,13 +99,19 @@ const StarsBars = ({ percentages, rating, num, reviews, setReviews }) => {
     //   review.rating === numClicked
     // })
     // setReviews(filteredReviews)
-    for (let i = 0; i < reviews.length; i++) {
-      const singleReview = reviews[i];
+    for (let i = 0; i < allReviews.length; i++) {
+      const singleReview = allReviews[i];
       if (singleReview.rating === numClicked) {
         newArr.push(singleReview);
       }
     }
     setReviews(newArr)
+    setToggle(!toggle)
+    setRemoveFilters(!removeFilters)
+    } else {
+      setReviews(allReviews)
+      setToggle(!toggle)
+    }
   }
 
   useEffect(() => {
@@ -97,39 +119,9 @@ const StarsBars = ({ percentages, rating, num, reviews, setReviews }) => {
   }, [reviews])
   return (
     <Container>
-      {/* <ContainerStyle>
-        <FillerStyles style={{ width: `${barPercentage5}` }}>
-          <div>5 stars</div>
-          <LabelStyles>{rating.length !== 0 && rating[5] !== undefined ? rating[5] : ''} reviews</LabelStyles>
-        </FillerStyles>
-      </ContainerStyle>
-      <ContainerStyle>
-        <FillerStyles style={{ width: `${barPercentage4}` }}>
-        <div>4 stars</div>
-          <LabelStyles>{rating.length !== 0 && rating[4] !== undefined ? rating[4] : ''} reviews</LabelStyles>
-        </FillerStyles>
-      </ContainerStyle>
-      <ContainerStyle>
-        <FillerStyles style={{ width: `${barPercentage3}` }}>
-        <div>3 stars</div>
-          <LabelStyles>{rating.length !== 0 && rating[3] !== undefined ? rating[3] : ''} reviews</LabelStyles>
-        </FillerStyles>
-      </ContainerStyle>
-      <ContainerStyle>
-        <FillerStyles style={{ width: `${barPercentage2}` }}>
-        <div>2 stars</div>
-          <LabelStyles>{rating.length !== 0 && rating[2] !== undefined ? rating[2] : ''} reviews</LabelStyles>
-        </FillerStyles>
-      </ContainerStyle>
-      <ContainerStyle>
-        <FillerStyles style={{ width: `${barPercentage1}` }}>
-        <div>1 stars</div>
-          <LabelStyles>{rating.length !== 0 && rating[1] !== undefined ? rating[1] : ''} reviews</LabelStyles>
-        </FillerStyles>
-      </ContainerStyle> */}
-
-
-      <GrayBar onClick={() => filterReviews(num)}>
+      {/* <div>{removeFilters === true ? <button>Remove filters</button> : '' }</div> */}
+      <GrayBar onClick={((event) =>  {filterReviews(num)})} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
         <StarNum>{num} stars</StarNum>
         <GreenBar style={{ width: `${percentages}` }}>
           <RatingsNum>{rating.length !== 0 && rating[num] !== undefined ? rating[num] : ''} reviews</RatingsNum>
