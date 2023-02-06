@@ -1,25 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 import SingleReview from './SingleReview.jsx'
+import AddReviewForm from './AddReviewForm.jsx';
 
-const ReviewsList = ({product_id}) => {
-  const[reviews, setReviews] = useState([]);
-  const[sortBy, setSortBy] = useState(sortBy || 'relevant');
-  const[reviewsShown, setReviewsShown] = useState(2);
+const ReviewsList = ({product_id, reviews, sortBy, reviewsShown, handleSortBy, handleReviewsShown, characteristics}) => {
 
-  useEffect(() => {
+  const [modalState, setModalState] = useState(false)
 
-    axios.get(`http://localhost:3000/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
-    .then((res) => {
-      setReviews(res.data.results);
-    });
-  }, [sortBy, product_id]);
- //console.log('REVIEWS: ', reviews)
+  function addReview() {
+    setModalState(!modalState);
+  }
 
   return (
-    <div>
-        <div value={sortBy} onChange={(event) => {setSortBy(event.target.value)}}> {reviews.length} reviews, sorted by
-          <select>
+    <div className='reviews-list'>
+        <div className='reviews-tot-sorted-by' value={sortBy} onChange={(event) => {handleSortBy(event.target.value)}}> {reviews.length} reviews, sorted by
+          <select className='sort-by'>
             <option value='relevance'>relevance</option>
             <option value='newest'>newest</option>
             <option value='helpfulness'>helpfulness</option>
@@ -34,9 +30,26 @@ const ReviewsList = ({product_id}) => {
 
         <div>
         {reviews.length > reviewsShown && (
-          <button onClick={() => setReviewsShown(reviewsShown + 2)}> MORE REVIEWS</button>
+          <button className='more-reviews' onClick={() => handleReviewsShown()}> MORE REVIEWS</button>
         )}
-           <button>ADD A REVIEW +</button></div>
+           <button className='add-review' onClick={addReview}>
+            ADD A REVIEW +</button>
+           <Modal isOpen={modalState} onRequestClose={() => {setModalState(false)}} ariaHideApp={false}
+           style={{
+            content: {
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              marginRight: '-50%',
+              transform: 'translate(-50%, -50%)',
+              width: '400px',
+              height: '300px'
+            }
+          }}>
+            <AddReviewForm product_id={product_id} closeModal={() => setModalState(false)} characteristics={characteristics}/>
+           </Modal>
+        </div>
     </div>
 
   )
