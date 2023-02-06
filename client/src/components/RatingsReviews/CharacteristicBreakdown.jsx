@@ -71,9 +71,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Too small </Text1>
-      <Text2>Slightly small </Text2>
+      <Text2></Text2>
       <Text3>Perfect </Text3>
-      <Text4>Slightly big </Text4>
+      <Text4></Text4>
       <Text5>Too big </Text5>
       </>
       )
@@ -81,9 +81,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Uncomfortable </Text1>
-      <Text2>Slightly uncomfortable</Text2>
+      <Text2></Text2>
       <Text3>All right </Text3>
-      <Text4>Comfortable </Text4>
+      <Text4> </Text4>
       <Text5>Perfect </Text5>
       </>
       )
@@ -91,9 +91,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Too tight </Text1>
-      <Text2>Slightly tight </Text2>
+      <Text2></Text2>
       <Text3>Perfect </Text3>
-      <Text4>Slightly loose </Text4>
+      <Text4> </Text4>
       <Text5>Too loose </Text5>
       </>
       )
@@ -101,9 +101,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Poor </Text1>
-      <Text2>Below average </Text2>
+      <Text2></Text2>
       <Text3>Average</Text3>
-      <Text4>Good  </Text4>
+      <Text4> </Text4>
       <Text5>Great </Text5>
       </>
       )
@@ -111,9 +111,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Too short </Text1>
-      <Text2>Slightly short </Text2>
+      <Text2></Text2>
       <Text3>Perfect </Text3>
-      <Text4>Slightly long </Text4>
+      <Text4> </Text4>
       <Text5>Too long </Text5>
       </>
       )
@@ -121,9 +121,9 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
       return(
       <>
       <Text1>Too narrow </Text1>
-      <Text2>Slightly narrow </Text2>
+      <Text2> </Text2>
       <Text3>Perfect </Text3>
-      <Text4>Slightly wide </Text4>
+      <Text4> </Text4>
       <Text5>Too wide </Text5>
       </>
       )
