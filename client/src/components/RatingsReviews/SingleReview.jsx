@@ -3,6 +3,7 @@ import axios from 'axios';
 import Stars from './Stars.jsx';
 import styled from 'styled-components';
 import {GrCheckmark} from 'react-icons/gr'
+import EnlargedImageModal from './EnlargedImage.jsx'
 
 const BottomLine = styled.div`
 background-color: #D3D3D3;
@@ -15,7 +16,7 @@ margin-bottom:15px;
 const SingleReview = ({ review }) => {
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
   const [alreadyVoted, setAlreadyVolted] = useState(false);
-
+// console.log('review', review)
   const handleVoteCount = (review_id) => {
     axios.put(`http://localhost:3000/reviews/${review_id}/helpful`)
       .then((res) => {
@@ -34,6 +35,17 @@ const SingleReview = ({ review }) => {
   const months = ['Januray', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const date = new Date(review.date)
 
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEnlarged, setIsEnlarged] = useState(false);
+  const [enlargePhotoIndex, setEnlargedPhotoIndex] = useState(-1);
+
+  const handlePhotoClick = (index) => {
+    setEnlargedPhotoIndex(index);
+    setIsEnlarged(!isEnlarged);
+  }
+
+
   return (
     <div className='single-review'>
       <span>
@@ -45,7 +57,16 @@ const SingleReview = ({ review }) => {
       <div className='review-body'>{review.body}</div>
       <div className='review-recommend'>{review.recommend ? <div> <GrCheckmark/> &nbsp; I recommend this product </div> : ''}</div>
       <div className='review-response'>{review.response}</div>
-      <div className='review-phots'>{review.photos.map((photo) => { return (<img key={photo.id} src={photo.url} />) })}</div>
+
+      <div className='review-phots'>{review.photos.map((photo, index) => { return (<img key={photo.id} src={photo.url} onClick={() => handlePhotoClick(index)} alt="review photo"
+                    className={index === enlargePhotoIndex && isEnlarged ? 'enlarged-photo' : 'review-photo-orign' }/>) })}</div>
+      <EnlargedImageModal
+                imageUrl={review.photos[enlargePhotoIndex]}
+                isOpen={isEnlarged}
+                ariaHideApp={false}
+                onClose={() => setIsEnlarged(false)}
+            />
+
       <button className="review-help"> Helpful? &nbsp; | &nbsp;
         <u onClick={() => { if (!alreadyVoted) { increaseHelpCount(review.review_id) } }}
           disabled={alreadyVoted}
