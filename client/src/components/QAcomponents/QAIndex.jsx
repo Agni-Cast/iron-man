@@ -71,8 +71,8 @@ const QAIndex = () => {
       </div>
 
       <QAList qaData={filteredData.length > 0 ? filteredData : qaData} questionsToShow={questionsToShow}/>
-      <button className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-      <button className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
+      <button data-testid="more-answered-questions" className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button data-testid="add-question-button" className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
       <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)} ariaHideApp={false}
         style={{
           content: {

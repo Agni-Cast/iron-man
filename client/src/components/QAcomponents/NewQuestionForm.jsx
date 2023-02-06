@@ -15,6 +15,14 @@ const NewQuestionForm = (props, closeModal) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const form = event.target;
+    form.classList.add("fly-away");
+
+    form.addEventListener("animationend", () => {
+      form.remove();
+    });
+
     const data = { body: questionBody, name: askerName, email: askerEmail, product_id:props.questionId[0]};
 
     // console.log("show me the data that user fill?", data);

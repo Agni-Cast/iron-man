@@ -215,7 +215,18 @@ img {
   background-color: transparent;
 }
 
+.iron-man-form.fly-away {
+  animation: fly-away 1s forwards;
+}
 
+@keyframes fly-away {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(1000px);
+  }
+}
 
 .form-title {
   font-size: 25px;
