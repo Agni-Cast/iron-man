@@ -136,7 +136,7 @@ const AnswerEntry = ({ answer }) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
-                    <div className="report-form-container">
+                    <div className="iron-man-form">
                       <label className="form-title">
                           Report This Answer:
                           <br />
