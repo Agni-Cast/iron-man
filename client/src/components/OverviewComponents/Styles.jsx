@@ -32,16 +32,53 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
     background: "Gray",
   }
 
-  const handleStylesClick = (event) => {
-    setStyleNumber(event.target.className);
+  const circleContainerStyle = {
+    display: "flex",
+    justifyContent: "flex-end"
   }
 
-  let finalStyleList = styleList.map((entry, index) => {
-    let cr = "";
-    if (index % 4 === 0) {
-      cr = ""
+  const circleCheckmarkStyle = {
+    width: "0px",
+    position: "relative",
+    bottom: "-5px",
+    left: "60px"
+  }
+
+  const hiddenCheckmarkStyle = {
+    visibility: "hidden",
+    width: "0px",
+    position: "relative",
+    bottom: "-5px",
+    left: "60px"
+  }
+
+  const checkmarkImageStyle = {
+    backgroundColor: "white",
+    borderRadius: "15px"
+  }
+
+  const handleStylesClick = (event) => {
+    setStyleNumber(event.target.className);
+    let imageList = document.getElementsByClassName("circleCheckmark");
+    for (let entry of imageList) {
+      if (entry.id === ('circle' + event.target.className)) {
+        entry.style.visibility = "visible";
+      } else {
+        entry.style.visibility = "hidden";
+      }
     }
-    return (
+  }
+
+    let finalStyleList = styleList.map((entry, index) => {
+      let checkBool = false;
+      if (styleNumber === index) {
+        checkBool = true;
+      }
+      return (
+        <div className="circleContainer" style={circleContainerStyle}>
+          <div className="circleCheckmark" id={'circle' + index} style={checkBool ? circleCheckmarkStyle : hiddenCheckmarkStyle}>
+                  <img src="check-mark-circle-icon.png" style={checkmarkImageStyle}/>
+          </div>
           <img
                   key={index}
                   className={index}
@@ -49,9 +86,11 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
                   src={entry.photos[0].thumbnail_url}
                   alt="Italian Trulli"
                   onClick={handleStylesClick}
-          />
+                  />
+      </div>
     )
   })
+
 
 
   //CSS:
