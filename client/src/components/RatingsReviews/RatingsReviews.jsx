@@ -17,7 +17,7 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
       setReviews(res.data.results);
     });
   }, [sortBy, product_id]);
-  console.log('REVIEWS: ', reviews)
+  // console.log('REVIEWS: ', reviews)
 
   const handleReviewsShown = () => {
     setReviewsShown(reviewsShown + 2)
@@ -26,6 +26,7 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
   const handleSortBy = (input) => {
     setSortBy(input)
   }
+  // console.log('Reviews: ', reviews)
 
   // Ratings
   const[ratingsData, setRatingsData] = useState({})
@@ -76,7 +77,7 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
     <div id='ratings-reviews'>
       <h5 className='ratings-reviews-title'> RATINGS & REVIEWS</h5>
       <Ratings product_id={product_id} ratingsData={ratingsData} ratings={ratings} averageRating={averageRating} recommendPerc={recommendPerc} starsPercentage={starsPercentage} characteristics={characteristics} reviews={reviews} setReviews={setReviews}/>
-      <ReviewsList product_id={product_id} reviews={reviews} sortBy={sortBy} reviewsShown={reviewsShown} handleSortBy={handleSortBy} handleReviewsShown={handleReviewsShown}/>
+      <ReviewsList product_id={product_id} reviews={reviews} sortBy={sortBy} reviewsShown={reviewsShown} handleSortBy={handleSortBy} handleReviewsShown={handleReviewsShown} characteristics={characteristics}/>
     </div>
   );
 }

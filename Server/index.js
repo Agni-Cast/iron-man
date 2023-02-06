@@ -278,5 +278,21 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   })
 });
 
+// app.post('/reviews', (req, res) => {
+//   const newReviewBody = req.body;
+//   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews?product_id=${req.query.product_id}`, newReviewBody,
+//   {
+//    headers: {
+//     'Authorization': `${token}`
+//   }
+//   })
+//   .then((response) => {
+//     console.log(response)
+//     return res.status(201).send(response.data).end();
+//   })
+//   .catch((error) => {
+//     res.status(501).send(error);
+//   });
+// });
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

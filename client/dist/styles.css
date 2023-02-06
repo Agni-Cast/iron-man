@@ -286,3 +286,16 @@ img {
 .characteristics {
   margin-top: 30px;
 }
+
+.on {
+  color: #000;
+  border: none;
+  border-color: transparent;
+  background: none;
+}
+.off {
+  color: #ccc;
+  border: none;
+  border-color: transparent;
+  background: none;
+}
