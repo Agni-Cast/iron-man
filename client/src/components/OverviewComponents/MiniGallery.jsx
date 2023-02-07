@@ -22,10 +22,12 @@ const thumbnailSelectedStyle = {
 
 const miniGalleryContainerStyle = {
   display: "flex",
+  alignSelf: "flex-start",
   width: "80px",
   flexDirection: "column",
-  position: "relative",
-  top: "-600px"
+  postion: "absolute",
+  top: "0px",
+  left: "15px"
 }
 
 const upArrowStyle = {
@@ -63,7 +65,7 @@ const handleUpArrow = () => {
 }
 
 const handleThumbnailSelect = (event) => {
-  setPhotoNumber(Number(event.target.className.slice(5)) + windowIndex);
+  setPhotoNumber(Number(event.target.id.slice(5)) + windowIndex);
 }
 
 let galleryWindow = [];
@@ -78,7 +80,8 @@ let formattedWindow = galleryWindow.map((photoContainer, index) => {
   return (
     <div key={index} className={"image" + index + "Div"}>
       <img
-        className={"image" + index}
+        className="thumbnailClass"
+        id={"image" + index}
         style={windowIndex + index === photoNumber ? thumbnailSelectedStyle : thumbnailStyle}
         src={photoContainer.thumbnail_url}
         onClick={handleThumbnailSelect} />
