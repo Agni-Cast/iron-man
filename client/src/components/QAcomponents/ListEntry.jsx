@@ -120,6 +120,8 @@ const ListEntry = (props) => {
             background: 'none'
           }
         }}>
+          <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsModalOpen(false)}>[Close]</button>
+
         <form className="iron-man-form" onSubmit ={(event) => {
           event.preventDefault();
           let photos = [];

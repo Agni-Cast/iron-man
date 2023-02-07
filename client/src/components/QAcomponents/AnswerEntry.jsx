@@ -104,7 +104,7 @@ const AnswerEntry = ({ answer }) => {
                     </p>
                 </button>
             </div>
-            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false}  style={{
           content: {
             top: '50%',
             left: '50%',
@@ -119,6 +119,8 @@ const AnswerEntry = ({ answer }) => {
             background: 'none'
           }
         }}>
+                <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
+
                 <form onSubmit={(event) => {
 
                     event.preventDefault();
@@ -161,6 +163,7 @@ const AnswerEntry = ({ answer }) => {
                           style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
                         />
                       </div>
+
                     </div>
                 </form>
             </ReactModal>
