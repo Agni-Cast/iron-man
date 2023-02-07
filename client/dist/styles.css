@@ -4,6 +4,8 @@
   justify-content: flex-start;
   display: flex;
 } */
+
+
 button.form-submit:not([disabled]) {
   background-color: green;
 }
@@ -13,6 +15,8 @@ button.form-submit:not([disabled]) {
   align-items:flex-start;
   justify-content: flex-start;
 }
+
+
 
 .report-type {
   color:rgb(227, 218, 218)
@@ -43,8 +47,9 @@ button.form-submit:not([disabled]) {
   font-size: small;
 }
 
+
 .add-answer-body{
-  color:rgb(119, 115, 115);
+  color:rgb(75, 71, 71);
   font-size: medium;
 
 }
@@ -109,10 +114,9 @@ button.form-submit:not([disabled]) {
 
 }
 
-.answer-list {
-  display:inline-block;
 
-}
+
+
 
 .question-container {
   display: flex;
@@ -169,7 +173,7 @@ button.form-submit:not([disabled]) {
 
 .qa-head {
   font-size: large;
-  color: rgb(170, 168, 168);
+  color: gray;
 }
 
 
@@ -189,15 +193,30 @@ img {
 
 
 .iron-man-form {
+
   width: 500px;
   max-width: 100%;
   padding: 40px;
-  background: linear-gradient(45deg, #f7e307, #ff0000);
+  background: linear-gradient(45deg, #f1f6f7f1, #2c2929);
   color: #ffffff;
   box-shadow: 0px 0px 10px 2px #000000;
   border-radius: 10px;
   text-align: center;
   margin: 0 auto;
+
+}
+
+.iron-man-form::before {
+  content: "";
+  background: url(form_logo.png) no-repeat;
+  width:90px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-size: contain;
+  margin-left: 10px;
+  background-color: transparent;
 }
 
 .form-title {
@@ -261,7 +280,7 @@ img {
 .report-form-container {
   background-image: linear-gradient(to right, #ed8506, #ff0000);
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 5px 5px 10px #333;
   display: flex;
   flex-direction: column;
@@ -278,7 +297,7 @@ img {
 }
 
 .report-submit-button {
-  width: 100%;
+  width: 70%;
   padding: 15px;
   font-size: 20px;
   background-color: #ffffff;
@@ -440,5 +459,6 @@ img {
   border-color: transparent;
   background: none;
 }
+
 
 

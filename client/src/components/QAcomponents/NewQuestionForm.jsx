@@ -15,6 +15,14 @@ const NewQuestionForm = (props, closeModal) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const form = event.target;
+    form.classList.add("fly-away");
+
+    form.addEventListener("animationend", () => {
+      form.remove();
+    });
+
     const data = { body: questionBody, name: askerName, email: askerEmail, product_id:props.questionId[0]};
 
     // console.log("show me the data that user fill?", data);
@@ -33,43 +41,47 @@ const NewQuestionForm = (props, closeModal) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="iron-man-form">
-      <h2 className="form-title">STARK VALUE YOUR QUESTIONS</h2>
-      <div className="form-group">
-        <label htmlFor="question-body" className="form-label">Question Body:</label>
-        <input
-          type="text"
-          value={questionBody}
-          onChange={e => setQuestionBody(e.target.value)}
-          id="question-body"
-          className="form-input"
-          placeholder="Enter your question"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="asker-name" className="form-label">Your Name:</label>
-        <input
-          type="text"
-          value={askerName}
-          onChange={e => setAskerName(e.target.value)}
-          id="asker-name"
-          className="form-input"
-          placeholder="Enter your name"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="asker-email" className="form-label">Your Email:</label>
-        <input
-          type="email"
-          value={askerEmail}
-          onChange={e => setAskerEmail(e.target.value)}
-          id="asker-email"
-          className="form-input"
-          placeholder="Enter your email"
-        />
-      </div>
-      <button type="submit" className={buttonClass}>Submit</button>
-    </form>
+    <div>
+      <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => props.closeModal()}>[Close]</button>
+
+      <form onSubmit={handleSubmit} className="iron-man-form">
+        <h2 className="form-title">STARK VALUE YOUR QUESTIONS</h2>
+        <div className="form-group">
+          <label htmlFor="question-body" className="form-label">Question Body:</label>
+          <input
+            type="text"
+            value={questionBody}
+            onChange={e => setQuestionBody(e.target.value)}
+            id="question-body"
+            className="form-input"
+            placeholder="Enter your question"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="asker-name" className="form-label">Your Name:</label>
+          <input
+            type="text"
+            value={askerName}
+            onChange={e => setAskerName(e.target.value)}
+            id="asker-name"
+            className="form-input"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="asker-email" className="form-label">Your Email:</label>
+          <input
+            type="email"
+            value={askerEmail}
+            onChange={e => setAskerEmail(e.target.value)}
+            id="asker-email"
+            className="form-input"
+            placeholder="Enter your email"
+          />
+        </div>
+        <button type="submit" className={buttonClass}>Submit</button>
+      </form>
+    </div>
   );
 
 }

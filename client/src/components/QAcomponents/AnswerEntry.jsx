@@ -75,7 +75,6 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
                 <button className="answer-help">
                   | &nbsp; Helpful? &nbsp;
                   <u
@@ -105,7 +104,7 @@ const AnswerEntry = ({ answer }) => {
                     </p>
                 </button>
             </div>
-            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false}  style={{
           content: {
             top: '50%',
             left: '50%',
@@ -120,6 +119,8 @@ const AnswerEntry = ({ answer }) => {
             background: 'none'
           }
         }}>
+                <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
+
                 <form onSubmit={(event) => {
 
                     event.preventDefault();
@@ -136,7 +137,7 @@ const AnswerEntry = ({ answer }) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
-                    <div className="report-form-container">
+                    <div className="iron-man-form">
                       <label className="form-title">
                           Report This Answer:
                           <br />
@@ -162,6 +163,7 @@ const AnswerEntry = ({ answer }) => {
                           style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
                         />
                       </div>
+
                     </div>
                 </form>
             </ReactModal>
