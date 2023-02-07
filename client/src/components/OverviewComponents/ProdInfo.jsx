@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Styles from "./Styles.jsx";
 import Checkout from "./Checkout.jsx";
+import Stars from "../RatingsReviews/Stars.jsx";
 
 
 const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
@@ -11,6 +12,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
   const [styleEntry, setStyleEntry] = useState({});
   const [prodEntry, setProdEntry] = useState({});
   const [newCategory, setNewCategory] = useState("");
+  const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
 
@@ -31,7 +33,19 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       console.log('this is an axios get error in ProdInfo.jsx: ', error);
     })
 
+    axios.get(`http://localhost:3000/reviews/meta?product_id=${productID}`)
+    .then((res) => {
+      setAverageRating(calculateAverageRating(res.data.ratings));
+    })
+
   },[styleNumber, productID]);
+
+
+  function calculateAverageRating(obj) {
+    let sum = (obj[1] * 1) + (obj[2] * 2) + (obj[3] * 3) + (obj[4] * 4) + (obj[5] * 5);
+    let count = Number(obj[1]) + Number(obj[2]) + Number(obj[3]) + Number(obj[4]) + Number(obj[5])
+    return Math.round((sum/count) * 10) / 10;
+  }
 
   //CSS:
   const prodNameStyle = {
@@ -72,6 +86,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
   }
 
   const reviewStyle = {
+    display: "flex",
     fontFamily: "Helvetica",
     fontSize: "10px",
     padding: "15px"
@@ -102,8 +117,8 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
     <div className="prodInfoContainer" style={prodInfoContainerStyle}>
       <div>
         <div className="review" style={reviewStyle}>
-          *STAR MODULE HERE*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="url" style={{color: "Gray"}}>Read all reviews</a>
+        <Stars className='average-star' rating={averageRating}/>
+          <a href="#ratings-reviews" style={{color: "Gray", paddingLeft: "15px"}}>Read all reviews</a>
         </div>
         <div className="category" style={categoryStyle}>
           {newCategory}

@@ -27,7 +27,6 @@ const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoLi
   useEffect(() => {
 
     let thumbnailArray = photoList.map((photo, index) => {
-      //console.log('mapping ', index);
       return (
         <li key={index} style={{ listStyle: 'none', listStyleType: 'none' , left: "0%", position: "relative"}}>
           <img
@@ -39,7 +38,6 @@ const Thumbnail = ({productID, photoNumber, setPhotoNumber, styleNumber, photoLi
         </li>
       )
     })
-    //console.log('this is thumbnail array', thumbnailArray)
     setThumbnailList(thumbnailArray);
   },[photoList, productID]);
 

@@ -70,7 +70,6 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
                 <button className="answer-help">
                   | &nbsp; Helpful? &nbsp;
                   <u
@@ -100,7 +99,7 @@ const AnswerEntry = ({ answer }) => {
                     </p>
                 </button>
             </div>
-            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false}  style={{
           content: {
             top: '50%',
             left: '50%',
@@ -112,6 +111,8 @@ const AnswerEntry = ({ answer }) => {
             height: '300px'
           }
         }}>
+                <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
+
                 <form onSubmit={(event) => {
                     event.preventDefault();
 
@@ -128,12 +129,43 @@ const AnswerEntry = ({ answer }) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
+<<<<<<< HEAD
                     <label>
                         Report This Answer:
 
                         <input type="text" name="reportReason" size="50" />
                     </label>
                     <input type="submit" value="Submit" />
+=======
+                    <div className="iron-man-form">
+                      <label className="form-title">
+                          Report This Answer:
+                          <br />
+                          <textarea
+                            className="report-textarea"
+                            name="reportReason"
+                            onChange={(e) => setReportReason(e.target.value)}
+                            style={{ height: '200px', width: '270px' }}
+                            placeholder="Enter your report reason here"
+                          />
+                          <br/>
+
+                          {wordCount > 4 ? <span></span> : <span className="report-word-count"> &nbsp; &nbsp; {5 - wordCount} Words To Submit</span>}
+
+                      </label>
+                      <br />
+                      <div className="report-form-button-container">
+                        <input
+                          className="report-submit-button"
+                          type="submit"
+                          value="Submit"
+                          disabled={wordCount < 5}
+                          style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
+                        />
+                      </div>
+
+                    </div>
+>>>>>>> 3e456f1beaf980b11e7e7a0793e0e190865041e7
                 </form>
             </ReactModal>
         </div>

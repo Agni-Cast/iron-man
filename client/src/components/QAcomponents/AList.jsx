@@ -1,26 +1,33 @@
 import AnswerEntry from './AnswerEntry.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const AList = (props) => {
-    // console.log("im in Answer render now the incoming props looks like: ", props);
-    const answersArray = Object.values(props.answers);
-    const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
+  const answersArray = Object.values(props.answers);
+  const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
+  const [showMore, setShowMore] = useState(true);
+  const [overflow, setOverflow] = useState('hidden')
 
-    return (
-      <div className="flexbox-item answer-list">
+  return (
 
-        <div >
-          {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
-              <AnswerEntry key={index} answer={answer} />
-          ))}
+    <div className="flexbox-item answer-list" style={{ display: 'inline-block', width: '100%', maxHeight: '600px', overflowY: overflow }}>
 
-          {answersArray.length > numAnswersDisplayed && (
-            <button className="butLoadMoreAns" onClick={() => setNumAnswersDisplayed(numAnswersDisplayed + 2)}>LOAD MORE ANSWERS 👈</button>
-          )}
-        </div>
+      <div>
+        {answersArray.slice(0, numAnswersDisplayed).map((answer, index) => (
+            <AnswerEntry key={index} answer={answer} />
+        ))}
+
+        {answersArray.length > numAnswersDisplayed && (
+          <button className="butLoadMoreAns" onClick={() => {
+              setNumAnswersDisplayed(showMore ? numAnswersDisplayed + 2 : 2);
+              setShowMore(!showMore);
+              setOverflow(showMore ? 'scroll' : 'hidden');
+          }}>
+              {showMore ? 'LOAD MORE ANSWERS 👈' : 'COLLAPSE ANSWERS 👈'}
+          </button>
+        )}
       </div>
-    );
-
+    </div>
+  );
 }
 
 export default AList;
