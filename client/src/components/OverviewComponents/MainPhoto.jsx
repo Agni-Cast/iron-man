@@ -20,18 +20,13 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
   },[productID, styleNumber]);
 
   const handleNext = function() {
-    if (photoNumber === photoList.length) {
-
-    } else {
+    if (photoNumber !== photoList.length) {
       setPhotoNumber(photoNumber + 1);
-
     }
   }
 
   const handlePrev = function() {
-    if (photoNumber === 0) {
-
-    } else {
+    if (photoNumber !== 0) {
       setPhotoNumber(photoNumber - 1);
     }
   }
@@ -104,16 +99,15 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
   }
 
 
-    return (
-      <>
+  return (
+  <>
     <div className="imageContainer" id="imageContainerID" style={imageContainer}>
        <MiniGallery
          photoList={photoList}
          setPhotoNumber={setPhotoNumber}
          photoNumber={photoNumber}
        />
-      <img className="mainPhoto" src={photoList[photoNumber].url ? photoList[photoNumber].url : "starklogo.png" } alt="Italian Trulli"
-      style={mainPhoto} onClick={enlargePhoto}/>
+       <img className="mainPhoto" src={photoList[photoNumber].url ? photoList[photoNumber].url : "starklogo.png"} alt="Italian Trulli" style={mainPhoto} onClick={enlargePhoto}/>
         <a className="prev"
           style={arrowStylePrev}
           onClick={handlePrev}
@@ -133,11 +127,3 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
 
 
 export default MainPhoto;
-
-/* <Thumbnail
-productID={productID}
-photoNumber={photoNumber}
-setPhotoNumber={setPhotoNumber}
-styleNumber={styleNumber}
-photoList={photoList}
-/> */

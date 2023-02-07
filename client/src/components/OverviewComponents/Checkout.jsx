@@ -37,8 +37,6 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
           setQty(styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15);
         }
       }
-
-
       //generate array with integers from 1 to quanity and use as dropdown values
       let qtyArray = [];
       for (let i = 1; i <= qty; i++) {
@@ -51,7 +49,6 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
         })
       setQuantityDropDown(finalQty);
     }
-
   },[styleEntry, size, productID, styleNumber]);
 
   const handleChange = (event) => {
@@ -67,9 +64,8 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
   }
 
   const handleClick = (event) => {
-    //axios post call
+    //axios post call but something wrong with Cart API
   }
-
 
   //CSS:
 
@@ -160,7 +156,6 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     <div className="socialMediaContainer" style={socialMediaContainerStyle}>
       <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg"/></a><script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
        <div className="facebook">
-
           <div id="fb-root"></div>
           <script>{(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -169,13 +164,12 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
             js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'))}</script>
-
-          <div className="fb-share-button"
-          data-href="http://localhost:3000"
-          data-layout="button_count">
+          <div
+            className="fb-share-button"
+            data-href="http://localhost:3000"
+            data-layout="button_count">
           </div>
        </div>
-
       <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
     </div>
   </>

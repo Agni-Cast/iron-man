@@ -6,11 +6,9 @@ import axios from "axios";
 
 const Styles = ({productID, styleNumber, setStyleNumber}) => {
 
-
   const [styleList, setStyleList] = useState([]);
 
   useEffect(() => {
-
     axios.get(`http://localhost:3000/products/${productID}/styles`)
     .then((response) => {
       setStyleList(response.data.results);
@@ -20,6 +18,8 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
     })
 
   },[productID]);
+
+  //CSS
 
   const circleStyle = {
     flex: "75px",
@@ -69,32 +69,29 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
     }
   }
 
-    let finalStyleList = styleList.map((entry, index) => {
-      let checkBool = false;
-      if (styleNumber === index) {
-        checkBool = true;
-      }
-      return (
-        <div className="circleContainer" style={circleContainerStyle}>
-          <div className="circleCheckmark" id={'circle' + index} style={checkBool ? circleCheckmarkStyle : hiddenCheckmarkStyle}>
-                  <img src="check-mark-circle-icon.png" style={checkmarkImageStyle}/>
-          </div>
+  //Additional code:
+
+  let finalStyleList = styleList.map((entry, index) => {
+    let checkBool = false;
+    if (styleNumber === index) {
+      checkBool = true;
+    }
+    return (
+      <div className="circleContainer" style={circleContainerStyle}>
+        <div className="circleCheckmark" id={'circle' + index} style={checkBool ? circleCheckmarkStyle : hiddenCheckmarkStyle}>
+            <img src="check-mark-circle-icon.png" style={checkmarkImageStyle}/>
+        </div>
           <img
-                  key={index}
-                  className={index}
-                  style={circleStyle}
-                  src={entry.photos[0].thumbnail_url}
-                  alt="Italian Trulli"
-                  onClick={handleStylesClick}
-                  />
-      </div>
+            key={index}
+            className={index}
+            style={circleStyle}
+            src={entry.photos[0].thumbnail_url}
+            alt="Italian Trulli"
+            onClick={handleStylesClick}
+          />
+        </div>
     )
-  })
-
-
-
-  //CSS:
-
+})
 
   return (
   <>

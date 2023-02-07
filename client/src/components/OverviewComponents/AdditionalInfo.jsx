@@ -7,24 +7,17 @@ import Checkout from "./Checkout.jsx";
 
 const AdditionalInfo = ({productID}) => {
 
-
-
   const [featuresEntry, setFeaturesEntry] = useState({});
 
-
   useEffect(() => {
-
     axios.get(`http://localhost:3000/products/${productID}`)
     .then((response) => {
       setFeaturesEntry(response.data);
-
     })
     .catch((error) => {
       console.log('this is an axios get error in AdditionalInfo.jsx: ', error);
     })
-
   },[productID]);
-
 
   let featuresList = [];
 
@@ -73,8 +66,6 @@ const AdditionalInfo = ({productID}) => {
     margin: 0
   }
 
-//listStyle: "symbols(cyclic, "*")"  &#10004;
-
   return (
   <>
     <div className="additionalInfoContainer" style={additionalInfoContainerStyle}>
@@ -88,7 +79,7 @@ const AdditionalInfo = ({productID}) => {
       </div>
       <div className="features" style={featuresStyle}>
         <ul className="featuresList" style={featuresListStyle}>
-        {featuresList}
+          {featuresList}
         </ul>
       </div>
     </div>
