@@ -129,14 +129,6 @@ const AnswerEntry = ({ answer }) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
-<<<<<<< HEAD
-                    <label>
-                        Report This Answer:
-
-                        <input type="text" name="reportReason" size="50" />
-                    </label>
-                    <input type="submit" value="Submit" />
-=======
                     <div className="iron-man-form">
                       <label className="form-title">
                           Report This Answer:
@@ -165,7 +157,6 @@ const AnswerEntry = ({ answer }) => {
                       </div>
 
                     </div>
->>>>>>> 3e456f1beaf980b11e7e7a0793e0e190865041e7
                 </form>
             </ReactModal>
         </div>
