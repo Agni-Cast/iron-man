@@ -4,6 +4,8 @@
   justify-content: flex-start;
   display: flex;
 } */
+
+
 button.form-submit:not([disabled]) {
   background-color: green;
 }
@@ -13,6 +15,8 @@ button.form-submit:not([disabled]) {
   align-items:flex-start;
   justify-content: flex-start;
 }
+
+
 
 .report-type {
   color:rgb(227, 218, 218)
@@ -42,6 +46,7 @@ button.form-submit:not([disabled]) {
   color:gray;
   font-size: small;
 }
+
 
 .add-answer-body{
   color:rgb(119, 115, 115);
@@ -110,9 +115,14 @@ button.form-submit:not([disabled]) {
 }
 
 .answer-list {
-  display:inline-block;
-
+    display: inline-block;
+    width: 100%;
+    /* float: right; */
+    max-height: 600px;
+    overflow-y: scroll;
 }
+
+
 
 .question-container {
   display: flex;
@@ -213,19 +223,6 @@ img {
   background-size: contain;
   margin-left: 10px;
   background-color: transparent;
-}
-
-.iron-man-form.fly-away {
-  animation: fly-away 1s forwards;
-}
-
-@keyframes fly-away {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(1000px);
-  }
 }
 
 .form-title {
@@ -469,4 +466,7 @@ img {
   background: none;
 }
 
+.ReactModal_Overlay--after-open {
+  background-color: rgba(255, 255, 255, 0.9);
+}
 

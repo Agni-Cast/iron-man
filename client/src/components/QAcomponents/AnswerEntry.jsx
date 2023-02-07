@@ -75,7 +75,6 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
                 <button className="answer-help">
                   | &nbsp; Helpful? &nbsp;
                   <u

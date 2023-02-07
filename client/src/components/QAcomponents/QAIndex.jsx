@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 
 const QAIndex = () => {
 
-  const [questionId, setQuestionId] = useState([37777])
+  const [questionId, setQuestionId] = useState([37765])
   const [qaData, setQaData] = useState([])
   // inital state for how many questions show on the DOM
   const [questionsToShow, setQuestionsToShow] = useState(4)

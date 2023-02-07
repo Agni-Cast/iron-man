@@ -140,7 +140,7 @@ const ListEntry = (props) => {
             setIsModalOpen(false);
           })
           .catch((error) => {
-            alert('please check your format', error)
+            console.log('answer submit error.')
           })
         }}>
           <div className="form-group">
