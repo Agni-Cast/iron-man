@@ -33,7 +33,7 @@ const GrayBar = styled.div`
   margin: 0px;
   margin-top: 10px;
   &:hover {
-    background-color: red;
+    background-color: #979797;
   }
 `
 const GreenBar = styled.div`
@@ -41,7 +41,7 @@ const GreenBar = styled.div`
   background-color: #009f00;
   width: 0%;
   &:hover {
-    background-color: red;
+    background-color: #98FB98;
   }
 `
 const RatingsNum = styled.span`
@@ -52,7 +52,7 @@ const RatingsNum = styled.span`
   bottom: 10px;
   font-size: small;
   &:hover {
-    color: red;
+    color: #98FB98;
   }
 `
 const StarNum = styled.u`
@@ -63,7 +63,7 @@ const StarNum = styled.u`
   bottom: 14px;
   font-size: small;
   &:hover {
-    color: red;
+    color: #98FB98;
   }
 `
 
@@ -76,7 +76,7 @@ const Container = styled.div`
 `
 
 const StarsBars = ({ percentages, rating, num, reviews, setReviews, allReviews}) => {
-  // console.log('Reviews --->', reviews)
+  //  console.log('Reviews --->', reviews)
 
   const [isHover, setIsHover] = useState(false);
   const [toggle, setToggle] = useState(true)
@@ -94,11 +94,6 @@ const StarsBars = ({ percentages, rating, num, reviews, setReviews, allReviews})
     if (toggle) {
     const numClicked = Number(num);
     const newArr = [];
-    // console.log(num)
-    // const filteredReviews = reviews.filter((review) => {
-    //   review.rating === numClicked
-    // })
-    // setReviews(filteredReviews)
     for (let i = 0; i < allReviews.length; i++) {
       const singleReview = allReviews[i];
       if (singleReview.rating === numClicked) {
@@ -117,6 +112,8 @@ const StarsBars = ({ percentages, rating, num, reviews, setReviews, allReviews})
   useEffect(() => {
 
   }, [reviews])
+
+
   return (
     <Container>
       {/* <div>{removeFilters === true ? <button>Remove filters</button> : '' }</div> */}

@@ -15,6 +15,7 @@ const Ratings = ({product_id, ratingsData, ratings, averageRating, recommendPerc
     </div>
     <div className='recommend-pecent'>{recommendPerc}% of reviews reccomend this product</div>
     {/* <StarsBars percentages={starsPercentage} rating={ratings}/> */}
+    {/* {checkForFilter() === true ? <button onClick={removeStarFilters}> Remove filters</button> : ''} */}
     <div className='stars-bars'>
       {Object.keys(starsPercentage).map((key) => {
         return (

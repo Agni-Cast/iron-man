@@ -464,3 +464,9 @@ img {
   cursor: zoom-in;
 }
 
+.review-photo-orign {
+  padding:20px;
+  width: auto;
+  height: 100px;
+  border-radius: 25%;
+}

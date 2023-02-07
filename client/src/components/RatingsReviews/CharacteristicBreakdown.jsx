@@ -8,6 +8,7 @@ import styled from 'styled-components';
     left: 0px;
     height:55px;
     margin: 0px;
+    margin-top:10px
   `;
 
   const SingleBar = styled.div`

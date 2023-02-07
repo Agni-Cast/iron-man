@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stars from './Stars.jsx';
 import styled from 'styled-components';
-import {GrCheckmark} from 'react-icons/gr'
+import { GrCheckmark } from 'react-icons/gr'
 import EnlargedImageModal from './EnlargedImage.jsx'
 
 const BottomLine = styled.div`
@@ -16,7 +16,7 @@ margin-bottom:15px;
 const SingleReview = ({ review }) => {
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
   const [alreadyVoted, setAlreadyVolted] = useState(false);
-// console.log('review', review)
+  // console.log('review', review)
   const handleVoteCount = (review_id) => {
     axios.put(`http://localhost:3000/reviews/${review_id}/helpful`)
       .then((res) => {
@@ -45,7 +45,6 @@ const SingleReview = ({ review }) => {
     setIsEnlarged(!isEnlarged);
   }
 
-
   return (
     <div className='single-review'>
       <span>
@@ -55,17 +54,24 @@ const SingleReview = ({ review }) => {
       </span>
       <div className='review-summary'>{review.summary}</div>
       <div className='review-body'>{review.body}</div>
-      <div className='review-recommend'>{review.recommend ? <div> <GrCheckmark/> &nbsp; I recommend this product </div> : ''}</div>
+      <div className='review-recommend'>{review.recommend ? <div> <GrCheckmark /> &nbsp; I recommend this product </div> : ''}</div>
       <div className='review-response'>{review.response}</div>
 
-      <div className='review-phots'>{review.photos.map((photo, index) => { return (<img key={photo.id} src={photo.url} onClick={() => handlePhotoClick(index)} alt="review photo"
-                    className={index === enlargePhotoIndex && isEnlarged ? 'enlarged-photo' : 'review-photo-orign' }/>) })}</div>
+      <div className='review-phots'>{review.photos.map((photo, index) => {
+        return (
+          <img key={photo.id} src={photo.url}
+            onClick={() => handlePhotoClick(index)} alt="review photo"
+            className={index === enlargePhotoIndex && isEnlarged ? 'enlarged-photo' : 'review-photo-orign'} />
+        )
+      })}
       <EnlargedImageModal
-                imageUrl={review.photos[enlargePhotoIndex]}
-                isOpen={isEnlarged}
-                ariaHideApp={false}
-                onClose={() => setIsEnlarged(false)}
+              imageUrl={review.photos[enlargePhotoIndex] !== undefined ? review.photos[enlargePhotoIndex].url : ''}
+              isOpen={isEnlarged}
+              ariaHideApp={false}
+              onClose={() => setIsEnlarged(false)}
             />
+      </div>
+
 
       <button className="review-help"> Helpful? &nbsp; | &nbsp;
         <u onClick={() => { if (!alreadyVoted) { increaseHelpCount(review.review_id) } }}

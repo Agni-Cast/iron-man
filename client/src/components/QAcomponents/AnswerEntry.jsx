@@ -13,12 +13,7 @@ const AnswerEntry = ({ answer }) => {
     const [votedHelpful, setVotedHelpful] = useState(false);
     const [reportActed, setReportActed] = useState(false);
 
-    const [reportReason, setReportReason] = useState("");
-    const [wordCount, setWordCount] = useState(0);
 
-    useEffect(() => {
-      setWordCount(reportReason.split(" ").length);
-    }, [reportReason]);
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
@@ -112,18 +107,15 @@ const AnswerEntry = ({ answer }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: 'auto',
-            height: 'auto',
-            // border-color: 'transparent',
-            border: 'none',
-            background: 'none'
+            width: '400px',
+            height: '300px'
           }
         }}>
                 <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
 
                 <form onSubmit={(event) => {
-
                     event.preventDefault();
+
                     // console.log("am i sending request to ans report API?", answer.id)
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
