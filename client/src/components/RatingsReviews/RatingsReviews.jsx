@@ -11,10 +11,13 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
   const[sortBy, setSortBy] = useState(sortBy || 'relevant');
   const[reviewsShown, setReviewsShown] = useState(2);
 
+  const[allReviews, setAllReviews] = useState([])
+
   useEffect(() => {
     axios.get(`http://localhost:3000/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
     .then((res) => {
       setReviews(res.data.results);
+      setAllReviews(res.data.results)
     });
   }, [sortBy, product_id]);
   // console.log('REVIEWS: ', reviews)
@@ -76,7 +79,7 @@ const RatingsReviews = (/* produt_id from overview component*/) => {
   return (
     <div id='ratings-reviews'>
       <h5 className='ratings-reviews-title'> RATINGS & REVIEWS</h5>
-      <Ratings product_id={product_id} ratingsData={ratingsData} ratings={ratings} averageRating={averageRating} recommendPerc={recommendPerc} starsPercentage={starsPercentage} characteristics={characteristics} reviews={reviews} setReviews={setReviews}/>
+      <Ratings product_id={product_id} ratingsData={ratingsData} ratings={ratings} averageRating={averageRating} recommendPerc={recommendPerc} starsPercentage={starsPercentage} characteristics={characteristics} reviews={reviews} setReviews={setReviews} allReviews={allReviews}/>
       <ReviewsList product_id={product_id} reviews={reviews} sortBy={sortBy} reviewsShown={reviewsShown} handleSortBy={handleSortBy} handleReviewsShown={handleReviewsShown} characteristics={characteristics}/>
     </div>
   );

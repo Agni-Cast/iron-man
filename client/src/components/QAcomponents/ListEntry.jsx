@@ -2,7 +2,15 @@ import AList from './AList.jsx';
 import {useState} from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const BottomLine = styled.div`
+background-color: #D3D3D3;
+height: 2px;
+width: 100%;
+margin-top: 20px;
+margin-bottom:15px;
+`
 
 
 const ListEntry = (props) => {
@@ -95,6 +103,9 @@ const ListEntry = (props) => {
         <AList answers={props.question.answers}/>
         {/* ariaHideApp is used here to prevent ReactModal fault in console */}
       </div>
+
+      <BottomLine></BottomLine>
+
       <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
@@ -109,6 +120,8 @@ const ListEntry = (props) => {
             background: 'none'
           }
         }}>
+          <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsModalOpen(false)}>[Close]</button>
+
         <form className="iron-man-form" onSubmit ={(event) => {
           event.preventDefault();
           let photos = [];
@@ -129,7 +142,7 @@ const ListEntry = (props) => {
             setIsModalOpen(false);
           })
           .catch((error) => {
-            alert('please check your format', error)
+            console.log('answer submit error.')
           })
         }}>
           <div className="form-group">

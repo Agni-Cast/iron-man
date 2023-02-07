@@ -21,14 +21,13 @@ const ReviewsList = ({product_id, reviews, sortBy, reviewsShown, handleSortBy, h
             <option value='helpfulness'>helpfulness</option>
           </select>
         </div>
-
+    <div className='reviews-shown'>
         {reviews.slice(0, reviewsShown).map((singleReview) => {
           return (
             <div key={singleReview.review_id}><SingleReview review={singleReview}/></div>
           )
         })}
 
-        <div>
         {reviews.length > reviewsShown && (
           <button className='more-reviews' onClick={() => handleReviewsShown()}> MORE REVIEWS</button>
         )}
@@ -50,6 +49,8 @@ const ReviewsList = ({product_id, reviews, sortBy, reviewsShown, handleSortBy, h
             <AddReviewForm product_id={product_id} closeModal={() => setModalState(false)} characteristics={characteristics}/>
            </Modal>
         </div>
+        <br />
+        <br />
     </div>
 
   )

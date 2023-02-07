@@ -22,6 +22,7 @@ const CharacteristicForm = ({ characteristic, value, allChars, charChosen, handl
   // console.log('CHAR NAMEE', charChosen[characteristic])
   return (
     <div>
+      <br />
       <label>{characteristic}</label><br />
       <div className="charquestion-container">
         <label className="radio-choice">

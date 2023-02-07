@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 
 const QAIndex = () => {
 
-  const [questionId, setQuestionId] = useState([37777])
+  const [questionId, setQuestionId] = useState([37765])
   const [qaData, setQaData] = useState([])
   // inital state for how many questions show on the DOM
   const [questionsToShow, setQuestionsToShow] = useState(4)
@@ -18,16 +18,17 @@ const QAIndex = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   const handleSearch = () => {
+    if (searchTerm.length < 3) {
+      setFilteredData([]);
+      return;
+    }
+
     const lowerCasedSearchTerm = searchTerm.toLowerCase();
-    // console.log("what is data transfer to handlesearch func",qaData[0]);
-    const filtered = qaData.filter((data) => {
-      return (
-        data.question_body.toLowerCase().includes(lowerCasedSearchTerm)
-      );
-    });
-    // console.log("filtered data looks like :", filtered)
+    const filtered = qaData.filter(
+      (data) => data.question_body.toLowerCase().includes(lowerCasedSearchTerm)
+    );
     setFilteredData(filtered);
-  }
+  };
 
   // this is for the test right now, render out questions and answers for product 37322
   useEffect(() => {
@@ -60,19 +61,18 @@ const QAIndex = () => {
       <p data-testid="todo-1" className="qa-head">QUESTIONS & ANSWERS</p>
 
       <div className="search-container">
-        <input
-          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button type="submit" onClick={handleSearch}>
-          <img src="./magnifier.png" alt="Amplifier"/>
-        </button>
+      <input
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value) & handleSearch()}
+        style={{height: '45px'}}
+      />
+      <img src='./magnifier.png' alt="magnifier" style={{height: '45px', float: 'right'}} />
       </div>
 
-      <QAList qaData={filteredData.length > 0 ? filteredData : qaData} questionsToShow={questionsToShow}/>
-      <button className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-      <button className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
+      <QAList qaData={filteredData.length > 0 ? filteredData : qaData} questionsToShow={questionsToShow} />
+      <button data-testid="more-answered-questions" className="button-show-more-answered-question" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button data-testid="add-question-button" className="button-add-a-question" onClick={addNewQuestion}>ADD A QUESTION +</button>
       <Modal isOpen={modelIsOpen} onRequestClose={() => setModelIsOpen(false)} ariaHideApp={false}
         style={{
           content: {
