@@ -4,7 +4,7 @@ import axios from 'axios';
 import EnlargedImageModal from './EnlargedImageModal.jsx';
 
 const AnswerEntry = ({ answer }) => {
-    // console.log('what is each answer_id looks like :', answer.id);
+    // console.log('what is each answer_id looks like :', {answer});
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
@@ -19,12 +19,12 @@ const AnswerEntry = ({ answer }) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
         axios.put(`http://localhost:3000/qa/answers/${answerId}/helpful`)
         .then((response) => {
-          alert("Thanks for voting this answer helpful! ")
+          // alert("Thanks for voting this answer helpful! ")
           // console.log("voting succeed!")
           setVotedHelpful(true);
         })
         .catch ((error) => {
-          alert('this answer voting get error: ', error);
+          // alert('this answer voting get error: ', error);
         })
     }
 
@@ -70,9 +70,9 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                <button className="answer-help">
+                <button data-testid="answer-helpful-btn" className="answer-help">
                   | &nbsp; Helpful? &nbsp;
-                  <u
+                  <u data-testid="answer-helpful-value"
                     onClick={() => {
                       if (!votedHelpful) {
                         handleHelpfulClick(answer.id);
@@ -84,7 +84,7 @@ const AnswerEntry = ({ answer }) => {
                   </u>
               </button>
                 {/* <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button> */}
-                <button className="answer-report">
+                <button data-testid="answer-report-btn" className="answer-report">
                   <p>| &nbsp; &nbsp;
                     <u
                       onClick={() => {
@@ -120,13 +120,13 @@ const AnswerEntry = ({ answer }) => {
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
                     .then((response) => {
-                          alert("Thanks for report this answer ! ")
+                          // alert("Thanks for report this answer ! ")
                           // console.log("voting succeed!")
                           setIsOpen(false);
                           setReportActed(true);
                       })
                     .catch ((error) => {
-                      alert('this answer report get error: ', error);
+                      // alert('this answer report get error: ', error);
                      })
                     }}>
                     <div className="iron-man-form">

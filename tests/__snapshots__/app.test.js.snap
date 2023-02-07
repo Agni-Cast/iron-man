@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QAIndex snap shots tests for AList component 1`] = `
+<div>
+  <div
+    class="flexbox-item answer-list"
+    style="display: inline-block; width: 100%; max-height: 600px; overflow-y: hidden;"
+  >
+    <div>
+      <div>
+        <p
+          class="answer-text"
+        >
+          test1
+        </p>
+        <div
+          class="answer-infor"
+        >
+          <p>
+            by 
+            test1
+             - 
+            Invalid Date
+          </p>
+          <button
+            class="answer-help"
+            data-testid="answer-helpful-btn"
+          >
+            |   Helpful?  
+            <u
+              data-testid="answer-helpful-value"
+            >
+              Yes (1) 
+            </u>
+          </button>
+          <button
+            class="answer-report"
+            data-testid="answer-report-btn"
+          >
+            <p>
+              |    
+              <u>
+                Report
+              </u>
+            </p>
+          </button>
+        </div>
+      </div>
+      <div>
+        <p
+          class="answer-text"
+        >
+          test2
+        </p>
+        <div
+          class="answer-infor"
+        >
+          <p>
+            by 
+            test2
+             - 
+            Invalid Date
+          </p>
+          <button
+            class="answer-help"
+            data-testid="answer-helpful-btn"
+          >
+            |   Helpful?  
+            <u
+              data-testid="answer-helpful-value"
+            >
+              Yes (1) 
+            </u>
+          </button>
+          <button
+            class="answer-report"
+            data-testid="answer-report-btn"
+          >
+            <p>
+              |    
+              <u>
+                Report
+              </u>
+            </p>
+          </button>
+        </div>
+      </div>
+      <button
+        class="butLoadMoreAns"
+      >
+        LOAD MORE ANSWERS 👈
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`QAIndex snap shots tests for ListEntry component 1`] = `
+<div>
+  <div>
+    <div
+      class="question-container"
+    >
+      <h4
+        class="question-body"
+      >
+        Q: 
+        Recusandae nemo dolores.
+      </h4>
+      <div
+        class="question-actions"
+      >
+        <button
+          class="question-help"
+          data-testid="question-helpful-btn"
+        >
+          Helpful?  
+          <u
+            data-testid="question-helpful-value"
+          >
+            Yes (31)
+          </u>
+        </button>
+        <button
+          class="question-addAnswer"
+          data-testid="add-answer-btn"
+        >
+          |   
+          <u>
+            Add Answer
+          </u>
+        </button>
+      </div>
+    </div>
+    <div
+      class="flexbox-container"
+    >
+      <h4
+        class="answer-head"
+      >
+        A:
+      </h4>
+      <div
+        class="flexbox-item answer-list"
+        style="display: inline-block; width: 100%; max-height: 600px; overflow-y: hidden;"
+      >
+        <div />
+      </div>
+    </div>
+    <div
+      class="sc-bcXHqe kqoeXp"
+    />
+  </div>
+</div>
+`;

@@ -39,7 +39,7 @@ const QAIndex = () => {
       setQaData(response.data.results)
     })
     .catch((error) => {
-      alert('first render got trouble!', error)
+      // alert('first render got trouble!', error)
     })
 
   }, [])
