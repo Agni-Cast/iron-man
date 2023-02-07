@@ -40,8 +40,6 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     let imageContainerNew = document.getElementById("imageContainerID");
     let photoNew = event.target.style;
     let thumbnailNew = document.getElementsByClassName("thumbnailClass");
-    console.log('this is thumbnailNew, ',thumbnailNew);
-    console.log('this is event.target.class', photoNew);
     if (imageContainerNew.style.width === "1400px") {
       imageContainerNew.style.width = "800px";
       imageContainerNew.style.height = "600px";
@@ -114,7 +112,7 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
          setPhotoNumber={setPhotoNumber}
          photoNumber={photoNumber}
        />
-      <img className="mainPhoto" src={photoList[photoNumber].url} alt="Italian Trulli"
+      <img className="mainPhoto" src={photoList[photoNumber].url ? photoList[photoNumber].url : "starklogo.png" } alt="Italian Trulli"
       style={mainPhoto} onClick={enlargePhoto}/>
         <a className="prev"
           style={arrowStylePrev}

@@ -6,8 +6,6 @@ import axios from "axios";
 
 const Checkout = ({styleEntry, productID, styleNumber}) => {
 
-  console.log("this is styleEntry,", styleEntry);
-
   const [sizeDropDown, setSizeDropDown] = useState([]);
   const [quantityDropDown, setQuantityDropDown] = useState([]);
   const [size, setSize] = useState("");
@@ -25,7 +23,6 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
 
   useEffect(() => {
     if (styleEntry.skus !== undefined) {
-      console.log('size list getting populated.');
       let dropDown = Object.keys(styleEntry.skus).map((key, index) => {
             return (
               <option key={index} value={styleEntry.skus[key].size}>&nbsp;&nbsp;{styleEntry.skus[key].size}</option>
@@ -34,15 +31,9 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
       setSizeDropDown(dropDown);
     }
 
-
-
     if (styleEntry.skus !== undefined) {
-      console.log('quantity list getting populated');
-      //match the size to the quantity
-       //let qty = 0;
       for (let key in styleEntry.skus) {
         if (styleEntry.skus[key].size === size) {
-          console.log('the qty code is being executed, qty should be: ', styleEntry.skus[key].quantity);
           setQty(styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15);
         }
       }
@@ -123,6 +114,18 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     textAlign: "left"
   }
 
+  const hiddenButtonStyle = {
+    visibility: "hidden",
+    height: "50px",
+    minWidth: "300px",
+    margin: "15px",
+    borderWidth: "thin",
+    background: "white",
+    fontFamily: "Helvetica",
+    fontSize: "16px",
+    textAlign: "left"
+  }
+
   const favoriteStyle = {
     height: "50px",
     minWidth: "50px",
@@ -133,7 +136,6 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     fontSize: "16px"
   }
 
-  console.log("isEmpty is: ", isEmpty);
 
   return (
   <>
@@ -152,7 +154,7 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
       </div>
     </div>
     <div className="addToCartContainer" style={addToCartContainerStyle}>
-      <button id="addToCart" style={buttonStyle} onClick={handleClick}>&nbsp;&nbsp;ADD TO CART</button>
+      <button id="addToCart" style={isEmpty ? hiddenButtonStyle : buttonStyle} onClick={handleClick}>&nbsp;&nbsp;ADD TO CART</button>
       <button id="addToFavorite" style={favoriteStyle} onClick={handleFavorite}>&#9734;</button>
     </div>
     <div className="socialMediaContainer" style={socialMediaContainerStyle}>
