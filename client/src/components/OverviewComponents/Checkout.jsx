@@ -6,12 +6,26 @@ import axios from "axios";
 
 const Checkout = ({styleEntry, productID, styleNumber}) => {
 
-  const [sizeDropDown, setSizeDropDown] = useState("");
-  const [quantityDropDown, setQuantityDropDown] = useState("");
+  console.log("this is styleEntry,", styleEntry);
+
+  const [sizeDropDown, setSizeDropDown] = useState([]);
+  const [quantityDropDown, setQuantityDropDown] = useState([]);
   const [size, setSize] = useState("");
+  const [qty, setQty] = useState(0);
+
+  let isEmpty = false;
+  if (styleEntry.skus !== undefined) {
+    isEmpty = true;
+    for (let key in styleEntry.skus) {
+        if (styleEntry.skus[key].quantity !== 0) {
+          isEmpty = false;
+        }
+    }
+  }
 
   useEffect(() => {
     if (styleEntry.skus !== undefined) {
+      console.log('size list getting populated.');
       let dropDown = Object.keys(styleEntry.skus).map((key, index) => {
             return (
               <option key={index} value={styleEntry.skus[key].size}>&nbsp;&nbsp;{styleEntry.skus[key].size}</option>
@@ -19,15 +33,20 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
             })
       setSizeDropDown(dropDown);
     }
-    if (styleEntry.skus !== undefined) {
 
+
+
+    if (styleEntry.skus !== undefined) {
+      console.log('quantity list getting populated');
       //match the size to the quantity
-      let qty = 0;
+       //let qty = 0;
       for (let key in styleEntry.skus) {
         if (styleEntry.skus[key].size === size) {
-          qty = styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15;
+          console.log('the qty code is being executed, qty should be: ', styleEntry.skus[key].quantity);
+          setQty(styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15);
         }
       }
+
 
       //generate array with integers from 1 to quanity and use as dropdown values
       let qtyArray = [];
@@ -114,12 +133,14 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     fontSize: "16px"
   }
 
+  console.log("isEmpty is: ", isEmpty);
+
   return (
   <>
     <div className="checkoutContainer" style={checkoutContainerStyle}>
       <div className="sizeDropdown">
-        <select name="size" id="size" style={sizeStyle} onChange={handleChange}>
-          <option value="selectSize">&nbsp;&nbsp;SELECT SIZE</option>
+        <select name="size" id="size" style={sizeStyle} onChange={handleChange} disabled={isEmpty === true ? true : false}>
+          <option value="selectSize">&nbsp;&nbsp;{isEmpty === true ? "OUT OF STOCK" : "SELECT SIZE"}</option>
           {sizeDropDown}
         </select>
       </div>
