@@ -13,12 +13,7 @@ const AnswerEntry = ({ answer }) => {
     const [votedHelpful, setVotedHelpful] = useState(false);
     const [reportActed, setReportActed] = useState(false);
 
-    const [reportReason, setReportReason] = useState("");
-    const [wordCount, setWordCount] = useState(0);
 
-    useEffect(() => {
-      setWordCount(reportReason.split(" ").length);
-    }, [reportReason]);
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
@@ -113,16 +108,13 @@ const AnswerEntry = ({ answer }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: 'auto',
-            height: 'auto',
-            // border-color: 'transparent',
-            border: 'none',
-            background: 'none'
+            width: '400px',
+            height: '300px'
           }
         }}>
                 <form onSubmit={(event) => {
-
                     event.preventDefault();
+
                     // console.log("am i sending request to ans report API?", answer.id)
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
@@ -136,33 +128,12 @@ const AnswerEntry = ({ answer }) => {
                       alert('this answer report get error: ', error);
                      })
                     }}>
-                    <div className="report-form-container">
-                      <label className="form-title">
-                          Report This Answer:
-                          <br />
-                          <textarea
-                            className="report-textarea"
-                            name="reportReason"
-                            onChange={(e) => setReportReason(e.target.value)}
-                            style={{ height: '200px', width: '270px' }}
-                            placeholder="Enter your report reason here"
-                          />
-                          <br/>
+                    <label>
+                        Report This Answer:
 
-                          {wordCount > 4 ? <span></span> : <span className="report-word-count"> &nbsp; &nbsp; {5 - wordCount} Words To Submit</span>}
-
-                      </label>
-                      <br />
-                      <div className="report-form-button-container">
-                        <input
-                          className="report-submit-button"
-                          type="submit"
-                          value="Submit"
-                          disabled={wordCount < 5}
-                          style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
-                        />
-                      </div>
-                    </div>
+                        <input type="text" name="reportReason" size="50" />
+                    </label>
+                    <input type="submit" value="Submit" />
                 </form>
             </ReactModal>
         </div>

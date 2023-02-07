@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import SingleReview from './SingleReview.jsx'
 import AddReviewForm from './AddReviewForm.jsx';
 
-const ReviewsList = ({product_id, reviews, sortBy, reviewsShown, handleSortBy, handleReviewsShown, characteristics}) => {
+const ReviewsList = ({product_id, reviews, sortBy, reviewsShown, handleSortBy, handleReviewsShown, characteristics, allReviews}) => {
 
   const [modalState, setModalState] = useState(false)
 

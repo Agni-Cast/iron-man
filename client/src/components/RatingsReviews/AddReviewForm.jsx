@@ -66,13 +66,13 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
         <br />
         <label>
           Body:
-          <input type='text' value={reviewBody} onChange = {e => setReviewBody(e.target.value)} placeholder={'Why did you like the product or not?'}/>
+          <input required type='text' value={reviewBody} onChange = {e => setReviewBody(e.target.value)} placeholder={'Why did you like the product or not?'}/>
         </label>
         <br />
         <br />
         <label>
           Username:
-          <input type='text' value={username} onChange = {e => setUsername(e.target.value)} placeholder={'Example: jackson11!'}/>
+          <input required type='text' value={username} onChange = {e => setUsername(e.target.value)} placeholder={'Example: jackson11!'}/>
         </label>
         <br />
         For privacy reasons, do not use your full name or email address
@@ -80,7 +80,7 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
         <br />
         <label>
           Email:
-          <input type='email' value={email} onChange = {e => setEmail(e.target.value)} placeholder={'Example: jackson11@email.com'}/>
+          <input required type='email' value={email} onChange = {e => setEmail(e.target.value)} placeholder={'Example: jackson11@email.com'}/>
         </label>
         <br />
         For authentication reasons, you will not be emailed
@@ -90,25 +90,25 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
           Rating:
           {/* <input type='number' value={rating} onChange = {e => setRating(e.target.value)}/>
            */}
-           <StarRatingForm rating={rating} setRating={setRating}/>
+           <StarRatingForm required rating={rating} setRating={setRating}/>
         </label>
         <br />
         <br />
         <div>
         <label>
           Characteristics:
-          {charKeys.map(key => <CharacteristicForm characteristic={key} value={characteristics[key]} allChars={charKeys} handleCharChosen={handleCharChosen} charChosen={charChosen}/>)}
+          {charKeys.map(key => <CharacteristicForm required characteristic={key} value={characteristics[key]} allChars={charKeys} handleCharChosen={handleCharChosen} charChosen={charChosen}/>)}
         </label>
         </div>
         <br />
         <br />
         <label>
           Recommend:
-          <input type='radio' value={recommend} onClick = {(e) => {setRecommend(e.target.value); setToggle(!toggle)}}/> Yes
+          <input required type='radio' value={recommend} onClick = {(e) => {setToggle(!toggle); setRecommend(e.target.value) }}/> Yes
         </label>
         <br />
         <br />
-        <button type="submit" onClick={handleSubmit}>Submit</button>
+        <button required type="submit" onClick={handleSubmit}>Submit</button>
       </form>
     )
 }
