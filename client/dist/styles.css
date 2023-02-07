@@ -460,5 +460,7 @@ img {
   background: none;
 }
 
-
+.mainPhoto:hover {
+  cursor: zoom-in;
+}
 

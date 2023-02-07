@@ -6,9 +6,20 @@ import axios from "axios";
 
 const Checkout = ({styleEntry, productID, styleNumber}) => {
 
-  const [sizeDropDown, setSizeDropDown] = useState("");
-  const [quantityDropDown, setQuantityDropDown] = useState("");
+  const [sizeDropDown, setSizeDropDown] = useState([]);
+  const [quantityDropDown, setQuantityDropDown] = useState([]);
   const [size, setSize] = useState("");
+  const [qty, setQty] = useState(0);
+
+  let isEmpty = false;
+  if (styleEntry.skus !== undefined) {
+    isEmpty = true;
+    for (let key in styleEntry.skus) {
+        if (styleEntry.skus[key].quantity !== 0) {
+          isEmpty = false;
+        }
+    }
+  }
 
   useEffect(() => {
     if (styleEntry.skus !== undefined) {
@@ -19,15 +30,14 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
             })
       setSizeDropDown(dropDown);
     }
-    if (styleEntry.skus !== undefined) {
 
-      //match the size to the quantity
-      let qty = 0;
+    if (styleEntry.skus !== undefined) {
       for (let key in styleEntry.skus) {
         if (styleEntry.skus[key].size === size) {
-          qty = styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15;
+          setQty(styleEntry.skus[key].quantity < 16 ? styleEntry.skus[key].quantity : 15);
         }
       }
+
 
       //generate array with integers from 1 to quanity and use as dropdown values
       let qtyArray = [];
@@ -104,6 +114,18 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     textAlign: "left"
   }
 
+  const hiddenButtonStyle = {
+    visibility: "hidden",
+    height: "50px",
+    minWidth: "300px",
+    margin: "15px",
+    borderWidth: "thin",
+    background: "white",
+    fontFamily: "Helvetica",
+    fontSize: "16px",
+    textAlign: "left"
+  }
+
   const favoriteStyle = {
     height: "50px",
     minWidth: "50px",
@@ -114,12 +136,13 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
     fontSize: "16px"
   }
 
+
   return (
   <>
     <div className="checkoutContainer" style={checkoutContainerStyle}>
       <div className="sizeDropdown">
-        <select name="size" id="size" style={sizeStyle} onChange={handleChange}>
-          <option value="selectSize">&nbsp;&nbsp;SELECT SIZE</option>
+        <select name="size" id="size" style={sizeStyle} onChange={handleChange} disabled={isEmpty === true ? true : false}>
+          <option value="selectSize">&nbsp;&nbsp;{isEmpty === true ? "OUT OF STOCK" : "SELECT SIZE"}</option>
           {sizeDropDown}
         </select>
       </div>
@@ -131,7 +154,7 @@ const Checkout = ({styleEntry, productID, styleNumber}) => {
       </div>
     </div>
     <div className="addToCartContainer" style={addToCartContainerStyle}>
-      <button id="addToCart" style={buttonStyle} onClick={handleClick}>&nbsp;&nbsp;ADD TO CART</button>
+      <button id="addToCart" style={isEmpty ? hiddenButtonStyle : buttonStyle} onClick={handleClick}>&nbsp;&nbsp;ADD TO CART</button>
       <button id="addToFavorite" style={favoriteStyle} onClick={handleFavorite}>&#9734;</button>
     </div>
     <div className="socialMediaContainer" style={socialMediaContainerStyle}>

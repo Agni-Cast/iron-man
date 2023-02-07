@@ -36,6 +36,29 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
     }
   }
 
+  const enlargePhoto = function(event) {
+    let imageContainerNew = document.getElementById("imageContainerID");
+    let photoNew = event.target.style;
+    let thumbnailNew = document.getElementsByClassName("thumbnailClass");
+    if (imageContainerNew.style.width === "1400px") {
+      imageContainerNew.style.width = "800px";
+      imageContainerNew.style.height = "600px";
+      photoNew.width = "700px";
+      photoNew.height = "600px";
+      for (let i = 0; i < thumbnailNew.length; i++) {
+        thumbnailNew[i].style.width = "50px"
+      }
+    } else {
+      imageContainerNew.style.width = "1400px";
+      imageContainerNew.style.height = "auto";
+      photoNew.width = "1400px";
+      photoNew.height = "auto";
+      for (let i = 0; i < thumbnailNew.length; i++) {
+        thumbnailNew[i].style.width = "15px"
+      }
+    }
+  }
+
   if (photoList.length === 0) {
     return (
       <span>Data not available</span>
@@ -70,38 +93,39 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
   const imageContainer = {
     backgroundColor: "LightGray",
     position: "relative",
-    display: "inline-block",
+    display: "flex",
     width: "800px",
     height: "600px"
   }
 
   const mainPhoto = {
-      width: "100%",
-      height: "100%",
+      width: "700px",
+      height: "600px"
   }
+
 
     return (
       <>
-    <div className="imageContainer" style={imageContainer}>
-     <img className="mainPhoto" src={photoList[photoNumber].url} alt="Italian Trulli"
-     style={mainPhoto}/>
-      <a className="prev"
-        style={arrowStylePrev}
-        onClick={handlePrev}
-        hidden={photoNumber === 0 ? true : false}
-        >&#10094;
-      </a>
-      <a className="next"
-        style={arrowStyleNext}
-        onClick={handleNext}
-        hidden={photoNumber === photoList.length - 1 ? true : false}
-        >&#10095;
-      </a>
+    <div className="imageContainer" id="imageContainerID" style={imageContainer}>
        <MiniGallery
          photoList={photoList}
          setPhotoNumber={setPhotoNumber}
          photoNumber={photoNumber}
        />
+      <img className="mainPhoto" src={photoList[photoNumber].url ? photoList[photoNumber].url : "starklogo.png" } alt="Italian Trulli"
+      style={mainPhoto} onClick={enlargePhoto}/>
+        <a className="prev"
+          style={arrowStylePrev}
+          onClick={handlePrev}
+          hidden={photoNumber === 0 ? true : false}
+          >&#10094;
+        </a>
+        <a className="next"
+          style={arrowStyleNext}
+          onClick={handleNext}
+          hidden={photoNumber === photoList.length - 1 ? true : false}
+          >&#10095;
+        </a>
     </div>
   </>
   )
