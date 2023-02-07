@@ -14,6 +14,8 @@ margin-bottom:15px;
 
 
 const ListEntry = (props) => {
+
+  // console.log("ListEntry props looks like: ", props)
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
   // state for voting helpful
@@ -50,12 +52,12 @@ const ListEntry = (props) => {
 
     axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
     .then((response) => {
-      alert("Thanks for voting this question helpful! ");
+      // alert("Thanks for voting this question helpful! ");
       // console.log(response.data);
       setVotedHelpful(true);
     })
     .catch((error) => {
-      alert("This question helpful voting got error", error);
+      // alert("This question helpful voting got error", error);
     })
   }
 
@@ -81,9 +83,9 @@ const ListEntry = (props) => {
       <div className="question-container">
         <h4 className="question-body">Q: {props.question.question_body}</h4>
         <div className="question-actions">
-        <button className="question-help">
+        <button data-testid="question-helpful-btn" className="question-help">
           Helpful? &nbsp;
-          <u
+          <u data-testid="question-helpful-value"
             onClick={() => {
               if (!votedHelpful) {
                 voteOnHelp(props.question.question_id);
@@ -94,7 +96,7 @@ const ListEntry = (props) => {
             {votedHelpful ? 'Voted' : `Yes (${helpfulnessCount})`}
           </u>
         </button>
-          <button className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
+          <button data-testid="add-answer-btn" className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
 
@@ -106,7 +108,7 @@ const ListEntry = (props) => {
 
       <BottomLine></BottomLine>
 
-      <ReactModal isOpen={isModalOpen} ariaHideApp={false} style={{
+      <ReactModal data-testid="add-answer-modal" isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
             left: '50%',
@@ -138,7 +140,7 @@ const ListEntry = (props) => {
 
           axios.post(addAnsUrl, data)
           .then((response) => {
-            alert("Success! Your answer has been submitted.")
+            // alert("Success! Your answer has been submitted.")
             setIsModalOpen(false);
           })
           .catch((error) => {

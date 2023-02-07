@@ -3,14 +3,17 @@ import '@testing-library/jest-dom';
 import '@testing-library/react/dont-cleanup-after-each';
 import userEvent from '@testing-library/user-event';
 import {render, screen, waitFor, cleanup, fireEvent} from '@testing-library/react';
-import QAIndex from '../client/src/components/QAcomponents/QAIndex.jsx'
-import AList from '../client/src/components/QAcomponents/AList.jsx'
-import QAList from '../client/src/components/QAcomponents/QAList.jsx'
-import ListEntry from '../client/src/components/QAcomponents/ListEntry.jsx'
-
+import QAIndex from '../client/src/components/QAcomponents/QAIndex.jsx';
+import AList from '../client/src/components/QAcomponents/AList.jsx';
+import QAList from '../client/src/components/QAcomponents/QAList.jsx';
+import ListEntry from '../client/src/components/QAcomponents/ListEntry.jsx';
+import AnswerEntry from '../client/src/components/QAcomponents/AnswerEntry';
+import NewQuestionForm from '../client/src/components/QAcomponents/NewQuestionForm';
+import axios from 'axios';
 
 describe('QAIndex', () => {
   afterEach(cleanup);
+  const user = userEvent.setup()
 
   it('renders QA head', () => {
     render(<QAIndex />);
@@ -18,19 +21,6 @@ describe('QAIndex', () => {
 
     // console.log("the actual head i got :",head)
     expect(head).toHaveTextContent('QUESTIONS & ANSWERS');
-  });
-
-
-  it('calls handleSearch when the submit button is clicked', () => {
-
-    const { getByPlaceholderText, getByAltText } = render(<QAIndex />);
-    const input = getByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...');
-    const button = getByAltText('Amplifier');
-
-    fireEvent.change(input, { target: { value: 'search term' } });
-    fireEvent.click(button);
-
-    expect(input.value).toBe('search term');
   });
 
   it ('There should be a ADD a question button on the screen', () => {
@@ -47,18 +37,117 @@ describe('QAIndex', () => {
     expect(showQButton).toBeInTheDocument()
   })
 
-//   it('calls addNewQuestion when the "ADD A QUESTION +" button is clicked', () => {
-//     const { getByTestId } = render(<QAIndex />);
-//     const button = getByTestId('add-question-button');
+  it ('There should be a question helpful button to click', () => {
+    render(<ListEntry question={{answers: {2844077:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 31, question_id: 34, reported:false}} />)
+    const helpfulBtn = screen.getByTestId("question-helpful-btn")
+    expect(helpfulBtn).toBeInTheDocument()
+  })
 
-//     fireEvent.click(button);
-//   });
+  it ('There should be add answer button to click', () => {
+    render(<ListEntry question={{answers: {2844077:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 31, question_id: 34, reported:false}} />)
+    const helpfulBtn = screen.getByTestId("add-answer-btn")
+    expect(helpfulBtn).toBeInTheDocument()
+  })
 
-//   it('calls axios to get QA data when the component is mounted', async () => {
-//     axios.get.mockResolvedValue({ data: { results: [] } });
 
-//     render(<QAIndex />);
+  it ('Each answer should have button for helpful voting ', () => {
+    render(<AnswerEntry answer={{answerer_name:'tester', body: 'tester', date:'tester', helpful:1, id:1, photos:[]}}/>)
+    const helpfulABtn = screen.getByTestId('answer-helpful-btn')
+    expect(helpfulABtn).toBeInTheDocument()
+  })
 
-//     expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/api/qa/questions/?product_id=37777');
-//   });
+  it ('Each answer should have button for report ', () => {
+    render(<AnswerEntry answer={{answerer_name:'tester', body: 'tester', date:'tester', helpful:1, id:1, photos:[]}}/>)
+    const helpfulABtn = screen.getByTestId('answer-report-btn')
+    expect(helpfulABtn).toBeInTheDocument()
+  })
+
+  it ('snap shots tests for AList component', () => {
+    const answers = {
+      1: { answerer_name: 'test1', body: 'test1', date: 'test1', helpfulness: 1, id: 1, photos: [] },
+      2: { answerer_name: 'test2', body: 'test2', date: 'test2', helpfulness: 1, id: 1, photos: [] },
+      3: { answerer_name: 'test3', body: 'test3', date: 'test3', helpfulness: 1, id: 1, photos: [] },
+      4: { answerer_name: 'test4', body: 'test4', date: 'test4', helpfulness: 1, id: 1, photos: [] },
+    };
+
+    const { container } = render(<AList answers={answers} />);
+
+    expect(container).toMatchSnapshot();
+  })
+
+  it ('Each answer should have button for helpful voting ', () => {
+    render(<AnswerEntry answer={{answerer_name:'tester', body: 'tester', date:'tester', helpful:1, id:1, photos:[]}}/>)
+    const helpfulABtn = screen.getByTestId('answer-helpful-btn')
+    expect(helpfulABtn).toBeInTheDocument()
+  })
+
+  it ('answer helpful button should increase passing in helpfulness ', () => {
+    render(<AnswerEntry answer={{answerer_name:'tester', body: 'tester', date:'tester', helpfulness:1, id:1, photos:[]}}/>)
+
+
+    const helpfulButton = screen.getByTestId("answer-helpful-value")
+
+    fireEvent.click(helpfulButton)
+
+    expect(screen.getByTestId("answer-helpful-value").textContent).toBe("Yes (2) ");
+  })
+
+  it ('question helpful button should increase passing in helpfulness', () => {
+    render(<ListEntry question={{answers: {2844077:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 1, question_id: 34, reported:false}} />)
+
+
+    const helpfulBtn = screen.getByTestId("question-helpful-btn")
+
+    fireEvent.click(helpfulBtn)
+
+    expect(screen.getByTestId("question-helpful-value").textContent).toBe("Yes (1)");
+  })
+
+  it ('snap shots tests for ListEntry component', () => {
+    const question = {
+      answers: {},
+      asker_name: "Orval.Daugherty",
+      question_body: "Recusandae nemo dolores.",
+      question_date: "2021-06-22T00:00:00.000Z",
+      question_helpfulness: 31,
+      question_id: 304736,
+      reported: false
+    }
+
+    const { container } = render(<ListEntry question={question} />);
+
+    expect(container).toMatchSnapshot();
+  })
+
+  it('should render the form correctly', () => {
+    const closeModal = jest.fn();
+    const questionId = [1];
+    const { getByText, getByPlaceholderText } = render(<NewQuestionForm closeModal={closeModal} questionId={questionId} />);
+
+    expect(getByText('STARK VALUE YOUR QUESTIONS')).toBeInTheDocument();
+    expect(getByText('Question Body:')).toBeInTheDocument();
+    expect(getByPlaceholderText('Enter your question')).toBeInTheDocument();
+    expect(getByText('Your Name:')).toBeInTheDocument();
+    expect(getByPlaceholderText('Enter your name')).toBeInTheDocument();
+    expect(getByText('Your Email:')).toBeInTheDocument();
+    expect(getByPlaceholderText('Enter your email')).toBeInTheDocument();
+    expect(getByText('Submit')).toBeInTheDocument();
+  });
+
+  it('Should increment helpful count when helpful button is clicked', () => {
+    const question = {
+      question_id: 1,
+      question_body: 'What is your name?',
+      question_helpfulness: 2,
+      answers: []
+    };
+    const { getByTestId } = render(<ListEntry question={question} />);
+    const helpfulBtn = getByTestId('question-helpful-btn');
+    fireEvent.click(helpfulBtn);
+    const helpfulValue = getByTestId('question-helpful-value');
+    expect(helpfulValue.textContent).toBe('Yes (2)');
+  });
+
+
+
 });

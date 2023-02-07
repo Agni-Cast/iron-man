@@ -13,13 +13,18 @@ const AnswerEntry = ({ answer }) => {
     const [votedHelpful, setVotedHelpful] = useState(false);
     const [reportActed, setReportActed] = useState(false);
 
+    const [reportReason, setReportReason] = useState("");
+    const [wordCount, setWordCount] = useState(0);
 
+    useEffect(() => {
+      setWordCount(reportReason.split(" ").length);
+    }, [reportReason]);
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
         axios.put(`http://localhost:3000/qa/answers/${answerId}/helpful`)
         .then((response) => {
-          alert("Thanks for voting this answer helpful! ")
+          // alert("Thanks for voting this answer helpful! ")
           // console.log("voting succeed!")
           setVotedHelpful(true);
         })
@@ -70,6 +75,7 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
+                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
                 <button className="answer-help">
                   | &nbsp; Helpful? &nbsp;
                   <u
@@ -99,7 +105,7 @@ const AnswerEntry = ({ answer }) => {
                     </p>
                 </button>
             </div>
-            <ReactModal isOpen={isOpen} ariaHideApp={false}  style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
             left: '50%',
@@ -107,26 +113,29 @@ const AnswerEntry = ({ answer }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
-            height: '300px'
+            width: 'auto',
+            height: 'auto',
+            // border-color: 'transparent',
+            border: 'none',
+            background: 'none'
           }
         }}>
                 <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
 
                 <form onSubmit={(event) => {
-                    event.preventDefault();
 
+                    event.preventDefault();
                     // console.log("am i sending request to ans report API?", answer.id)
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
                     .then((response) => {
-                          alert("Thanks for report this answer ! ")
+                          // alert("Thanks for report this answer ! ")
                           // console.log("voting succeed!")
                           setIsOpen(false);
                           setReportActed(true);
                       })
                     .catch ((error) => {
-                      alert('this answer report get error: ', error);
+                      // alert('this answer report get error: ', error);
                      })
                     }}>
                     <div className="iron-man-form">
@@ -155,7 +164,6 @@ const AnswerEntry = ({ answer }) => {
                           style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
                         />
                       </div>
-
                     </div>
                 </form>
             </ReactModal>

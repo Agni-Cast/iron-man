@@ -30,7 +30,7 @@ const NewQuestionForm = (props, closeModal) => {
     axios.post('http://localhost:3000/api/qa/questions', data)
     // console.log(response)#;
     .then((response) => {
-      alert("Success! Your question has been submitted.");
+      // alert("Success! Your question has been submitted.");
     setTimeout(() => {
       props.closeModal();
     }, 1000);

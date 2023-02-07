@@ -2,6 +2,8 @@ import AnswerEntry from './AnswerEntry.jsx';
 import { useState, useEffect } from 'react';
 
 const AList = (props) => {
+  // console.log("show me the props in AList :", props)
+
   const answersArray = Object.values(props.answers);
   const [numAnswersDisplayed, setNumAnswersDisplayed] = useState(2);
   const [showMore, setShowMore] = useState(true);
