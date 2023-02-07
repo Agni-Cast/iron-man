@@ -4,7 +4,7 @@ import axios from 'axios';
 import EnlargedImageModal from './EnlargedImageModal.jsx';
 
 const AnswerEntry = ({ answer }) => {
-    // console.log('what is each answer_id looks like :', {answer});
+    // console.log('what is each answer_id looks like :', answer.id);
     const [answerHelpfulCount, setAnswerHelpfulCount] = useState(answer.helpfulness);
     const [isOpen, setIsOpen] = useState(false);
     const [isEnlarged, setIsEnlarged] = useState(false);
@@ -13,7 +13,12 @@ const AnswerEntry = ({ answer }) => {
     const [votedHelpful, setVotedHelpful] = useState(false);
     const [reportActed, setReportActed] = useState(false);
 
+    const [reportReason, setReportReason] = useState("");
+    const [wordCount, setWordCount] = useState(0);
 
+    useEffect(() => {
+      setWordCount(reportReason.split(" ").length);
+    }, [reportReason]);
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
@@ -24,7 +29,7 @@ const AnswerEntry = ({ answer }) => {
           setVotedHelpful(true);
         })
         .catch ((error) => {
-          // alert('this answer voting get error: ', error);
+          alert('this answer voting get error: ', error);
         })
     }
 
@@ -70,9 +75,10 @@ const AnswerEntry = ({ answer }) => {
             />
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
-                <button data-testid="answer-helpful-btn" className="answer-help">
+                {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
+                <button className="answer-help">
                   | &nbsp; Helpful? &nbsp;
-                  <u data-testid="answer-helpful-value"
+                  <u
                     onClick={() => {
                       if (!votedHelpful) {
                         handleHelpfulClick(answer.id);
@@ -84,7 +90,7 @@ const AnswerEntry = ({ answer }) => {
                   </u>
               </button>
                 {/* <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button> */}
-                <button data-testid="answer-report-btn" className="answer-report">
+                <button className="answer-report">
                   <p>| &nbsp; &nbsp;
                     <u
                       onClick={() => {
@@ -99,7 +105,7 @@ const AnswerEntry = ({ answer }) => {
                     </p>
                 </button>
             </div>
-            <ReactModal isOpen={isOpen} ariaHideApp={false}  style={{
+            <ReactModal isOpen={isOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
             left: '50%',
@@ -107,15 +113,18 @@ const AnswerEntry = ({ answer }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
-            height: '300px'
+            width: 'auto',
+            height: 'auto',
+            // border-color: 'transparent',
+            border: 'none',
+            background: 'none'
           }
         }}>
                 <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsOpen(false)}>[Close]</button>
 
                 <form onSubmit={(event) => {
-                    event.preventDefault();
 
+                    event.preventDefault();
                     // console.log("am i sending request to ans report API?", answer.id)
 
                     axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
@@ -155,7 +164,6 @@ const AnswerEntry = ({ answer }) => {
                           style={{ backgroundColor: wordCount >= 5 ? "green" : "" }}
                         />
                       </div>
-
                     </div>
                 </form>
             </ReactModal>
