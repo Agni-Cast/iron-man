@@ -77,9 +77,9 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
       checkBool = true;
     }
     return (
-      <div className="circleContainer" style={circleContainerStyle}>
-        <div className="circleCheckmark" id={'circle' + index} style={checkBool ? circleCheckmarkStyle : hiddenCheckmarkStyle}>
-            <img src="check-mark-circle-icon.png" style={checkmarkImageStyle}/>
+      <div key={"circleContainer" + index} className="circleContainer" style={circleContainerStyle}>
+        <div key={"circleCheckmark" + index} className="circleCheckmark" id={'circle' + index} style={checkBool ? circleCheckmarkStyle : hiddenCheckmarkStyle}>
+            <img key={"image" + index} src="check-mark-circle-icon.png" style={checkmarkImageStyle}/>
         </div>
           <img
             key={index}
