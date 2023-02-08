@@ -173,4 +173,5 @@ const ListEntry = (props) => {
     </div>
   )
 }
+
 export default ListEntry;
