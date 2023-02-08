@@ -36,7 +36,7 @@ const App = () => {
     <div>
       <Overview productID={productID}/>
       <QAIndex />
-      <RatingsReviews/>
+      <RatingsReviews product_id={productID}/>
     </div>
     </>
   )

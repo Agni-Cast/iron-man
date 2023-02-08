@@ -30,7 +30,6 @@ const CharacteristicForm = ({ characteristic, value, allChars, charChosen, handl
             return (
               <div>
                 <input required type="radio" name={characteristic} value={index}
-                // checked={charChosen[characteristic] === index}
                 onChange={handleCharChosen}
                 />
                 <span>{index + ` - ${meaning[index - 1]}`}</span>

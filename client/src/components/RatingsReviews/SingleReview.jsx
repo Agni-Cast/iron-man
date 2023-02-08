@@ -73,14 +73,14 @@ const SingleReview = ({ review }) => {
       </div>
 
 
-      <button className="review-help"> Helpful? &nbsp; | &nbsp;
+      <button data-testid='help' className="review-help"> Helpful? &nbsp; | &nbsp;
         <u onClick={() => { if (!alreadyVoted) { increaseHelpCount(review.review_id) } }}
           disabled={alreadyVoted}
         >
           {alreadyVoted ? 'Already voted' : `Yes (${helpfulCount})`}
         </u>
       </button>
-      <button className='review-report'>Report</button>
+      {/* <button className='review-report'>Report</button> */}
       <BottomLine></BottomLine>
 
     </div>

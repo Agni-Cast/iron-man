@@ -135,7 +135,7 @@ const CharacteristicBreakdown = ({categoryValue, category}) => {
    <CharContainer>
     <div>{category}</div>
     <Arrow style={{left: `${arrowPosition}px`}}/>
-    {[1, 2, 3, 4, 5].map(() => <SingleBar></SingleBar>)}
+    {[1, 2, 3, 4, 5].map((index) => <SingleBar key={index}></SingleBar>)}
     {checkCategory(category)}
    </CharContainer>
   )
