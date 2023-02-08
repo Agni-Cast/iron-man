@@ -44,7 +44,7 @@ const ListEntry = (props) => {
 
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
-    axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
+    axios.put(`/qa/questions/${questionId}/helpful`)
     .then((response) => {
       // alert("Thanks for voting this question helpful! ");
       // console.log(response.data);
