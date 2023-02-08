@@ -125,7 +125,7 @@ const ListEntry = (props) => {
           const data = {body: event.target.body.value, name: event.target.name.value, email: event.target.email.value, photos: photos}
 
 
-          const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
+          const addAnsUrl = `/api/qa/questions/${props.question.question_id}/answers`;
 
           axios.post(addAnsUrl, data)
           .then((response) => {
