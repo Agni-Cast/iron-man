@@ -5,6 +5,7 @@ import axios from "axios";
 
 
 const Checkout = ({styleEntry, productID, styleNumber}) => {
+  // console.log('show me the checkout props :', {styleEntry, productID, styleNumber})
 
   const [sizeDropDown, setSizeDropDown] = useState([]);
   const [quantityDropDown, setQuantityDropDown] = useState([]);

@@ -78,7 +78,7 @@ const RatingsReviews = (  /* product_id produt_id from overview component*/) => 
 
   return (
     <div id='ratings-reviews'>
-      <h5 data-testid='rr' className='ratings-reviews-title'> RATINGS & REVIEWS</h5>
+      <h5 data-testid="test-1" className='ratings-reviews-title'> RATINGS & REVIEWS</h5>
       <Ratings product_id={product_id} ratingsData={ratingsData} ratings={ratings} averageRating={averageRating} recommendPerc={recommendPerc} starsPercentage={starsPercentage} characteristics={characteristics} reviews={reviews} setReviews={setReviews} allReviews={allReviews}/>
       <ReviewsList product_id={product_id} reviews={reviews} sortBy={sortBy} reviewsShown={reviewsShown} handleSortBy={handleSortBy} handleReviewsShown={handleReviewsShown} characteristics={characteristics} allReviews={allReviews}/>
     </div>
