@@ -156,11 +156,11 @@ const ListEntry = (props) => {
             <br/>
             <br/>
             {fileInputs.map((input, index) => (
-                <>
+                <div key={index}>
                   <input key={index} className="form-input" type="file" name={`photos-${index}`} accept="image/*" />
                   <br />
                   <br />
-                </>
+                </div>
               ))}
               {fileInputs.length < 3 && (
                 <button className="addphoto-submit" onClick={(event) => {
