@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-// const ContainerStyle = styled.div`
-//   height: 10px;
-//   width: 359px;
-//   background-color: grey;
-//   margin-left: 50px;
-//   margin-top: 10px;
-//   //margin-bottom: 10px;
-// `
-// const FillerStyles = styled.div`
-//   height: 100%;
-//   background-color: green;
-//   width: 0%;
-// `
-// const LabelStyles = styled.span`
-//   padding: 5px;
-//   color: green;
-// `
-
-// const StarNum = styled.span`
-//   position: absolute;
-//   bottom: 5px;
-//   left: 161px;
-//   font-size: 9px;
-// `
-
 const GrayBar = styled.div`
   height: 10px;
   width: 235px;

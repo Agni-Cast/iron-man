@@ -3,7 +3,7 @@ import Ratings from './Ratings.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import axios from 'axios';
 
-const RatingsReviews = (/* produt_id from overview component*/) => {
+const RatingsReviews = (  /* product_id produt_id from overview component*/) => {
   const product_id = 37315
 
   // Reviews

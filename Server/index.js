@@ -279,15 +279,18 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
+  // console.log('REQUEST --->>>>', req)
   const newReviewBody = req.body;
+  // console.log(newReviewBody)
+  // res.send('RECEIVED')
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`, newReviewBody,
   {
    headers: {
-    'Authorization': `${token}`
+    'Authorization': `${token}`,
   }
   })
   .then((response) => {
-    console.log(response)
+    console.log(response.data)
     return res.status(201).send(response.data).end();
   })
   .catch((error) => {
