@@ -29,30 +29,28 @@ const Overview = ({productID}) => {
     flexDirection: "column"
   }
 
-
-
   return (
     <div className="overallContainer" style={overallContainerStyle}>
       <BottomLine></BottomLine>
         <div className="photoAndProdInfoContainer" style={photoAndProdInfoContainerStyle}>
-        <MainPhoto
-            productID={productID}
-            photoNumber={photoNumber}
-            setPhotoNumber={setPhotoNumber}
-            styleNumber={styleNumber}
-            />
-        <ProdInfo
-            productID={productID}
-            styleNumber={styleNumber}
-            setStyleNumber={setStyleNumber}
-            />
+          <MainPhoto
+              productID={productID}
+              photoNumber={photoNumber}
+              setPhotoNumber={setPhotoNumber}
+              styleNumber={styleNumber}
+              />
+          <ProdInfo
+              productID={productID}
+              styleNumber={styleNumber}
+              setStyleNumber={setStyleNumber}
+              />
         </div>
         <div>
           <AdditionalInfo
             productID={productID}
           />
         </div>
-        <BottomLine></BottomLine>
+      <BottomLine></BottomLine>
     </div>
   )
 }

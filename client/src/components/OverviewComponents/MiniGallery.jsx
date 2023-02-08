@@ -52,7 +52,6 @@ const downArrowStyle = {
 
 const handleDownArrow = () => {
   if (windowIndex + 5 > photoList.length - 1) {
-
   } else {
     setWindowIndex(windowIndex + 1);
   }

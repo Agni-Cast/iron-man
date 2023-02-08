@@ -15,7 +15,6 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
   const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
-
     axios.get(`http://localhost:3000/products/${productID}/styles`)
     .then((response) => {
       setStyleEntry(response.data.results[styleNumber]);
@@ -62,7 +61,6 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
 
   const priceContainerStyle = {
     display: "flex",
-
   }
 
   const prodPriceStyle = {
@@ -117,7 +115,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
     <div className="prodInfoContainer" style={prodInfoContainerStyle}>
       <div>
         <div className="review" style={reviewStyle}>
-        <Stars className='average-star' rating={averageRating}/>
+          <Stars className='average-star' rating={averageRating}/>
           <a href="#ratings-reviews" style={{color: "Gray", paddingLeft: "15px"}}>Read all reviews</a>
         </div>
         <div className="category" style={categoryStyle}>
@@ -145,7 +143,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
           productID={productID}
           />
       </div>
-      <div className="chekcout">
+      <div className="checkout">
           <Checkout
               productID={productID}
               styleNumber={styleNumber}
