@@ -29,7 +29,7 @@ const AnswerEntry = ({ answer }) => {
           setVotedHelpful(true);
         })
         .catch ((error) => {
-          alert('this answer voting get error: ', error);
+          // alert('this answer voting get error: ', error);
         })
     }
 
@@ -76,9 +76,9 @@ const AnswerEntry = ({ answer }) => {
             <div className="answer-infor">
                 <p>by {answer.answerer_name} - {new Date(answer.date).toLocaleDateString()}</p>
                 {/* <button className="answer-help" >| &nbsp; Helpful? <u onClick={() => handleHelpfulClick(answer.id)}> Yes({answerHelpfulCount}) </u> </button> */}
-                <button className="answer-help">
+                <button data-testid="answer-helpful-btn" className="answer-help">
                   | &nbsp; Helpful? &nbsp;
-                  <u
+                  <u data-testid="answer-helpful-value"
                     onClick={() => {
                       if (!votedHelpful) {
                         handleHelpfulClick(answer.id);
@@ -90,7 +90,7 @@ const AnswerEntry = ({ answer }) => {
                   </u>
               </button>
                 {/* <button className="answer-report" onClick={handleOpenModal}>| &nbsp; <u > Report</u></button> */}
-                <button className="answer-report">
+                <button data-testid="answer-report-btn" className="answer-report">
                   <p>| &nbsp; &nbsp;
                     <u
                       onClick={() => {

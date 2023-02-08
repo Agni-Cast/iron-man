@@ -62,6 +62,7 @@ const QAIndex = () => {
 
       <div className="search-container">
       <input
+        data-testid="search-input"
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value) & handleSearch()}
@@ -88,7 +89,7 @@ const QAIndex = () => {
             background: 'none'
           }
         }}>
-        <NewQuestionForm questionId={questionId} closeModal={() => setModelIsOpen(false)}/>
+        <NewQuestionForm  questionId={questionId} closeModal={() => setModelIsOpen(false)}/>
       </Modal>
 
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import '@testing-library/react/dont-cleanup-after-each';
 import userEvent from '@testing-library/user-event';
-import {render, screen, waitFor, cleanup, fireEvent} from '@testing-library/react';
+import {render, screen, waitFor, cleanup, fireEvent, waitForElement} from '@testing-library/react';
 import QAIndex from '../client/src/components/QAcomponents/QAIndex.jsx';
 import AList from '../client/src/components/QAcomponents/AList.jsx';
 import QAList from '../client/src/components/QAcomponents/QAList.jsx';
@@ -143,9 +143,93 @@ describe('QAIndex', () => {
     };
     const { getByTestId } = render(<ListEntry question={question} />);
     const helpfulBtn = getByTestId('question-helpful-btn');
+
     fireEvent.click(helpfulBtn);
+
     const helpfulValue = getByTestId('question-helpful-value');
     expect(helpfulValue.textContent).toBe('Yes (2)');
+  });
+
+  it ('Add answer button should pop a new window', () => {
+
+    render(<ListEntry question={{answers: {1:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 1, question_id: 1, reported:false}} />)
+    const addAnswerButton = screen.getByText("Add Answer")
+    fireEvent.click(addAnswerButton);
+
+    expect(screen.getByTestId('add-answer-modal')).toBeInTheDocument();
+  })
+
+  it ('In the add answer pop up window, should include SUBMIT YOUR ANSWER header', () => {
+
+    render(<ListEntry question={{answers: {1:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 1, question_id: 1, reported:false}} />)
+    const addAnswerButton = screen.getByText("Add Answer")
+    fireEvent.click(addAnswerButton);
+
+    expect(screen.getByTestId("add-answer-modal-header" )).toBeInTheDocument();
+  })
+
+  it ('In the add answer pop up window, should include add another photo button', () => {
+
+    render(<ListEntry question={{answers: {1:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 1, question_id: 1, reported:false}} />)
+    const addAnswerButton = screen.getByText("Add Answer")
+    fireEvent.click(addAnswerButton);
+
+    expect(screen.getByTestId("add-answer-modal-addphoto")).toBeInTheDocument();
+  })
+
+  it ('In the add answer pop up window, should include submit button', () => {
+
+    render(<ListEntry question={{answers: {1:{photos:[]}}, asker_name: 'tester', question_body:'tester', question_date:'test', question_helpfulness: 1, question_id: 1, reported:false}} />)
+    const addAnswerButton = screen.getByText("Add Answer")
+    fireEvent.click(addAnswerButton);
+
+    expect(screen.getByTestId("add-answer-modal-submit")).toBeInTheDocument();
+  })
+
+  it('submits the form when all inputs are valid', async () => {
+    const closeModal = jest.fn();
+    const questionId = [1];
+
+    const { getByPlaceholderText, getByText } = render(<NewQuestionForm closeModal={closeModal} questionId={questionId}/>);
+    const questionInput = getByPlaceholderText('Enter your question');
+    const nameInput = getByPlaceholderText('Enter your name');
+    const emailInput = getByPlaceholderText('Enter your email');
+    const submitButton = getByText('Submit');
+
+    fireEvent.change(questionInput, { target: { value: 'test' } });
+
+    fireEvent.change(nameInput, { target: { value: 'test' } });
+
+    fireEvent.change(emailInput, { target: { value: '123@test.com' } });
+
+    fireEvent.submit(submitButton);
+
+    await waitFor (() => {
+      expect(() => getByTestId("add-answer-modal")).toThrow();
+    });
+  });
+
+  it('renders the question and answer in ListEntry', () => {
+    const question = {
+      question_id: 1,
+      question_body: 'qtest',
+      question_helpfulness: 10,
+      answers: [
+        {
+          answer_id: 1,
+          body: 'atest',
+          date: '2022-01-01',
+          helpfulness: 20,
+          name: 'John Doe',
+          photos: [],
+        },
+      ],
+    };
+
+    const { getByText } = render(<ListEntry question={question} />);
+
+    expect(getByText('Q: qtest')).toBeInTheDocument();
+    expect(getByText('atest')).toBeInTheDocument();
   });
 
 

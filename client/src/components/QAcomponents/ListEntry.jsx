@@ -11,32 +11,27 @@ width: 100%;
 margin-top: 20px;
 margin-bottom:15px;
 `
-
-
 const ListEntry = (props) => {
-
   // console.log("ListEntry props looks like: ", props)
   // set helpfulnessCount for showing the current question helpfulness data
   const [helpfulnessCount, setHelpfulnessCount] = useState(props.question.question_helpfulness)
   // state for voting helpful
   const [votedHelpful, setVotedHelpful] = useState(false);
-
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [isValidEmail, setIsValidEmail] = useState(false);
   // handle the photos upload
   const [fileInputs, setFileInputs] = useState([0]);
-
   const addFileInput = () => {
     if (fileInputs.length < 3) {
       setFileInputs([...fileInputs, fileInputs.length]);
     }
   }
+
   const handleEmailChange = (event) => {
     const value = event.target.value;
     setEmail(value);
-
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsValidEmail(re.test(value));
   }
@@ -49,7 +44,6 @@ const ListEntry = (props) => {
 
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
-
     axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
     .then((response) => {
       // alert("Thanks for voting this question helpful! ");
@@ -74,9 +68,7 @@ const ListEntry = (props) => {
   const addAnswer = (questionId) => {
     setIsModalOpen(!isModalOpen);
   }
-
   // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
-
   // console.log("what is props here looks like?", props)
   return (
     <div>
@@ -99,15 +91,12 @@ const ListEntry = (props) => {
           <button data-testid="add-answer-btn" className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
-
       <div className='flexbox-container'>
         <h4 className="answer-head">A:</h4>
         <AList answers={props.question.answers}/>
         {/* ariaHideApp is used here to prevent ReactModal fault in console */}
       </div>
-
       <BottomLine></BottomLine>
-
       <ReactModal data-testid="add-answer-modal" isOpen={isModalOpen} ariaHideApp={false} style={{
           content: {
             top: '50%',
@@ -124,7 +113,7 @@ const ListEntry = (props) => {
         }}>
           <button className="close-button" style={{ color: 'black', cursor: 'pointer', position: 'absolute', top: '25px', right: '25px', background:'none', border:'none' }}onClick={() => setIsModalOpen(false)}>[Close]</button>
 
-        <form className="iron-man-form" onSubmit ={(event) => {
+        <form data-testid="add-answer-modal" className="iron-man-form" onSubmit ={(event) => {
           event.preventDefault();
           let photos = [];
           for (let i = 0; i < fileInputs.length; i++) {
@@ -148,8 +137,7 @@ const ListEntry = (props) => {
           })
         }}>
           <div className="form-group">
-            <h2 className="form-title">Submit Your Answer 👇</h2>
-
+            <h2 data-testid="add-answer-modal-header" className="form-title">Submit Your Answer 👇</h2>
             <textarea className="form-input" name="body" placeholder="Enter your answer here" onChange={handleBodyChange} style={{ height: '200px', width: '350px' }}></textarea>
             {wordCount >= 5 ? <span style={{ color: "green" }}> &#10003; </span> : <span className = "add-answer-body">  {5 - wordCount} words to submit </span> }
             <br/>
@@ -163,7 +151,7 @@ const ListEntry = (props) => {
                 </>
               ))}
               {fileInputs.length < 3 && (
-                <button className="addphoto-submit" onClick={(event) => {
+                <button data-testid="add-answer-modal-addphoto"  className="addphoto-submit" onClick={(event) => {
                   event.preventDefault();
                   addFileInput();
                 }}>Add Another Photo</button>
@@ -178,12 +166,11 @@ const ListEntry = (props) => {
             {isValidEmail ? <span style={{ color: "green" }}> &#10003; </span> : <span className="add-answer-email"> Invalid Email format</span>}
             <br/>
             <br/>
-            <button className="form-submit" type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
+            <button  className="form-submit" type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
           </div>
         </form>
       </ReactModal>
     </div>
   )
 }
-
-export default ListEntry
+export default ListEntry;
