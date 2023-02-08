@@ -96,7 +96,7 @@ app.get('/cart', (req, res) => {
 });
 
 app.post('/cart', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let cartInfo = req.body;
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,cartInfo,
   {
@@ -215,7 +215,7 @@ app.post('/api/qa/questions/:question_id/answers', (req, res) => {
 
 // handle the first render out currently, might not be used in the final version
 app.get('/api/qa/questions', (req, res) => {
-  console.log("first render request check :", req)
+  // console.log("first render request check :", req)
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/?product_id=${req.query.product_id}`,
   {
     headers: {
