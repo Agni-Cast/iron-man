@@ -6,7 +6,7 @@ import MiniGallery from "./MiniGallery.jsx";
 
 
 const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
-
+  // console.log("show me the mainphoto props", {productID, photoNumber, setPhotoNumber, styleNumber})
   const [photoList, setPhotoList] = useState([]);
 
   useEffect(() => {

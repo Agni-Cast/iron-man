@@ -71,10 +71,10 @@ const ListEntry = (props) => {
   // console.log("in listEntry, i want to see the question_id :", props.question.question_id);
   // console.log("what is props here looks like?", props)
   return (
-    <div>
-      <div className="question-container">
-        <h4 className="question-body">Q: {props.question.question_body}</h4>
-        <div className="question-actions">
+    <div >
+      <div className="question-container" key={props.question.question_id}>
+        <h4 className="question-body" key={props.question.question_id + 1}>Q: {props.question.question_body}</h4>
+        <div key={props.question.question_id} className="question-actions" >
         <button data-testid="question-helpful-btn" className="question-help">
           Helpful? &nbsp;
           <u data-testid="question-helpful-value"
@@ -88,7 +88,7 @@ const ListEntry = (props) => {
             {votedHelpful ? 'Voted' : `Yes (${helpfulnessCount})`}
           </u>
         </button>
-          <button data-testid="add-answer-btn" className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
+          <button key={props.question.question_id} data-testid="add-answer-btn" className="question-addAnswer" >| &nbsp; <u  onClick={() => addAnswer(props.question.question_id)}>Add Answer</u></button>
         </div>
       </div>
       <div className='flexbox-container'>
@@ -137,18 +137,18 @@ const ListEntry = (props) => {
           })
         }}>
           <div className="form-group">
-            <h2 data-testid="add-answer-modal-header" className="form-title">Submit Your Answer 👇</h2>
+            <h2 key={props.question.question_id}data-testid="add-answer-modal-header" className="form-title">Submit Your Answer 👇</h2>
             <textarea className="form-input" name="body" placeholder="Enter your answer here" onChange={handleBodyChange} style={{ height: '200px', width: '350px' }}></textarea>
             {wordCount >= 5 ? <span style={{ color: "green" }}> &#10003; </span> : <span className = "add-answer-body">  {5 - wordCount} words to submit </span> }
             <br/>
             <br/>
             <br/>
             {fileInputs.map((input, index) => (
-                <>
+                <div key={index}>
                   <input key={index} className="form-input" type="file" name={`photos-${index}`} accept="image/*" />
                   <br />
                   <br />
-                </>
+                </div>
               ))}
               {fileInputs.length < 3 && (
                 <button data-testid="add-answer-modal-addphoto"  className="addphoto-submit" onClick={(event) => {
@@ -166,7 +166,7 @@ const ListEntry = (props) => {
             {isValidEmail ? <span style={{ color: "green" }}> &#10003; </span> : <span className="add-answer-email"> Invalid Email format</span>}
             <br/>
             <br/>
-            <button  className="form-submit" type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
+            <button  data-testid="add-answer-modal-submit"   className="form-submit" type="submit" disabled={wordCount < 5 || !isValidEmail}>Add Answer</button>
           </div>
         </form>
       </ReactModal>
