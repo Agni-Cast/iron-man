@@ -278,7 +278,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   })
 });
 
-app.post('/reviews', (req, res) => {
+app.post('/api/reviews', (req, res) => {
   // console.log('REQUEST --->>>>', req)
   const newReviewBody = req.body;
   // console.log(newReviewBody)

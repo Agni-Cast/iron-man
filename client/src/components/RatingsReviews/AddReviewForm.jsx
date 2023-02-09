@@ -37,7 +37,7 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
     };
 
 
-  axios.post(`http://localhost:3000/api/reviews`, data)
+  axios.post(`/api/reviews`, data)
     .then((response) => {
       alert("Success! Your review has been submitted.");
     setTimeout(() => {
@@ -88,8 +88,6 @@ const AddReviewForm = ({characteristics, product_id, closeModal} ) => {
         <br />
         <label>
           Rating:
-          {/* <input type='number' value={rating} onChange = {e => setRating(e.target.value)}/>
-           */}
            <StarRatingForm required rating={rating} setRating={setRating}/>
         </label>
         <br />
