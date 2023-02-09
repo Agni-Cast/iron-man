@@ -10,7 +10,7 @@ const AdditionalInfo = ({productID}) => {
   const [featuresEntry, setFeaturesEntry] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${productID}`)
+    axios.get(`/products/${productID}`)
     .then((response) => {
       setFeaturesEntry(response.data);
     })
