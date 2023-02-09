@@ -14,7 +14,8 @@ const RatingsReviews = (  /* product_id produt_id from overview component*/) => 
   const[allReviews, setAllReviews] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
+    axios.get(`/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
+    // axios.get(`http://localhost:3000/reviews?count=5000&sort=${sortBy}&product_id=${product_id}`)
     .then((res) => {
       setReviews(res.data.results);
       setAllReviews(res.data.results)
