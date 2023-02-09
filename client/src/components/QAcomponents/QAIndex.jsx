@@ -33,7 +33,7 @@ const QAIndex = () => {
   // this is for the test right now, render out questions and answers for product 37322
   useEffect(() => {
 
-    axios.get(`http://localhost:3000/api/qa/questions/?product_id=${questionId}`)
+    axios.get(`/api/qa/questions/?product_id=${questionId}`)
     .then((response) => {
       // console.log("response return from server :", response)
       setQaData(response.data.results)
