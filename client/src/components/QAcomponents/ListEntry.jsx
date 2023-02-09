@@ -44,7 +44,7 @@ const ListEntry = (props) => {
 
   const handleVote = (questionId) => {
     // console.log("correct question ID here?", questionId)
-    axios.put(`http://localhost:3000/qa/questions/${questionId}/helpful`)
+    axios.put(`/qa/questions/${questionId}/helpful`)
     .then((response) => {
       // alert("Thanks for voting this question helpful! ");
       // console.log(response.data);
@@ -125,7 +125,7 @@ const ListEntry = (props) => {
           const data = {body: event.target.body.value, name: event.target.name.value, email: event.target.email.value, photos: photos}
 
 
-          const addAnsUrl = `http://localhost:3000/api/qa/questions/${props.question.question_id}/answers`;
+          const addAnsUrl = `/api/qa/questions/${props.question.question_id}/answers`;
 
           axios.post(addAnsUrl, data)
           .then((response) => {

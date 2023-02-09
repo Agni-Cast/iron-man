@@ -27,7 +27,7 @@ const NewQuestionForm = (props, closeModal) => {
 
     // console.log("show me the data that user fill?", data);
 
-    axios.post('http://localhost:3000/api/qa/questions', data)
+    axios.post('/api/qa/questions', data)
     // console.log(response)#;
     .then((response) => {
       // alert("Success! Your question has been submitted.");
