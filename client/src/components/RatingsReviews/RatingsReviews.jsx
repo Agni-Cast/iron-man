@@ -41,7 +41,7 @@ const RatingsReviews = (  /* product_id produt_id from overview component*/) => 
   const[characteristics, setcharacteristics] = useState({})
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews/meta?product_id=${product_id}`)
+    axios.get(`/reviews/meta?product_id=${product_id}`)
     .then((res) => {
       setRatingsData(res.data);
       setRatings(res.data.ratings);
