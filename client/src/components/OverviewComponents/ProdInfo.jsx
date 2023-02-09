@@ -15,7 +15,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
   const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${productID}/styles`)
+    axios.get(`/products/${productID}/styles`)
     .then((response) => {
       setStyleEntry(response.data.results[styleNumber]);
     })
@@ -23,7 +23,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       console.log('this is an axios get error in ProdInfo.jsx: ', error);
     })
 
-    axios.get(`http://localhost:3000/products/${productID}`)
+    axios.get(`/products/${productID}`)
     .then((response) => {
       setProdEntry(response.data);
       setNewCategory(response.data.category.toUpperCase())
@@ -32,7 +32,7 @@ const ProdInfo = ({productID, styleNumber, setStyleNumber}) => {
       console.log('this is an axios get error in ProdInfo.jsx: ', error);
     })
 
-    axios.get(`http://localhost:3000/reviews/meta?product_id=${productID}`)
+    axios.get(`/reviews/meta?product_id=${productID}`)
     .then((res) => {
       setAverageRating(calculateAverageRating(res.data.ratings));
     })

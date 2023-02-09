@@ -10,7 +10,7 @@ const MainPhoto = ({productID, photoNumber, setPhotoNumber, styleNumber}) => {
   const [photoList, setPhotoList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${productID}/styles`)
+    axios.get(`/products/${productID}/styles`)
     .then((response) => {
       setPhotoList(response.data.results[styleNumber].photos);
     })
