@@ -9,7 +9,7 @@ const Styles = ({productID, styleNumber, setStyleNumber}) => {
   const [styleList, setStyleList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${productID}/styles`)
+    axios.get(`/products/${productID}/styles`)
     .then((response) => {
       setStyleList(response.data.results);
     })
