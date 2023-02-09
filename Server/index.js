@@ -1,6 +1,7 @@
 const path = require("path");
 const {token} = require('../config.js');
 const axios = require('axios');
+const cors = require('cors')
 
 const express = require('express');
 const app = express();
@@ -8,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //Middleware:
-
+app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
@@ -95,7 +96,7 @@ app.get('/cart', (req, res) => {
 });
 
 app.post('/cart', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let cartInfo = req.body;
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/cart`,cartInfo,
   {

@@ -22,7 +22,7 @@ const AnswerEntry = ({ answer }) => {
 
     const handleVote = (answerId) => {
         // console.log("am in handleVote func, prepare send request to API", apiUrl);
-        axios.put(`http://localhost:3000/qa/answers/${answerId}/helpful`)
+        axios.put(`/qa/answers/${answerId}/helpful`)
         .then((response) => {
           // alert("Thanks for voting this answer helpful! ")
           // console.log("voting succeed!")
@@ -127,7 +127,7 @@ const AnswerEntry = ({ answer }) => {
                     event.preventDefault();
                     // console.log("am i sending request to ans report API?", answer.id)
 
-                    axios.put(`http://localhost:3000/qa/answers/${answer.id}/report`)
+                    axios.put(`/qa/answers/${answer.id}/report`)
                     .then((response) => {
                           // alert("Thanks for report this answer ! ")
                           // console.log("voting succeed!")
