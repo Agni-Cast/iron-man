@@ -18,7 +18,8 @@ const SingleReview = ({ review }) => {
   const [alreadyVoted, setAlreadyVolted] = useState(false);
   // console.log('review', review)
   const handleVoteCount = (review_id) => {
-    axios.put(`http://localhost:3000/reviews/${review_id}/helpful`)
+    axios.put(`/reviews/${review_id}/helpful`)
+    // axios.put(`http://localhost:3000/reviews/${review_id}/helpful`)
       .then((res) => {
         setAlreadyVolted(true)
       })
